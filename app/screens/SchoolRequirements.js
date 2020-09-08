@@ -1,19 +1,32 @@
 import React from 'react';
-import {StyleSheet, View, Text, Button} from 'react-native';
+import {
+  StyleSheet,
+  View,
+  Text,
+  Button,
+  useState,
+  FlatList,
+  ScrollView,
+  TouchableOpacity,
+} from 'react-native';
 import {globalStyles} from '../styling/styles/global';
 import Item from '../components/Item';
 
 export default function SchoolRequirements() {
   return (
     <View style={styles.container}>
-      <View style={styles.header}></View>
+      <View style={styles.header}>
+        <Text style={styles.heading}>DONORS SUPPORT</Text>
+      </View>
       <View style={styles.headerMini}>
         <View style={styles.headerMiniWhite}>
           <Text style={styles.titleText}>
             Donations for Educational Institutes
           </Text>
         </View>
-        <Item></Item>
+      </View>
+      <View style={styles.listView}>
+        <Item itemName="Accessories"></Item>
       </View>
     </View>
   );
@@ -66,5 +79,25 @@ const styles = StyleSheet.create({
     textAlign: 'center',
 
     color: '#3954FD',
+  },
+
+  listView: {
+    backgroundColor: '#EBEFF2',
+    marginTop: 188,
+    padding: 100,
+  },
+  heading: {
+    position: 'absolute',
+    width: 184,
+    height: 22,
+    top: 37,
+    alignSelf: 'center',
+
+    fontFamily: 'Montserrat',
+    fontWeight: 'bold',
+    fontSize: 18,
+    lineHeight: 22,
+
+    color: '#FFFFFF',
   },
 });
