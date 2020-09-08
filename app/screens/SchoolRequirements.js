@@ -8,14 +8,20 @@ import {
   FlatList,
   ScrollView,
   TouchableOpacity,
+  Image,
 } from 'react-native';
 import {globalStyles} from '../styling/styles/global';
+import colors from '../styling/colorSchemes/colors';
 import Item from '../components/Item';
+import AppButton from '../components/AppButton';
+
+const DonorHands = '../styling/images/donor-logo-1.png';
 
 export default function SchoolRequirements() {
   return (
     <View style={styles.container}>
       <View style={styles.header}>
+        <Image style={styles.donorHands} source={require(DonorHands)} />
         <Text style={styles.heading}>DONORS SUPPORT</Text>
       </View>
       <View style={styles.headerMini}>
@@ -28,6 +34,13 @@ export default function SchoolRequirements() {
       <View style={styles.listView}>
         <Item itemName="Accessories"></Item>
       </View>
+      <View style={styles.confirmButton}>
+        <AppButton
+          title="Confirm"
+          onPress={() => alert('Donor Button Tapped')}
+          dimensions={styles.button}
+        />
+      </View>
     </View>
   );
 }
@@ -35,7 +48,7 @@ export default function SchoolRequirements() {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#EBEFF2',
+    backgroundColor: colors.offwhite,
   },
   header: {
     position: 'absolute',
@@ -43,7 +56,7 @@ const styles = StyleSheet.create({
     height: 89,
     left: 0,
     top: 0,
-    backgroundColor: '#3954FD',
+    backgroundColor: colors.secondary,
     borderBottomEndRadius: 50,
   },
   headerMini: {
@@ -52,7 +65,7 @@ const styles = StyleSheet.create({
     height: 60,
     left: 0,
     top: 89,
-    backgroundColor: '#3954FD',
+    backgroundColor: colors.secondary,
   },
   headerMiniWhite: {
     position: 'absolute',
@@ -60,7 +73,7 @@ const styles = StyleSheet.create({
     height: 60,
     left: 0,
     top: 0,
-    backgroundColor: '#EBEFF2',
+    backgroundColor: colors.offwhite,
     borderTopLeftRadius: 50,
   },
   titleText: {
@@ -78,11 +91,11 @@ const styles = StyleSheet.create({
     lineHeight: 27,
     textAlign: 'center',
 
-    color: '#3954FD',
+    color: colors.primary,
   },
 
   listView: {
-    backgroundColor: '#EBEFF2',
+    backgroundColor: colors.offwhite,
     marginTop: 188,
     padding: 100,
   },
@@ -99,5 +112,13 @@ const styles = StyleSheet.create({
     lineHeight: 22,
 
     color: '#FFFFFF',
+  },
+  donorHands: {
+    top: 21.88,
+    left: 17.46,
+  },
+  confirmButton: {
+    alignSelf: 'center',
+    top: 390,
   },
 });

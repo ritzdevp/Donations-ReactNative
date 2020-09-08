@@ -19,7 +19,11 @@ export default function Item(props) {
       <Image style={styles.stretch} source={require(AccessoriesImage)} />
       <Image style={styles.tick} source={require(OffTick)} />
       <Text style={styles.itemName}>{props.itemName}</Text>
-      <TextInput style={styles.quantity} placeholder="QTY" />
+      <TextInput
+        style={styles.quantity}
+        placeholder="QTY"
+        keyboardType="numeric"
+      />
     </View>
   );
 }
