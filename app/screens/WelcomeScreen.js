@@ -18,37 +18,39 @@ const WelcomeScreen = () => {
         <ImageBackground
           style={styles.introBackground}
           imageStyle={{borderRadius: 50}}
-          source={require('../styling/images/Vector.png')}>
-          <AppBanner />
-          <View style={styles.introContainer}>
-            <View style={styles.schoolContainer}>
+          source={require('../styling/images/Vector.png')}></ImageBackground>
+        <AppBanner />
+        <View style={styles.introContainer}>
+          <View style={styles.schoolContainer}>
+            <View
+              style={{
+                flexDirection: 'column',
+              }}>
               <Text style={styles.normalText}>
                 Over <Text style={styles.highlightedText}>100 Schools</Text>
-                {'\n'}
-                got Benefitted
               </Text>
-
-              <Image
-                style={styles.introLogo}
-                source={require('../styling/images/Group-2-bus.png')}
-              />
+              <Text style={styles.normalText}>got Benefitted</Text>
             </View>
-
-            <View style={styles.donorContainer}>
-              <Image
-                style={styles.introLogo}
-                source={require('../styling/images/Group-3-donate.png')}
-              />
-              <Text style={styles.normalText}>
-                Over{' '}
-                <Text style={styles.highlightedText}>
-                  2500 investors {'\n'} Rs 2.5 crore {'\n'}
-                </Text>
-                already invested
-              </Text>
-            </View>
+            <Image
+              style={styles.introLogo}
+              source={require('../styling/images/Group-2-bus.png')}
+            />
           </View>
-        </ImageBackground>
+
+          <View style={styles.donorContainer}>
+            <Image
+              style={styles.introLogo}
+              source={require('../styling/images/Group-3-donate.png')}
+            />
+            <Text style={styles.normalText}>
+              Over{' '}
+              <Text style={styles.highlightedText}>
+                2500 investors {'\n'} Rs 2.5 crore {'\n'}
+              </Text>
+              already invested
+            </Text>
+          </View>
+        </View>
       </View>
       <View style={styles.blueBox}>
         <View style={styles.actionContainer}>
@@ -104,18 +106,19 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'space-evenly',
     // backgroundColor: '#000000',
-    flex: 0.9,
+    flex: 1,
   },
   schoolContainer: {
     flexDirection: 'row',
-    justifyContent: 'space-evenly',
+    justifyContent: 'center',
+    alignItems: 'center',
   },
   donorContainer: {
     flexDirection: 'row',
-    justifyContent: 'space-evenly',
+    justifyContent: 'center',
+    alignItems: 'center',
   },
 
-  introLogo: {},
   introBackground: {
     position: 'absolute',
     left: 17,

@@ -35,19 +35,21 @@ const styles = StyleSheet.create({
   banner: {
     flexDirection: 'row',
     justifyContent: 'space-between',
-    alignItems: 'baseline',
+    alignItems: 'center',
     height: 50,
+    marginTop: 15,
+    marginBottom: 0,
+    marginHorizontal: 15,
   },
   bannerButton: {
     width: 50,
     height: 50,
   },
   bannerNav: {
-    height: 50,
-    width: 50,
+    height: 30,
+
     alignItems: 'flex-end',
-    margin: 2,
-    backgroundColor: colors.black,
+    justifyContent: 'space-around',
   },
 });
 export default AppBanner;
