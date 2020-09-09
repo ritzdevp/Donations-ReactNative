@@ -82,7 +82,6 @@ export default function SchoolRequirements() {
         <AppButton
           title="Confirm"
           onPress={() => alert('Confirm Button Tapped')}
-          dimensions={styles.button}
         />
       </View>
     </View>
