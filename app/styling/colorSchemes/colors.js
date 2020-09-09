@@ -7,4 +7,6 @@ export default {
   offwhite: '#EBEFF2', // offwhite
   white: '#FFFFFF',
   black: '#000000',
+  lightgrey: '#D7D8DA',
+  darkblue: '#343B83',
 };

@@ -16,9 +16,11 @@ const styles = StyleSheet.create({
     borderRadius: 50,
     justifyContent: 'center',
     alignItems: 'center',
-    height: 60,
-    width: 300,
     borderColor: colors.primary,
+    borderWidth: 2,
+    padding: 10,
+    // width: 300,
+    // height: 60,
   },
   text: {
     fontSize: 14,
