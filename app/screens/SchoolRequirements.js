@@ -11,30 +11,34 @@ import {
   SafeAreaView,
   Image,
 } from 'react-native';
-import {globalStyles} from '../styling/styles/global';
-import colors from '../styling/colorSchemes/colors';
 import Item from '../components/Item';
 import AppButton from '../components/AppButton';
+
+import colors from '../styling/colorSchemes/colors';
 
 const DonorHands = '../styling/images/donor-logo-1.png';
 const OffTick = '../styling/images/offTick.png';
 
-const DATA = [
+const ITEMSLIST = [
   {
-    id: 'adasd',
-    title: 'First Item',
+    id: '1',
+    title: 'Accessories',
+    imageSrc: '../styling/images/accessories.png',
   },
   {
-    id: 'bd7acbea-c1b1-46c2-aed5-3ad53abb28ba',
-    title: 'First Item',
+    id: '2',
+    title: 'Bags',
+    imageSrc: '../styling/images/bag1.png',
   },
   {
-    id: '3ac68afc-c605-48d3-a4f8-fbd91aa97f63',
-    title: 'Second Item',
+    id: '3',
+    title: 'Transportations',
+    imageSrc: '../styling/images/bus2.png',
   },
   {
-    id: '58694a0f-sad3da1-471f-bd96-145571e29d72',
-    title: 'Third Item',
+    id: '4',
+    title: 'Copies',
+    imageSrc: '../styling/images/copies1.png',
   },
 ];
 
@@ -59,7 +63,7 @@ export default function SchoolRequirements() {
       <FlatList
         numColumns={2}
         style={styles.listView}
-        data={DATA}
+        data={ITEMSLIST}
         renderItem={renderItem}
         keyExtractor={(item) => item.id}
       />
@@ -184,6 +188,5 @@ const styles = StyleSheet.create({
   confirmButton: {
     alignSelf: 'center',
     bottom: 24,
-    backgroundColor: 'yellow',
   },
 });
