@@ -11,6 +11,7 @@ import {
   SafeAreaView,
   Image,
 } from 'react-native';
+
 import Item from '../components/Item';
 import AppButton from '../components/AppButton';
 
@@ -78,6 +79,7 @@ export default function SchoolRequirements() {
       </View>
 
       <View style={styles.table}></View>
+
       <View style={styles.confirmButton}>
         <AppButton
           title="Confirm"
@@ -177,7 +179,7 @@ const styles = StyleSheet.create({
   },
   table: {
     flexDirection: 'row',
-    height: 150,
+    height: 100,
     width: '90%',
     top: 0,
     marginHorizontal: 30,

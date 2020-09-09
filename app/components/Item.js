@@ -34,7 +34,7 @@ const Item = (props) => {
 const styles = StyleSheet.create({
   card: {
     width: 151.52,
-    height: 190,
+    height: 191,
     borderWidth: 2,
     backgroundColor: '#EBEFF2',
     borderColor: '#D2D7DB',
@@ -75,7 +75,7 @@ const styles = StyleSheet.create({
   quantity: {
     position: 'absolute',
     width: 102,
-    height: 34,
+    height: 35,
     top: 135,
 
     backgroundColor: '#EBEFF2',
