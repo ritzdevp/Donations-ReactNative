@@ -1,12 +1,5 @@
 import React from 'react';
-import {
-  StyleSheet,
-  View,
-  Text,
-  Image,
-  ImageBackground,
-  Button,
-} from 'react-native';
+import {StyleSheet, View, Text, Image, ImageBackground} from 'react-native';
 import AppButton from '../components/AppButton';
 import colors from '../styling/colorSchemes/colors';
 import AppBanner from '../components/AppBanner';
@@ -16,9 +9,10 @@ const WelcomeScreen = () => {
     <View style={styles.container}>
       <View style={styles.topContainer}>
         <ImageBackground
-          style={styles.introBackground}
+          style={styles.topBackground}
           imageStyle={{borderRadius: 50}}
-          source={require('../styling/images/Vector.png')}></ImageBackground>
+          source={require('../styling/images/Vector.png')}
+        />
         <AppBanner />
         <View style={styles.introContainer}>
           <View style={styles.schoolContainer}>
@@ -58,18 +52,21 @@ const WelcomeScreen = () => {
             <Text style={styles.actionText}>Educational Institute?</Text>
             <Text style={styles.actionText}>Need Donations?</Text>
           </View>
-          <AppButton
-            title="Click to enter your requirement"
-            onPress={() => alert('School Button Tapped')}
-            dimensions={styles.button}
-          />
-          <Text> {''}</Text>
+          <View style={styles.appButton}>
+            <AppButton
+              title="Click to enter your requirement"
+              onPress={() => alert('School Button Tapped')}
+              style={styles.button}
+            />
+          </View>
+          {/* <Text> {''}</Text> */}
           <Text style={styles.actionText}>Want to donate ?</Text>
-          <AppButton
-            title="Click to see schools’ requirements"
-            onPress={() => alert('Donor Button Tapped')}
-            dimensions={styles.button}
-          />
+          <View style={styles.appButton}>
+            <AppButton
+              title="Click to see schools’ requirements"
+              onPress={() => alert('Donor Button Tapped')}
+            />
+          </View>
           <Image
             style={styles.accoliteLogo}
             source={require('../styling/images/Accolite-logo.png')}
@@ -104,28 +101,30 @@ const styles = StyleSheet.create({
   },
   introContainer: {
     alignItems: 'center',
-    justifyContent: 'space-evenly',
+    justifyContent: 'space-around',
     // backgroundColor: '#000000',
     flex: 1,
   },
   schoolContainer: {
     flexDirection: 'row',
-    justifyContent: 'center',
+    width: '90%',
+    justifyContent: 'space-around',
     alignItems: 'center',
   },
   donorContainer: {
+    width: '90%',
     flexDirection: 'row',
-    justifyContent: 'center',
+    justifyContent: 'space-around',
     alignItems: 'center',
   },
 
-  introBackground: {
+  topBackground: {
     position: 'absolute',
-    left: 17,
+    left: 22,
     top: 22,
     bottom: 0,
     right: 0,
-    resizeMode: 'cover',
+    resizeMode: 'stretch',
   },
   blueBox: {
     flex: 0.5,
@@ -152,5 +151,9 @@ const styles = StyleSheet.create({
   accoliteLogo: {
     marginTop: 20,
     bottom: 5,
+  },
+  appButton: {
+    height: 60,
+    width: 300,
   },
 });

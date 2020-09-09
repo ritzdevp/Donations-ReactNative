@@ -186,6 +186,8 @@ const styles = StyleSheet.create({
   },
   confirmButton: {
     alignSelf: 'center',
+    height: 60,
+    width: 300,
     bottom: 24,
   },
 });
