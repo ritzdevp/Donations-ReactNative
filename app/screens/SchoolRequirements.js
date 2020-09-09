@@ -38,7 +38,6 @@ export default function SchoolRequirements() {
         <AppButton
           title="Confirm"
           onPress={() => alert('Confirm Button Tapped')}
-          dimensions={styles.button}
         />
       </View>
     </View>
@@ -120,5 +119,7 @@ const styles = StyleSheet.create({
   confirmButton: {
     alignSelf: 'center',
     top: 390,
+    height: 60,
+    width: 300,
   },
 });
