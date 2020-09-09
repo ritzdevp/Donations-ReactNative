@@ -3,7 +3,6 @@ import {
   StyleSheet,
   View,
   TextInput,
-  Button,
   Text,
   Image,
   TouchableHighlight,
@@ -13,11 +12,15 @@ const AccessoriesImage = '../styling/images/accessories.png';
 const Tick = '../styling/images/tick.png';
 const OffTick = '../styling/images/offTick.png';
 
-export default function Item(props) {
+const Item = (props) => {
+  const onPress = () => alert('item tapped');
+
   return (
     <View style={styles.card}>
       <Image style={styles.stretch} source={require(AccessoriesImage)} />
-      <Image style={styles.tick} source={require(OffTick)} />
+      <TouchableHighlight onPress={onPress}>
+        <Image style={styles.tick} source={require(OffTick)} />
+      </TouchableHighlight>
       <Text style={styles.itemName}>{props.itemName}</Text>
       <TextInput
         style={styles.quantity}
@@ -26,19 +29,18 @@ export default function Item(props) {
       />
     </View>
   );
-}
+};
 
 const styles = StyleSheet.create({
   card: {
-    position: 'absolute',
     width: 151.52,
     height: 190,
-    left: 30,
-    top: 10,
     borderWidth: 2,
     backgroundColor: '#EBEFF2',
     borderColor: '#D2D7DB',
     borderRadius: 20,
+    marginHorizontal: 15,
+    marginTop: 27,
   },
 
   onTouch: {
@@ -100,3 +102,5 @@ const styles = StyleSheet.create({
     top: 8,
   },
 });
+
+export default Item;
