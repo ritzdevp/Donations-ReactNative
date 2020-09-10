@@ -24,27 +24,29 @@ const ITEMSLIST = [
   {
     id: '1',
     title: 'Accessories',
-    imageSrc: '../styling/images/accessories.png',
+    imageSrc: require('../styling/images/Accessories.png'),
   },
   {
     id: '2',
     title: 'Bags',
-    imageSrc: '../styling/images/bag1.png',
+    imageSrc: require('../styling/images/Bags.png'),
   },
   {
     id: '3',
     title: 'Transportations',
-    imageSrc: '../styling/images/bus2.png',
+    imageSrc: require('../styling/images/Transportations.png'),
   },
   {
     id: '4',
     title: 'Copies',
-    imageSrc: '../styling/images/copies1.png',
+    imageSrc: require('../styling/images/Copies.png'),
   },
 ];
 
 export default function SchoolRequirements() {
-  const renderItem = ({item}) => <Item itemName={item.title}></Item>;
+  const renderItem = ({item}) => (
+    <Item itemName={item.title} imageSrc={item.imageSrc}></Item>
+  );
 
   return (
     <View style={styles.container}>

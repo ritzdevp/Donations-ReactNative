@@ -8,7 +8,7 @@ import {
   TouchableHighlight,
 } from 'react-native';
 
-const AccessoriesImage = '../styling/images/accessories.png';
+const AccessoriesImage = '../styling/images/Accessories.png';
 const Tick = '../styling/images/tick.png';
 const OffTick = '../styling/images/offTick.png';
 
@@ -17,7 +17,7 @@ const Item = (props) => {
 
   return (
     <View style={styles.card}>
-      <Image style={styles.stretch} source={require(AccessoriesImage)} />
+      <Image style={styles.stretch} source={props.imageSrc} />
       <TouchableHighlight onPress={onPress}>
         <Image style={styles.tick} source={require(OffTick)} />
       </TouchableHighlight>
