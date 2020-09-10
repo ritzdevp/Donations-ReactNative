@@ -13,7 +13,7 @@ export default function EmptyScreen({heading}) {
       </View>
       <View style={styles.headerMini}>
         <View style={styles.headerMiniWhite}>
-          <Text style={styles.titleText}>{heading}</Text>
+          <Text style={styles.titleText}>{heading} </Text>
         </View>
       </View>
     </>
@@ -37,21 +37,23 @@ const styles = StyleSheet.create({
   headerMiniWhite: {
     position: 'absolute',
     width: '100%',
-    height: 60,
     left: 0,
     top: 0,
     backgroundColor: colors.offwhite,
     borderTopLeftRadius: 50,
     alignItems: 'center',
     justifyContent: 'center',
+    paddingVertical: 20,
   },
   titleText: {
     fontFamily: 'Montserrat',
     fontStyle: 'normal',
     fontWeight: '500',
+    width: '70%',
     fontSize: 22,
     lineHeight: 27,
-
+    textAlign: 'center',
+    flexWrap: 'wrap',
     color: colors.primary,
   },
   heading: {
