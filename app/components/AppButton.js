@@ -1,12 +1,12 @@
 import React from 'react';
-import {Text, StyleSheet, TouchableOpacity} from 'react-native';
+import {Text, StyleSheet, TouchableHighlight} from 'react-native';
 import colors from '../styling/colorSchemes/colors';
 
 const AppButton = ({title, onPress}) => {
   return (
-    <TouchableOpacity style={styles.button} onPress={onPress}>
+    <TouchableHighlight style={styles.button} onPress={onPress}>
       <Text style={styles.text}> {title} </Text>
-    </TouchableOpacity>
+    </TouchableHighlight>
   );
 };
 

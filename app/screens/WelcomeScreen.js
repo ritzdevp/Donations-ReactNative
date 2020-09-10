@@ -16,14 +16,15 @@ const WelcomeScreen = () => {
         <AppBanner />
         <View style={styles.introContainer}>
           <View style={styles.schoolContainer}>
-            <View
-              style={{
-                flexDirection: 'column',
-              }}>
-              <Text style={styles.normalText}>
+            <View>
+              {/* <View style={{flexDirection: 'row'}}> */}
+              <Text style={styles.rightText}>
                 Over <Text style={styles.highlightedText}>100 Schools</Text>
               </Text>
-              <Text style={styles.normalText}>got Benefitted</Text>
+              {/* </View> */}
+              {/* <View style={{flexDirection: 'row'}}> */}
+              <Text style={styles.rightText}>got Benefitted</Text>
+              {/* </View> */}
             </View>
             <Image
               style={styles.introLogo}
@@ -39,7 +40,7 @@ const WelcomeScreen = () => {
             <Text style={styles.normalText}>
               Over{' '}
               <Text style={styles.highlightedText}>
-                2500 investors {'\n'} Rs 2.5 crore {'\n'}
+                2500 investors {'\n'}Rs 2.5 crore {'\n'}
               </Text>
               already invested
             </Text>
@@ -91,10 +92,16 @@ const styles = StyleSheet.create({
   },
   normalText: {
     fontFamily: 'Montserrat',
-    fontStyle: 'normal',
     fontSize: 18,
     lineHeight: 22,
-    color: '#FFFFFF',
+    color: colors.white,
+  },
+  rightText: {
+    textAlign: 'right',
+    fontFamily: 'Montserrat',
+    fontSize: 18,
+    lineHeight: 22,
+    color: colors.white,
   },
   highlightedText: {
     fontWeight: 'bold',
