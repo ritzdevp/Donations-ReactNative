@@ -1,10 +1,11 @@
 import {StyleSheet, View, Text} from 'react-native';
 import colors from '../styling/colorSchemes/colors';
-import React from 'react';
+import React, {useEffect} from 'react';
 import EmptyScreen from './EmptyScreen';
 import {TextInput, Image, FlatList, ScrollView} from 'react-native';
 import {SafeAreaView} from 'react-native-safe-area-context';
 import SchoolRequirements from './SchoolRequirements';
+import {TouchableHighlight} from 'react-native';
 
 const Item = ({title, address, id}) => (
   <View style={styles.item}>
@@ -12,16 +13,21 @@ const Item = ({title, address, id}) => (
       <Text style={styles.title}>{title}</Text>
       <Text style={styles.address}>{address}</Text>
     </View>
-    <View style={styles.infoButton}>
+    <TouchableHighlight onPress={() => alert('id clicked : ' + id)}>
       <Image source={require('../styling/Icons/info.png')} />
-    </View>
+    </TouchableHighlight>
   </View>
 );
 
 function DonorSchoolList() {
   const [searchSchool, onSearchChange] = React.useState('');
-  //   var reg = new RegExp(searchSchool);
-  //   mylist = SCHOOL_LIST.filter((item) => reg.test(item.title));
+  //   var mylist = SCHOOL_LIST;
+  //   useEffect(() => {
+  //     var reg = new RegExp(searchSchool, 'i');
+  //     mylist = SCHOOL_LIST.filter((item) => reg.test(item.title));
+  //     // console.log(reg);
+  //     // console.log(mylist);
+  //   });
   const renderItem = ({item}) => (
     <Item title={item.title} address={item.address} id={item.id} />
   );
@@ -38,7 +44,7 @@ function DonorSchoolList() {
           style={styles.textInput}
           onChangeText={(text) => onSearchChange(text)}
           value={searchSchool}
-          placeholder="Search school name"
+          placeholder="Sarch school name"
         />
       </View>
       <SafeAreaView style={styles.listContainer}>
@@ -100,9 +106,6 @@ const styles = StyleSheet.create({
   listContainer: {
     marginVertical: 20,
     width: '80%',
-  },
-  infoButton: {
-    padding: 5,
   },
 });
 
