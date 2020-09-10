@@ -39,8 +39,8 @@ const styles = StyleSheet.create({
     backgroundColor: '#EBEFF2',
     borderColor: '#D2D7DB',
     borderRadius: 20,
-    marginHorizontal: 15,
-    marginTop: 27,
+    marginHorizontal: 7.24,
+    marginTop: 15,
   },
 
   onTouch: {
