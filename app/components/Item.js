@@ -6,21 +6,32 @@ import {
   Text,
   Image,
   TouchableHighlight,
+  TouchableOpacity,
 } from 'react-native';
+
+import colors from '../styling/colorSchemes/colors';
 
 const AccessoriesImage = '../styling/images/Accessories.png';
 const Tick = '../styling/images/tick.png';
 const OffTick = '../styling/images/offTick.png';
+const OnTick = '../styling/images/onTick.png';
 
 const Item = (props) => {
-  const onPress = () => alert('item tapped');
+  const [selected, setSelected] = useState(false);
+
+  const onPress = () => {
+    setSelected(!selected);
+  };
 
   return (
-    <View style={styles.card}>
+    <View style={selected ? styles.onTouch : styles.card}>
       <Image style={styles.stretch} source={props.imageSrc} />
-      <TouchableHighlight onPress={onPress} underlayColor="none">
-        <Image style={styles.tick} source={require(OffTick)} />
-      </TouchableHighlight>
+      <TouchableOpacity onPress={onPress} underlayColor="none">
+        <Image
+          style={styles.tick}
+          source={selected ? require(OnTick) : require(OffTick)}
+        />
+      </TouchableOpacity>
       <Text style={styles.itemName}>{props.itemName}</Text>
       <TextInput
         style={styles.quantity}
@@ -44,21 +55,20 @@ const styles = StyleSheet.create({
   },
 
   onTouch: {
-    position: 'absolute',
     width: 151.52,
-    height: 190,
-    left: 30,
-    top: 10,
+    height: 191,
     borderWidth: 2,
     backgroundColor: '#EBEFF2',
-    borderColor: '#D2D7DB',
+    borderColor: colors.primary,
     borderRadius: 20,
+    marginHorizontal: 7.24,
+    marginTop: 15,
   },
 
   itemName: {
     position: 'absolute',
     width: '100%',
-    height: 20,
+    height: 25,
     left: 0,
     top: 110,
 
@@ -76,7 +86,7 @@ const styles = StyleSheet.create({
     position: 'absolute',
     width: 102,
     height: 35,
-    top: 135,
+    top: 138,
 
     backgroundColor: '#EBEFF2',
     borderWidth: 1,

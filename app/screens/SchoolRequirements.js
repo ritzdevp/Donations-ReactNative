@@ -1,17 +1,5 @@
 import React from 'react';
-import {
-  StyleSheet,
-  View,
-  Text,
-  Button,
-  useState,
-  FlatList,
-  ScrollView,
-  TouchableOpacity,
-  SafeAreaView,
-  Image,
-  KeyboardAvoidingView,
-} from 'react-native';
+import {StyleSheet, View, Text, useState, FlatList, Image} from 'react-native';
 
 import Item from '../components/Item';
 import AppButton from '../components/AppButton';
@@ -56,21 +44,21 @@ const ListOfSelectedItems = [
     title: 'Bags',
     qty: '0',
   },
-  {
-    id: '3',
-    title: 'Transportations',
-    qty: '0',
-  },
-  {
-    id: '4',
-    title: 'Copies',
-    qty: '0',
-  },
-  {
-    id: '5',
-    title: 'Others',
-    qty: '0',
-  },
+  // {
+  //   id: '3',
+  //   title: 'Transportations',
+  //   qty: '0',
+  // },
+  // {
+  //   id: '4',
+  //   title: 'Copies',
+  //   qty: '0',
+  // },
+  // {
+  //   id: '5',
+  //   title: 'Others',
+  //   qty: '0',
+  // },
 ];
 
 export default function SchoolRequirements() {
