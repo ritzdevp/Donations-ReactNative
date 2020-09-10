@@ -8,9 +8,9 @@ import colors from './app/styling/colorSchemes/colors';
 import WelcomeScreen from './app/screens/WelcomeScreen';
 
 export default function App() {
-  //return <Navigator />;
+  return <Navigator />;
   //return <SchoolDetailsForm />;
-  return <WelcomeScreen />;
+  //return <WelcomeScreen />;
 }
 
 const styles = StyleSheet.create({

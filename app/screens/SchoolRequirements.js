@@ -11,6 +11,7 @@ import {
   SafeAreaView,
   Image,
 } from 'react-native';
+
 import Item from '../components/Item';
 import AppButton from '../components/AppButton';
 
@@ -23,27 +24,29 @@ const ITEMSLIST = [
   {
     id: '1',
     title: 'Accessories',
-    imageSrc: '../styling/images/accessories.png',
+    imageSrc: require('../styling/images/Accessories.png'),
   },
   {
     id: '2',
     title: 'Bags',
-    imageSrc: '../styling/images/bag1.png',
+    imageSrc: require('../styling/images/Bags.png'),
   },
   {
     id: '3',
     title: 'Transportations',
-    imageSrc: '../styling/images/bus2.png',
+    imageSrc: require('../styling/images/Transportations.png'),
   },
   {
     id: '4',
     title: 'Copies',
-    imageSrc: '../styling/images/copies1.png',
+    imageSrc: require('../styling/images/Copies.png'),
   },
 ];
 
 export default function SchoolRequirements() {
-  const renderItem = ({item}) => <Item itemName={item.title}></Item>;
+  const renderItem = ({item}) => (
+    <Item itemName={item.title} imageSrc={item.imageSrc}></Item>
+  );
 
   return (
     <View style={styles.container}>
@@ -78,6 +81,7 @@ export default function SchoolRequirements() {
       </View>
 
       <View style={styles.table}></View>
+
       <View style={styles.confirmButton}>
         <AppButton
           title="Confirm"
@@ -177,7 +181,7 @@ const styles = StyleSheet.create({
   },
   table: {
     flexDirection: 'row',
-    height: 150,
+    height: 100,
     width: '90%',
     top: 0,
     marginHorizontal: 30,
