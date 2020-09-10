@@ -21,13 +21,14 @@ const Item = ({title, address, id}) => (
 
 function DonorSchoolList() {
   const [searchSchool, onSearchChange] = React.useState('');
-  //   var mylist = SCHOOL_LIST;
-  //   useEffect(() => {
-  //     var reg = new RegExp(searchSchool, 'i');
-  //     mylist = SCHOOL_LIST.filter((item) => reg.test(item.title));
-  //     // console.log(reg);
-  //     // console.log(mylist);
-  //   });
+  const [myList, updateList] = React.useState(SCHOOL_LIST);
+  var myNewList;
+  useEffect(() => {
+    var reg = new RegExp(searchSchool, 'i');
+    myNewList = SCHOOL_LIST.filter((item) => reg.test(item.title));
+    console.log(reg);
+    console.log(myNewList);
+  });
   const renderItem = ({item}) => (
     <Item title={item.title} address={item.address} id={item.id} />
   );
@@ -42,7 +43,9 @@ function DonorSchoolList() {
         />
         <TextInput
           style={styles.textInput}
-          onChangeText={(text) => onSearchChange(text)}
+          onChangeText={(text) => {
+            updateList(myNewList), onSearchChange(text);
+          }}
           value={searchSchool}
           placeholder="Sarch school name"
         />
@@ -50,7 +53,7 @@ function DonorSchoolList() {
       <SafeAreaView style={styles.listContainer}>
         <ScrollView>
           <FlatList
-            data={SCHOOL_LIST}
+            data={myList}
             renderItem={renderItem}
             keyExtractor={(item) => item.id}
           />
