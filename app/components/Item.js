@@ -18,7 +18,7 @@ const Item = (props) => {
   return (
     <View style={styles.card}>
       <Image style={styles.stretch} source={props.imageSrc} />
-      <TouchableHighlight onPress={onPress}>
+      <TouchableHighlight onPress={onPress} underlayColor="none">
         <Image style={styles.tick} source={require(OffTick)} />
       </TouchableHighlight>
       <Text style={styles.itemName}>{props.itemName}</Text>
