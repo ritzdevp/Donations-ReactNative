@@ -11,8 +11,6 @@ import {
 
 import colors from '../styling/colorSchemes/colors';
 
-const AccessoriesImage = '../styling/images/Accessories.png';
-const Tick = '../styling/images/tick.png';
 const OffTick = '../styling/images/offTick.png';
 const OnTick = '../styling/images/onTick.png';
 

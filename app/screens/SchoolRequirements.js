@@ -41,21 +41,21 @@ const ListOfSelectedItems = [
     title: 'Bags',
     qty: '0',
   },
-  // {
-  //   id: '3',
-  //   title: 'Transportations',
-  //   qty: '0',
-  // },
-  // {
-  //   id: '4',
-  //   title: 'Copies',
-  //   qty: '0',
-  // },
-  // {
-  //   id: '5',
-  //   title: 'Others',
-  //   qty: '0',
-  // },
+  {
+    id: '3',
+    title: 'Transportations',
+    qty: '0',
+  },
+  {
+    id: '4',
+    title: 'Copies',
+    qty: '0',
+  },
+  {
+    id: '5',
+    title: 'Others',
+    qty: '0',
+  },
 ];
 
 export default function SchoolRequirements() {
@@ -75,6 +75,19 @@ export default function SchoolRequirements() {
       <Text style={styles.tableContentsText}>{item.qty}</Text>
     </View>
   );
+
+  // const pressDeleteHandler = (key) => {
+  //   setListOfSelectedItems((prevListOfSelectedItems) => {
+  //     return prevListOfSelectedItems.filter((item) => item.key != key);
+  //   });
+  // };
+
+  // const submitHandler = (title, qty) => {
+  //   setListOfSelectedItems((prevListOfSelectedItems) => {
+  //     count++;
+  //     return [{id: count.toString(), title, qty}, ...prevListOfSelectedItems];
+  //   });
+  // };
 
   return (
     <View style={styles.container}>
