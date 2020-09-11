@@ -31,7 +31,7 @@ const styles = StyleSheet.create({
   },
   headerMini: {
     width: '100%',
-    height: 60,
+    height: 89,
     backgroundColor: colors.secondary,
   },
   headerMiniWhite: {
@@ -41,6 +41,7 @@ const styles = StyleSheet.create({
     top: 0,
     backgroundColor: colors.offwhite,
     borderTopLeftRadius: 50,
+    height: 89,
     alignItems: 'center',
     justifyContent: 'center',
     paddingVertical: 20,
@@ -59,8 +60,6 @@ const styles = StyleSheet.create({
   heading: {
     position: 'absolute',
     width: 184,
-    height: 22,
-    top: 37,
     alignSelf: 'center',
 
     fontFamily: 'Montserrat',
