@@ -10,9 +10,9 @@ import DonorSchoolList from './app/screens/DonorSchoolList';
 
 export default function App() {
   // return <Navigator />;
-  //return <SchoolDetailsForm />;
+  return <SchoolDetailsForm />;
   //return <WelcomeScreen />;
-  return <DonorSchoolList />;
+  //return <DonorSchoolList />;
 }
 
 const styles = StyleSheet.create({

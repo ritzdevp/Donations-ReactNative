@@ -17,14 +17,12 @@ const styles = StyleSheet.create({
   inputContainer: {
     backgroundColor: colors.offwhite,
     borderRadius: 20,
-    flexDirection: 'row',
-
     marginVertical: 5,
     borderColor: colors.lightgrey,
     borderWidth: 2,
   },
   TextInput: {
-    fontSize: 15,
+    fontSize: 12,
   },
   label: {
     fontSize: 12,
@@ -37,7 +35,7 @@ const styles = StyleSheet.create({
     width: '80%',
   },
   container: {
-    width: '90%',
+    // width: '90%',
   },
 });
 
