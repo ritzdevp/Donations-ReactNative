@@ -2,7 +2,7 @@ import {StyleSheet, View, Text} from 'react-native';
 import colors from '../styling/colorSchemes/colors';
 import React, {useEffect} from 'react';
 import EmptyScreen from './EmptyScreen';
-import {TextInput, Image, FlatList, ScrollView} from 'react-native';
+import {TextInput, Image, FlatList} from 'react-native';
 import {SafeAreaView} from 'react-native-safe-area-context';
 import SchoolRequirements from './SchoolRequirements';
 import {TouchableHighlight} from 'react-native';
@@ -26,16 +26,17 @@ function DonorSchoolList() {
   useEffect(() => {
     var reg = new RegExp(searchSchool, 'i');
     myNewList = SCHOOL_LIST.filter((item) => reg.test(item.title));
-    console.log(reg);
+    // console.log(reg);
     console.log(myNewList);
   });
+
   const renderItem = ({item}) => (
     <Item title={item.title} address={item.address} id={item.id} />
   );
 
   return (
     <View style={styles.container}>
-      <EmptyScreen heading="List of Institutes need help" />
+      <EmptyScreen heading="List of Institutes need" />
       <View style={styles.inputContainer}>
         <Image
           style={styles.searchIcon}
@@ -47,17 +48,15 @@ function DonorSchoolList() {
             updateList(myNewList), onSearchChange(text);
           }}
           value={searchSchool}
-          placeholder="Sarch school name"
+          placeholder="Search school name"
         />
       </View>
       <SafeAreaView style={styles.listContainer}>
-        <ScrollView>
-          <FlatList
-            data={myList}
-            renderItem={renderItem}
-            keyExtractor={(item) => item.id}
-          />
-        </ScrollView>
+        <FlatList
+          data={myList}
+          renderItem={renderItem}
+          keyExtractor={(item) => item.id}
+        />
       </SafeAreaView>
     </View>
   );
@@ -72,11 +71,12 @@ const styles = StyleSheet.create({
   },
 
   inputContainer: {
+    position: 'relative',
     backgroundColor: colors.offwhite,
     borderRadius: 20,
     flexDirection: 'row',
     width: '80%',
-    marginVertical: 5,
+    marginVertical: 10,
     borderColor: colors.lightgrey,
     borderWidth: 2,
     alignItems: 'center',
@@ -109,6 +109,7 @@ const styles = StyleSheet.create({
   listContainer: {
     marginVertical: 20,
     width: '80%',
+    paddingVertical: 10,
   },
 });
 
