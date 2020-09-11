@@ -1,22 +1,9 @@
 import React from 'react';
-import {
-  StyleSheet,
-  View,
-  Text,
-  Button,
-  useState,
-  FlatList,
-  ScrollView,
-  TouchableOpacity,
-  SafeAreaView,
-  Image,
-} from 'react-native';
-
+import {StyleSheet, View, Text, useState, FlatList, Image} from 'react-native';
 import Item from '../components/Item';
 import AppButton from '../components/AppButton';
-
 import colors from '../styling/colorSchemes/colors';
-
+import {color} from 'react-native-reanimated';
 const DonorHands = '../styling/images/donor-logo-1.png';
 const OffTick = '../styling/images/offTick.png';
 
@@ -43,10 +30,64 @@ const ITEMSLIST = [
   },
 ];
 
+const ListOfSelectedItems = [
+  {
+    id: '1',
+    title: 'Accessories',
+    qty: '0',
+  },
+  {
+    id: '2',
+    title: 'Bags',
+    qty: '0',
+  },
+  {
+    id: '3',
+    title: 'Transportations',
+    qty: '0',
+  },
+  {
+    id: '4',
+    title: 'Copies',
+    qty: '0',
+  },
+  {
+    id: '5',
+    title: 'Others',
+    qty: '0',
+  },
+];
+
 export default function SchoolRequirements() {
   const renderItem = ({item}) => (
     <Item itemName={item.title} imageSrc={item.imageSrc}></Item>
   );
+
+  const renderListOfItems = ({item}) => (
+    <View
+      style={{
+        flexDirection: 'row',
+        width: 330,
+        backgroundColor: colors.offwhite,
+        justifyContent: 'space-between',
+      }}>
+      <Text style={styles.tableContentsText}>{item.title}</Text>
+      <Text style={styles.tableContentsText}>{item.qty}</Text>
+    </View>
+  );
+
+  // const pressDeleteHandler = (key) => {
+  //   setListOfSelectedItems((prevListOfSelectedItems) => {
+  //     return prevListOfSelectedItems.filter((item) => item.key != key);
+  //   });
+  // };
+
+  // const submitHandler = (title, qty) => {
+  //   setListOfSelectedItems((prevListOfSelectedItems) => {
+  //     count++;
+  //     return [{id: count.toString(), title, qty}, ...prevListOfSelectedItems];
+  //   });
+  // };
 
   return (
     <View style={styles.container}>
@@ -80,7 +121,18 @@ export default function SchoolRequirements() {
         </View>
       </View>
 
-      <View style={styles.table}></View>
+      <View style={styles.table}>
+        <View style={styles.tableHeader}>
+          <Text style={styles.tableHeaderText}>Items Selected</Text>
+          <Text style={styles.tableHeaderText}>Quantity Required</Text>
+        </View>
+        <FlatList
+          style={styles.tableContents}
+          data={ListOfSelectedItems}
+          renderItem={renderListOfItems}
+          keyExtractor={(item) => item.id}
+        />
+      </View>
 
       <View style={styles.confirmButton}>
         <AppButton
@@ -140,10 +192,11 @@ const styles = StyleSheet.create({
   },
 
   listView: {
+    flex: 1,
+    paddingBottom: 360,
     backgroundColor: colors.offwhite,
-    marginTop: 170,
+    marginTop: 180,
     alignSelf: 'center',
-    padding: 10,
   },
 
   heading: {
@@ -165,10 +218,11 @@ const styles = StyleSheet.create({
     left: 17.46,
   },
   othersBox: {
+    top: 4,
     flexDirection: 'row',
-    height: 25,
+    height: 20,
     width: 88,
-    left: 30,
+    left: 50,
     backgroundColor: colors.offwhite,
   },
   othersText: {
@@ -180,15 +234,49 @@ const styles = StyleSheet.create({
     color: '#343B83',
   },
   table: {
+    top: 20,
+    left: 30,
+    paddingBottom: 10,
+    marginBottom: 8,
+    width: 340,
+  },
+  tableHeader: {
     flexDirection: 'row',
+    width: 340,
+    justifyContent: 'space-between',
+    paddingBottom: 5,
+  },
+  tableHeaderText: {
+    top: 1,
+    paddingTop: 3,
+    fontFamily: 'Montserrat',
+    fontSize: 13,
+    fontWeight: '500',
+    lineHeight: 12,
+    backgroundColor: colors.offwhite,
+    color: '#343B83',
+  },
+  tableContents: {
+    top: 10,
     height: 100,
-    width: '90%',
-    top: 0,
-    marginHorizontal: 30,
-
+    width: '100%',
     backgroundColor: colors.offwhite,
   },
+
+  tableContentsText: {
+    height: 18,
+
+    fontFamily: 'Montserrat',
+    fontWeight: 'bold',
+    fontSize: 12,
+    lineHeight: 12,
+    backgroundColor: colors.offwhite,
+    color: '#343B83',
+  },
+
   confirmButton: {
+    flex: 1,
+    top: 20,
     alignSelf: 'center',
     height: 60,
     width: 300,

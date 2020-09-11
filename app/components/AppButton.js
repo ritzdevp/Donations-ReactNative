@@ -4,7 +4,10 @@ import colors from '../styling/colorSchemes/colors';
 
 const AppButton = ({title, onPress}) => {
   return (
-    <TouchableHighlight style={styles.button} onPress={onPress}>
+    <TouchableHighlight
+      style={styles.button}
+      onPress={onPress}
+      underlayColor="none">
       <Text style={styles.text}> {title} </Text>
     </TouchableHighlight>
   );
