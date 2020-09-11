@@ -18,6 +18,7 @@ const OnTick = '../styling/images/onTick.png';
 
 const Item = (props) => {
   const [selected, setSelected] = useState(false);
+  const [quantity, setQuantity] = useState(0);
 
   const onPress = () => {
     setSelected(!selected);
@@ -37,6 +38,8 @@ const Item = (props) => {
         style={styles.quantity}
         placeholder="QTY"
         keyboardType="numeric"
+        onChangeText={(quantity) => setQuantity(quantity)}
+        editable={selected}
       />
     </View>
   );

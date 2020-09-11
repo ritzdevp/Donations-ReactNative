@@ -1,12 +1,9 @@
 import React from 'react';
 import {StyleSheet, View, Text, useState, FlatList, Image} from 'react-native';
-
 import Item from '../components/Item';
 import AppButton from '../components/AppButton';
-
 import colors from '../styling/colorSchemes/colors';
 import {color} from 'react-native-reanimated';
-
 const DonorHands = '../styling/images/donor-logo-1.png';
 const OffTick = '../styling/images/offTick.png';
 
