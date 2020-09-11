@@ -17,7 +17,7 @@ const styles = StyleSheet.create({
   inputContainer: {
     backgroundColor: colors.offwhite,
     borderRadius: 20,
-    marginVertical: 5,
+    marginVertical: 10,
     borderColor: colors.lightgrey,
     borderWidth: 2,
   },
