@@ -38,6 +38,7 @@ const Item = (props) => {
         keyboardType="numeric"
         onChangeText={(quantity) => setQuantity(quantity)}
         editable={selected}
+        //onClick={props.putItem(quantity, props.itemName)}
       />
     </View>
   );

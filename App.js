@@ -1,6 +1,6 @@
 import React, {useState} from 'react';
 import {StyleSheet, View} from 'react-native';
-import Navigator from './app/routes/SchoolRequirementsStack';
+import Navigator from './app/routes/WelcomeScreenStack';
 //todo-navigation
 import SchoolDetailsForm from './app/screens/SchoolDetailsForm';
 import AppBanner from './app/components/AppBanner';
@@ -9,10 +9,10 @@ import WelcomeScreen from './app/screens/WelcomeScreen';
 import DonorSchoolList from './app/screens/DonorSchoolList';
 
 export default function App() {
-  // return <Navigator />;
+  return <Navigator />;
   //return <SchoolDetailsForm />;
   //return <WelcomeScreen />;
-  return <DonorSchoolList />;
+  //return <DonorSchoolList />;
 }
 
 const styles = StyleSheet.create({

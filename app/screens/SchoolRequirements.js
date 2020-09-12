@@ -1,5 +1,5 @@
-import React from 'react';
-import {StyleSheet, View, Text, useState, FlatList, Image} from 'react-native';
+import React, {useState} from 'react';
+import {StyleSheet, View, Text, FlatList, Image} from 'react-native';
 import Item from '../components/Item';
 import AppButton from '../components/AppButton';
 import colors from '../styling/colorSchemes/colors';
@@ -30,37 +30,57 @@ const ITEMSLIST = [
   },
 ];
 
-const ListOfSelectedItems = [
-  {
-    id: '1',
-    title: 'Accessories',
-    qty: '0',
-  },
-  {
-    id: '2',
-    title: 'Bags',
-    qty: '0',
-  },
-  {
-    id: '3',
-    title: 'Transportations',
-    qty: '0',
-  },
-  {
-    id: '4',
-    title: 'Copies',
-    qty: '0',
-  },
-  {
-    id: '5',
-    title: 'Others',
-    qty: '0',
-  },
-];
+// const ListOfSelectedItems = [
+//   {
+//     id: '1',
+//     title: 'Accessories',
+//     qty: '0',
+//   },
+//   {
+//     id: '2',
+//     title: 'Bags',
+//     qty: '0',
+//   },
+//   {
+//     id: '3',
+//     title: 'Transportations',
+//     qty: '0',
+//   },
+//   {
+//     id: '4',
+//     title: 'Copies',
+//     qty: '0',
+//   },
+//   {
+//     id: '5',
+//     title: 'Others',
+//     qty: '0',
+//   },
+// ];
 
 export default function SchoolRequirements() {
+  const [ListOfSelectedItems, setListOfSelectedItems] = useState([]);
+
+  const putItem = (qty, title) => {
+    console.log('putItem called!');
+    console.log(ListOfSelectedItems);
+    setListOfSelectedItems([
+      ...ListOfSelectedItems,
+      {
+        id: ListOfSelectedItems.length,
+        title: title,
+        qty: qty,
+      },
+    ]);
+  };
+
   const renderItem = ({item}) => (
-    <Item itemName={item.title} imageSrc={item.imageSrc}></Item>
+    <Item
+      itemName={item.title}
+      itemQty={item.qty}
+      imageSrc={item.imageSrc}
+      //putItem={putItem}
+    ></Item>
   );
 
   const renderListOfItems = ({item}) => (
@@ -75,19 +95,6 @@ export default function SchoolRequirements() {
       <Text style={styles.tableContentsText}>{item.qty}</Text>
     </View>
   );
-
-  // const pressDeleteHandler = (key) => {
-  //   setListOfSelectedItems((prevListOfSelectedItems) => {
-  //     return prevListOfSelectedItems.filter((item) => item.key != key);
-  //   });
-  // };
-
-  // const submitHandler = (title, qty) => {
-  //   setListOfSelectedItems((prevListOfSelectedItems) => {
-  //     count++;
-  //     return [{id: count.toString(), title, qty}, ...prevListOfSelectedItems];
-  //   });
-  // };
 
   return (
     <View style={styles.container}>
