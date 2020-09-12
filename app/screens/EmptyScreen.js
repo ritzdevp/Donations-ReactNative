@@ -26,6 +26,7 @@ const styles = StyleSheet.create({
     height: 89,
     left: 0,
     top: 0,
+    fontFamily: 'Montserrat',
     backgroundColor: colors.secondary,
     borderBottomEndRadius: 50,
   },

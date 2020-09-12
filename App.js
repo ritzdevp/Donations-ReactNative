@@ -7,12 +7,14 @@ import AppBanner from './app/components/AppBanner';
 import colors from './app/styling/colorSchemes/colors';
 import WelcomeScreen from './app/screens/WelcomeScreen';
 import DonorSchoolList from './app/screens/DonorSchoolList';
+import DonorDetailsForm from './app/screens/DonorDetailsForm';
 
 export default function App() {
   // return <Navigator />;
-  //return <SchoolDetailsForm />;
-  //return <WelcomeScreen />;
-  return <DonorSchoolList />;
+  // return <SchoolDetailsForm />;
+  // return <WelcomeScreen />;
+  // return <DonorSchoolList />;
+  return <DonorDetailsForm />;
 }
 
 const styles = StyleSheet.create({

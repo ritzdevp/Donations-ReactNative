@@ -5,7 +5,7 @@ import AppButton from '../components/AppButton';
 import AppTextInput from '../components/AppTextInput';
 import EmptyScreen from './EmptyScreen';
 
-export default function SchoolDetailsForm() {
+export default function DonorDetailsForm() {
   const [schoolName, onChangeSchoolName] = React.useState('');
   const [schoolAddress, onChangeSchoolAddress] = React.useState('');
   const [city, onChangeCity] = React.useState('');
@@ -14,36 +14,19 @@ export default function SchoolDetailsForm() {
 
   return (
     <View style={styles.container}>
-      <EmptyScreen heading="Enter School Details" />
+      <EmptyScreen heading="Poornapragathi Vidya Mandir Association" />
       <SafeAreaView style={styles.schoolForm}>
         <ScrollView style={styles.schoolFormScroll}>
           <AppTextInput
-            mylabel="SCHOOL NAME"
+            mylabel="NAME"
             autoCorrect={false}
             keyboardType="default"
             onChangeText={(text) => onChangeSchoolName(text)}
             value={schoolName}
-            textContentType="organizationName"
-            placeholder="Enter School Name"
+            textContentType="name"
+            placeholder="Enter Your Full Name"
           />
-          <AppTextInput
-            mylabel="SCHOOL ADRESS"
-            onChangeText={(text) => onChangeSchoolAddress(text)}
-            value={schoolAddress}
-            style={{height: 100}}
-            textContentType="fullStreetAddress"
-            multiline={true}
-            placeholder="Enter Address"
-          />
-          <AppTextInput
-            mylabel="CITY"
-            autoCorrect={false}
-            keyboardType="default"
-            onChangeText={(text) => onChangeCity(text)}
-            value={city}
-            textContentType="addressCity"
-            placeholder="Enter City Name"
-          />
+
           <AppTextInput
             mylabel="CONTACT NUMBER"
             autoCorrect={false}
@@ -60,7 +43,7 @@ export default function SchoolDetailsForm() {
             onChangeText={(text) => onChangeEmail(text)}
             value={email}
             textContentType="emailAddress"
-            placeholder="Enter School Email"
+            placeholder="Enter Your Email ID"
           />
           <View style={styles.confirmButtonLine} />
           <View style={styles.confirmButton}>
@@ -103,6 +86,5 @@ const styles = StyleSheet.create({
   },
   schoolFormScroll: {
     width: '80%',
-    // backgroundColor: colors.black,
   },
 });
