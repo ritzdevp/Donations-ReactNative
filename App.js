@@ -11,9 +11,9 @@ import DonorDetailsForm from './app/screens/DonorDetailsForm';
 
 export default function App() {
   // return <Navigator />;
-  return <SchoolDetailsForm />;
+  //return <SchoolDetailsForm />;
   // return <WelcomeScreen />;
-  // return <DonorSchoolList />;
+  return <DonorSchoolList />;
   // return <DonorDetailsForm />;
 }
 

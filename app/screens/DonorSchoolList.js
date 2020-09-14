@@ -4,8 +4,7 @@ import React, {useEffect} from 'react';
 import EmptyScreen from './EmptyScreen';
 import {TextInput, Image, FlatList} from 'react-native';
 import {SafeAreaView} from 'react-native-safe-area-context';
-import SchoolRequirements from './SchoolRequirements';
-import {TouchableHighlight} from 'react-native';
+import {TouchableOpacity} from 'react-native';
 
 const Item = ({title, address, id}) => (
   <View style={styles.item}>
@@ -13,22 +12,21 @@ const Item = ({title, address, id}) => (
       <Text style={styles.title}>{title}</Text>
       <Text style={styles.address}>{address}</Text>
     </View>
-    <TouchableHighlight onPress={() => alert('id clicked : ' + id)}>
+    <TouchableOpacity onPress={() => alert('id clicked : ' + id)}>
       <Image source={require('../styling/Icons/info.png')} />
-    </TouchableHighlight>
+    </TouchableOpacity>
   </View>
 );
 
 function DonorSchoolList() {
   const [searchSchool, onSearchChange] = React.useState('');
   const [myList, updateList] = React.useState(SCHOOL_LIST);
-  var myNewList;
-  useEffect(() => {
-    var reg = new RegExp(searchSchool, 'i');
-    myNewList = SCHOOL_LIST.filter((item) => reg.test(item.title));
-    // console.log(reg);
-    console.log(myNewList);
-  });
+
+  function updateInputAndList(text) {
+    var reg = new RegExp(text, 'i');
+    updateList(SCHOOL_LIST.filter((item) => reg.test(item.title)));
+    onSearchChange(text);
+  }
 
   const renderItem = ({item}) => (
     <Item title={item.title} address={item.address} id={item.id} />
@@ -44,9 +42,7 @@ function DonorSchoolList() {
         />
         <TextInput
           style={styles.textInput}
-          onChangeText={(text) => {
-            updateList(myNewList), onSearchChange(text);
-          }}
+          onChangeText={(text) => updateInputAndList(text)}
           value={searchSchool}
           placeholder="Search school name"
         />
