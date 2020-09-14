@@ -7,80 +7,35 @@ import {color} from 'react-native-reanimated';
 const DonorHands = '../styling/images/donor-logo-1.png';
 const OffTick = '../styling/images/offTick.png';
 
-const ITEMSLIST = [
-  {
-    id: '1',
-    title: 'Accessories',
-    imageSrc: require('../styling/images/Accessories.png'),
-  },
-  {
-    id: '2',
-    title: 'Bags',
-    imageSrc: require('../styling/images/Bags.png'),
-  },
-  {
-    id: '3',
-    title: 'Transportations',
-    imageSrc: require('../styling/images/Transportations.png'),
-  },
-  {
-    id: '4',
-    title: 'Copies',
-    imageSrc: require('../styling/images/Copies.png'),
-  },
-];
-
-// const ListOfSelectedItems = [
-//   {
-//     id: '1',
-//     title: 'Accessories',
-//     qty: '0',
-//   },
-//   {
-//     id: '2',
-//     title: 'Bags',
-//     qty: '0',
-//   },
-//   {
-//     id: '3',
-//     title: 'Transportations',
-//     qty: '0',
-//   },
-//   {
-//     id: '4',
-//     title: 'Copies',
-//     qty: '0',
-//   },
-//   {
-//     id: '5',
-//     title: 'Others',
-//     qty: '0',
-//   },
-// ];
-
 export default function SchoolRequirements() {
   const [ListOfSelectedItems, setListOfSelectedItems] = useState([]);
 
   const putItem = (qty, title) => {
     console.log('putItem called!');
     console.log(ListOfSelectedItems);
-    setListOfSelectedItems([
-      ...ListOfSelectedItems,
-      {
-        id: ListOfSelectedItems.length,
+
+    let newListOfSelectedItems = [...ListOfSelectedItems];
+    let objIndex = newListOfSelectedItems.findIndex(
+      (obj) => obj.title == title,
+    );
+    if (objIndex < 0) {
+      newListOfSelectedItems.push({
         title: title,
         qty: qty,
-      },
-    ]);
+      });
+    } else {
+      newListOfSelectedItems[objIndex].qty = qty;
+    }
+
+    setListOfSelectedItems(newListOfSelectedItems);
   };
 
   const renderItem = ({item}) => (
     <Item
       itemName={item.title}
-      itemQty={item.qty}
+      //itemQty={item.qty}
       imageSrc={item.imageSrc}
-      //putItem={putItem}
-    ></Item>
+      putItem={putItem}></Item>
   );
 
   const renderListOfItems = ({item}) => (
@@ -116,7 +71,7 @@ export default function SchoolRequirements() {
         style={styles.listView}
         data={ITEMSLIST}
         renderItem={renderItem}
-        keyExtractor={(item) => item.id}
+        keyExtractor={(item) => item.title}
       />
 
       <View style={styles.othersBox}>
@@ -137,7 +92,8 @@ export default function SchoolRequirements() {
           style={styles.tableContents}
           data={ListOfSelectedItems}
           renderItem={renderListOfItems}
-          keyExtractor={(item) => item.id}
+          keyExtractor={(item) => item.title}
+          extraData={ListOfSelectedItems}
         />
       </View>
 
@@ -290,3 +246,26 @@ const styles = StyleSheet.create({
     bottom: 24,
   },
 });
+
+const ITEMSLIST = [
+  {
+    id: '1',
+    title: 'Accessories',
+    imageSrc: require('../styling/images/Accessories.png'),
+  },
+  {
+    id: '2',
+    title: 'Bags',
+    imageSrc: require('../styling/images/Bags.png'),
+  },
+  {
+    id: '3',
+    title: 'Transportations',
+    imageSrc: require('../styling/images/Transportations.png'),
+  },
+  {
+    id: '4',
+    title: 'Copies',
+    imageSrc: require('../styling/images/Copies.png'),
+  },
+];

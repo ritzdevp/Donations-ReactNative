@@ -2,7 +2,7 @@ import {createStackNavigator} from 'react-navigation-stack';
 import {createAppContainer} from 'react-navigation';
 import WelcomeScreen from '../screens/WelcomeScreen';
 import SchoolRequirements from '../screens/SchoolRequirements';
-import SchoolDetailsForm from '../screens/SchoolDetailsForm';
+import DonorSchoolList from '../screens/DonorSchoolList';
 
 const screens = {
   WelcomeScreen: {
@@ -17,8 +17,8 @@ const screens = {
       headerShown: false,
     },
   },
-  SchoolDetailsForm: {
-    screen: SchoolDetailsForm,
+  DonorSchoolList: {
+    screen: DonorSchoolList,
     navigationOptions: {
       headerShown: false,
     },

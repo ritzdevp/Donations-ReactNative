@@ -8,8 +8,8 @@ const WelcomeScreen = ({navigation}) => {
   const goToSchoolRequirements = () => {
     navigation.navigate('SchoolRequirements');
   };
-  const goToSchoolDetailsForm = () => {
-    navigation.navigate('SchoolDetailsForm');
+  const goToDonorSchoolList = () => {
+    navigation.navigate('DonorSchoolList');
   };
 
   return (
@@ -63,7 +63,7 @@ const WelcomeScreen = ({navigation}) => {
           <View style={styles.appButton}>
             <AppButton
               title="Click to enter your requirement"
-              onPress={goToSchoolDetailsForm}
+              onPress={goToSchoolRequirements}
               style={styles.button}
             />
           </View>
@@ -72,7 +72,7 @@ const WelcomeScreen = ({navigation}) => {
           <View style={styles.appButton}>
             <AppButton
               title="Click to see schools’ requirements"
-              onPress={goToSchoolRequirements}
+              onPress={goToDonorSchoolList}
             />
           </View>
           <Image

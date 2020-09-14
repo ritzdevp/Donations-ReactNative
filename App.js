@@ -7,9 +7,11 @@ import AppBanner from './app/components/AppBanner';
 import colors from './app/styling/colorSchemes/colors';
 import WelcomeScreen from './app/screens/WelcomeScreen';
 import DonorSchoolList from './app/screens/DonorSchoolList';
+import SchoolRequirements from './app/screens/SchoolRequirements';
 
 export default function App() {
   return <Navigator />;
+  //return <SchoolRequirements />;
   //return <SchoolDetailsForm />;
   //return <WelcomeScreen />;
   //return <DonorSchoolList />;
