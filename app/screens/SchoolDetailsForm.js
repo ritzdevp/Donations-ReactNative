@@ -1,5 +1,5 @@
 import React from 'react';
-import {StyleSheet, View, SafeAreaView, ScrollView} from 'react-native';
+import {StyleSheet, View, SafeAreaView, ScrollView, Text} from 'react-native';
 import colors from '../styling/colorSchemes/colors';
 import AppButton from '../components/AppButton';
 import AppTextInput from '../components/AppTextInput';
@@ -11,6 +11,52 @@ export default function SchoolDetailsForm() {
   const [city, onChangeCity] = React.useState('');
   const [contact, onChangeContact] = React.useState('');
   const [email, onChangeEmail] = React.useState('');
+
+  // ERROR MESAGES HOOK
+  const [contactErrorMsg, onChangeContactError] = React.useState('');
+  const [nameErrorMsg, onChangeNameError] = React.useState('');
+  const [emailErrorMsg, onChangeEmailError] = React.useState('');
+  const [cityErrorMsg, onChangeCityError] = React.useState('');
+
+  function handleSubmit() {
+    console.log(schoolName, city, contact, email);
+    if (schoolName != '' && contact.length == 10 && email != '' && city != '') {
+      alert('Form Submitted!');
+    } else {
+      alert('Please check you details again!');
+    }
+  }
+  function onBlurName(inputVal) {
+    if (inputVal.length < 1) {
+      onChangeNameError('* required \n');
+    } else {
+      onChangeNameError('');
+    }
+  }
+  function onBlurContact(inputVal) {
+    if (inputVal.length < 1) {
+      onChangeContactError('* required \n');
+    } else if (inputVal.length != 10) {
+      onChangeContactError('Contact Number must be of 10 digit \n');
+    } else {
+      onChangeContactError('');
+    }
+  }
+
+  function onBlurEmail(inputVal) {
+    if (inputVal.length < 1) {
+      onChangeEmailError('* required \n');
+    } else {
+      onChangeEmailError('');
+    }
+  }
+  function onBlurCity(inputVal) {
+    if (inputVal.length < 1) {
+      onChangeCityError('* required \n');
+    } else {
+      onChangeCityError('');
+    }
+  }
 
   return (
     <View style={styles.container}>
@@ -25,9 +71,12 @@ export default function SchoolDetailsForm() {
             value={schoolName}
             textContentType="organizationName"
             placeholder="Enter School Name"
+            onEndEditing={(event) => onBlurName(event.nativeEvent.text)}
           />
+          <Text style={styles.errorMsg}>{nameErrorMsg}</Text>
           <AppTextInput
             mylabel="SCHOOL ADRESS"
+            autoCorrect={false}
             onChangeText={(text) => onChangeSchoolAddress(text)}
             value={schoolAddress}
             style={{height: 100}}
@@ -43,7 +92,9 @@ export default function SchoolDetailsForm() {
             value={city}
             textContentType="addressCity"
             placeholder="Enter City Name"
+            onEndEditing={(event) => onBlurCity(event.nativeEvent.text)}
           />
+          <Text style={styles.errorMsg}>{cityErrorMsg}</Text>
           <AppTextInput
             mylabel="CONTACT NUMBER"
             autoCorrect={false}
@@ -52,7 +103,9 @@ export default function SchoolDetailsForm() {
             value={contact}
             textContentType="telephoneNumber"
             placeholder="Enter Contact Number"
+            onEndEditing={(event) => onBlurContact(event.nativeEvent.text)}
           />
+          <Text style={styles.errorMsg}>{contactErrorMsg}</Text>
           <AppTextInput
             mylabel="EMAIL"
             autoCorrect={false}
@@ -61,13 +114,12 @@ export default function SchoolDetailsForm() {
             value={email}
             textContentType="emailAddress"
             placeholder="Enter School Email"
+            onEndEditing={(event) => onBlurEmail(event.nativeEvent.text)}
           />
+          <Text style={styles.errorMsg}>{emailErrorMsg}</Text>
           <View style={styles.confirmButtonLine} />
           <View style={styles.confirmButton}>
-            <AppButton
-              title="Submit"
-              onPress={() => alert('Confirm Button Tapped')}
-            />
+            <AppButton title="Submit" onPress={handleSubmit} />
           </View>
         </ScrollView>
       </SafeAreaView>
@@ -104,5 +156,8 @@ const styles = StyleSheet.create({
   schoolFormScroll: {
     width: '80%',
     // backgroundColor: colors.black,
+  },
+  errorMsg: {
+    color: 'red',
   },
 });
