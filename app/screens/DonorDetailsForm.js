@@ -5,7 +5,7 @@ import AppButton from '../components/AppButton';
 import AppTextInput from '../components/AppTextInput';
 import EmptyScreen from './EmptyScreen';
 
-export default function DonorDetailsForm() {
+export default function DonorDetailsForm({navigation}) {
   const [donorName, onChangeName] = React.useState('');
   const [contact, onChangeContact] = React.useState('');
   const [email, onChangeEmail] = React.useState('');

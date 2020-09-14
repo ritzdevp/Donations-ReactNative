@@ -1,26 +1,27 @@
 import {StyleSheet, View, Text} from 'react-native';
 import colors from '../styling/colorSchemes/colors';
-import React, {useEffect} from 'react';
+import React from 'react';
 import EmptyScreen from './EmptyScreen';
 import {TextInput, Image, FlatList} from 'react-native';
 import {SafeAreaView} from 'react-native-safe-area-context';
 import {TouchableOpacity} from 'react-native';
 
-const Item = ({title, address, id}) => (
-  <View style={styles.item}>
-    <View>
-      <Text style={styles.title}>{title}</Text>
-      <Text style={styles.address}>{address}</Text>
-    </View>
-    <TouchableOpacity onPress={() => alert('id clicked : ' + id)}>
-      <Image source={require('../styling/Icons/info.png')} />
-    </TouchableOpacity>
-  </View>
-);
-
-function DonorSchoolList() {
+function DonorSchoolList({navigation}) {
   const [searchSchool, onSearchChange] = React.useState('');
   const [myList, updateList] = React.useState(SCHOOL_LIST);
+
+  const Item = ({item}) => (
+    <View style={styles.item}>
+      <View>
+        <Text style={styles.title}>{item.title}</Text>
+        <Text style={styles.address}>{item.address}</Text>
+      </View>
+      <TouchableOpacity
+        onPress={() => navigation.navigate('SchoolDetails', {item})}>
+        <Image source={require('../styling/Icons/info.png')} />
+      </TouchableOpacity>
+    </View>
+  );
 
   function updateInputAndList(text) {
     var reg = new RegExp(text, 'i');
@@ -28,13 +29,11 @@ function DonorSchoolList() {
     onSearchChange(text);
   }
 
-  const renderItem = ({item}) => (
-    <Item title={item.title} address={item.address} id={item.id} />
-  );
+  const renderItem = ({item}) => <Item item={item} />;
 
   return (
     <View style={styles.container}>
-      <EmptyScreen heading="List of Institutes need" />
+      <EmptyScreen heading="List of Institutes need help" />
       <View style={styles.inputContainer}>
         <Image
           style={styles.searchIcon}
