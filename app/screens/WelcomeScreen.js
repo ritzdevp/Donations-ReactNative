@@ -4,7 +4,14 @@ import AppButton from '../components/AppButton';
 import colors from '../styling/colorSchemes/colors';
 import AppBanner from '../components/AppBanner';
 
-const WelcomeScreen = () => {
+const WelcomeScreen = ({navigation}) => {
+  const goToSchoolRequirements = () => {
+    navigation.navigate('SchoolRequirements');
+  };
+  const goToDonorSchoolList = () => {
+    navigation.navigate('DonorSchoolList');
+  };
+
   return (
     <View style={styles.container}>
       <View style={styles.topContainer}>
@@ -56,7 +63,7 @@ const WelcomeScreen = () => {
           <View style={styles.appButton}>
             <AppButton
               title="Click to enter your requirement"
-              onPress={() => alert('School Button Tapped')}
+              onPress={goToSchoolRequirements}
               style={styles.button}
             />
           </View>
@@ -65,7 +72,7 @@ const WelcomeScreen = () => {
           <View style={styles.appButton}>
             <AppButton
               title="Click to see schools’ requirements"
-              onPress={() => alert('Donor Button Tapped')}
+              onPress={goToDonorSchoolList}
             />
           </View>
           <Image

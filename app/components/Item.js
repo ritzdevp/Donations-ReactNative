@@ -36,7 +36,10 @@ const Item = (props) => {
         style={styles.quantity}
         placeholder="QTY"
         keyboardType="numeric"
-        onChangeText={(quantity) => setQuantity(quantity)}
+        onChangeText={(quantity) => {
+          props.putItem(quantity, props.itemName);
+          setQuantity(quantity);
+        }}
         editable={selected}
       />
     </View>
