@@ -5,25 +5,20 @@ import AppButton from '../components/AppButton';
 import AppTextInput from '../components/AppTextInput';
 import EmptyScreen from './EmptyScreen';
 
-export default function SchoolDetailsForm() {
-  const [schoolName, onChangeSchoolName] = React.useState('');
-  const [schoolAddress, onChangeSchoolAddress] = React.useState('');
-  const [city, onChangeCity] = React.useState('');
+export default function DonorDetailsForm({navigation}) {
+  const [donorName, onChangeName] = React.useState('');
   const [contact, onChangeContact] = React.useState('');
   const [email, onChangeEmail] = React.useState('');
-
-  // ERROR MESAGES HOOK
   const [contactErrorMsg, onChangeContactError] = React.useState('');
   const [nameErrorMsg, onChangeNameError] = React.useState('');
   const [emailErrorMsg, onChangeEmailError] = React.useState('');
-  const [cityErrorMsg, onChangeCityError] = React.useState('');
 
   function handleSubmit() {
-    console.log(schoolName, city, contact, email);
-    if (schoolName != '' && contact.length == 10 && email != '' && city != '') {
+    console.log(donorName, contact, email);
+    if (donorName != '' && contact.length == 10 && email != '') {
       alert('Form Submitted!');
     } else {
-      alert('Please check you details again!');
+      alert('Please check you details again');
     }
   }
   function onBlurName(inputVal) {
@@ -50,51 +45,24 @@ export default function SchoolDetailsForm() {
       onChangeEmailError('');
     }
   }
-  function onBlurCity(inputVal) {
-    if (inputVal.length < 1) {
-      onChangeCityError('* required \n');
-    } else {
-      onChangeCityError('');
-    }
-  }
 
   return (
     <View style={styles.container}>
-      <EmptyScreen heading="Enter School Details" />
+      <EmptyScreen heading="Poornapragathi Vidya Mandir Association" />
       <SafeAreaView style={styles.schoolForm}>
         <ScrollView style={styles.schoolFormScroll}>
           <AppTextInput
-            mylabel="SCHOOL NAME"
+            mylabel="NAME"
             autoCorrect={false}
             keyboardType="default"
-            onChangeText={(text) => onChangeSchoolName(text)}
-            value={schoolName}
-            textContentType="organizationName"
-            placeholder="Enter School Name"
+            onChangeText={(text) => onChangeName(text)}
+            value={donorName}
+            textContentType="name"
+            placeholder="Enter Your Full Name"
+            // onFocus ={onFocusChangeColor}
             onEndEditing={(event) => onBlurName(event.nativeEvent.text)}
           />
           <Text style={styles.errorMsg}>{nameErrorMsg}</Text>
-          <AppTextInput
-            mylabel="SCHOOL ADRESS"
-            autoCorrect={false}
-            onChangeText={(text) => onChangeSchoolAddress(text)}
-            value={schoolAddress}
-            style={{height: 100}}
-            textContentType="fullStreetAddress"
-            multiline={true}
-            placeholder="Enter Address"
-          />
-          <AppTextInput
-            mylabel="CITY"
-            autoCorrect={false}
-            keyboardType="default"
-            onChangeText={(text) => onChangeCity(text)}
-            value={city}
-            textContentType="addressCity"
-            placeholder="Enter City Name"
-            onEndEditing={(event) => onBlurCity(event.nativeEvent.text)}
-          />
-          <Text style={styles.errorMsg}>{cityErrorMsg}</Text>
           <AppTextInput
             mylabel="CONTACT NUMBER"
             autoCorrect={false}
@@ -113,7 +81,7 @@ export default function SchoolDetailsForm() {
             onChangeText={(text) => onChangeEmail(text)}
             value={email}
             textContentType="emailAddress"
-            placeholder="Enter School Email"
+            placeholder="Enter Your Email ID"
             onEndEditing={(event) => onBlurEmail(event.nativeEvent.text)}
           />
           <Text style={styles.errorMsg}>{emailErrorMsg}</Text>
@@ -155,7 +123,6 @@ const styles = StyleSheet.create({
   },
   schoolFormScroll: {
     width: '80%',
-    // backgroundColor: colors.black,
   },
   errorMsg: {
     color: 'red',
