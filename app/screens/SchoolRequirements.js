@@ -4,15 +4,17 @@ import Item from '../components/Item';
 import AppButton from '../components/AppButton';
 import colors from '../styling/colorSchemes/colors';
 import {color} from 'react-native-reanimated';
+import {TouchableOpacity} from 'react-native-gesture-handler';
 const DonorHands = '../styling/images/donor-logo-1.png';
 const OffTick = '../styling/images/offTick.png';
+const OnTick = '../styling/images/onTick.png';
+const DeleteIcon = '../styling/images/deleteIcon.png';
 
 export default function SchoolRequirements() {
   const [ListOfSelectedItems, setListOfSelectedItems] = useState([]);
 
   const putItem = (qty, title) => {
     console.log('putItem called!');
-    console.log(ListOfSelectedItems);
 
     let newListOfSelectedItems = [...ListOfSelectedItems];
     let objIndex = newListOfSelectedItems.findIndex(
@@ -23,11 +25,25 @@ export default function SchoolRequirements() {
         title: title,
         qty: qty,
       });
+      console.log(newListOfSelectedItems);
+      console.log(ListOfSelectedItems);
     } else {
       newListOfSelectedItems[objIndex].qty = qty;
     }
-
     setListOfSelectedItems(newListOfSelectedItems);
+  };
+
+  const deleteItem = (title) => {
+    const tempArr = [...ListOfSelectedItems];
+    console.log('title is ');
+    console.log(title);
+    const index = tempArr.findIndex((obj) => obj.title != title);
+    console.log('index is');
+    console.log(index);
+    tempArr.splice(index, 1);
+    setListOfSelectedItems(tempArr);
+    console.log('deleted');
+    console.log(tempArr);
   };
 
   const renderItem = ({item}) => (
@@ -43,11 +59,14 @@ export default function SchoolRequirements() {
       style={{
         flexDirection: 'row',
         width: 330,
-        backgroundColor: colors.offwhite,
+        backgroundColor: 'red',
         justifyContent: 'space-between',
       }}>
       <Text style={styles.tableContentsText}>{item.title}</Text>
       <Text style={styles.tableContentsText}>{item.qty}</Text>
+      <TouchableOpacity onPress={deleteItem}>
+        <Image source={require(DeleteIcon)} />
+      </TouchableOpacity>
     </View>
   );
 
@@ -86,7 +105,7 @@ export default function SchoolRequirements() {
       <View style={styles.table}>
         <View style={styles.tableHeader}>
           <Text style={styles.tableHeaderText}>Items Selected</Text>
-          <Text style={styles.tableHeaderText}>Quantity Required</Text>
+          <Text style={styles.tableHeaderText}>Quantity</Text>
         </View>
         <FlatList
           style={styles.tableContents}
@@ -202,6 +221,8 @@ const styles = StyleSheet.create({
     paddingBottom: 10,
     marginBottom: 8,
     width: 340,
+    backgroundColor: 'pink',
+    alignSelf: 'stretch',
   },
   tableHeader: {
     flexDirection: 'row',
