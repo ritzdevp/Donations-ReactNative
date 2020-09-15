@@ -20,7 +20,7 @@ const WelcomeScreen = ({navigation}) => {
           imageStyle={{borderRadius: 50}}
           source={require('../styling/images/Vector.png')}
         />
-        <AppBanner />
+        <AppBanner navigation={navigation} />
         <View style={styles.introContainer}>
           <View style={styles.schoolContainer}>
             <View>
