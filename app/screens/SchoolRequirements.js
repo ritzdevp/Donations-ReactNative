@@ -1,16 +1,26 @@
 import React, {useState} from 'react';
-import {StyleSheet, View, Text, FlatList, Image} from 'react-native';
+import {
+  StyleSheet,
+  View,
+  Text,
+  FlatList,
+  Image,
+  SafeAreaView,
+} from 'react-native';
 import Item from '../components/Item';
 import AppButton from '../components/AppButton';
 import colors from '../styling/colorSchemes/colors';
 import {color} from 'react-native-reanimated';
+import EmptyScreen from './EmptyScreen';
+import {ScrollView} from 'react-native-gesture-handler';
 import {TouchableOpacity} from 'react-native-gesture-handler';
+
 const DonorHands = '../styling/images/donor-logo-1.png';
 const OffTick = '../styling/images/offTick.png';
 const OnTick = '../styling/images/onTick.png';
 const DeleteIcon = '../styling/images/deleteIcon.png';
 
-export default function SchoolRequirements() {
+export default function SchoolRequirements({navigation}) {
   const [ListOfSelectedItems, setListOfSelectedItems] = useState([]);
 
   const putItem = (qty, title) => {
@@ -72,56 +82,51 @@ export default function SchoolRequirements() {
 
   return (
     <View style={styles.container}>
-      <View style={styles.header}>
-        <Image style={styles.donorHands} source={require(DonorHands)} />
-        <Text style={styles.heading}>DONORS SUPPORT</Text>
-      </View>
-
-      <View style={styles.headerMini}>
-        <View style={styles.headerMiniWhite}>
-          <Text style={styles.titleText}>
-            Donations for Educational Institutes
-          </Text>
-        </View>
-      </View>
-
-      <FlatList
-        numColumns={2}
-        style={styles.listView}
-        data={ITEMSLIST}
-        renderItem={renderItem}
-        keyExtractor={(item) => item.title}
+      <EmptyScreen
+        heading=" Donations for Educational Institutes"
+        navigation={navigation}
       />
-
-      <View style={styles.othersBox}>
-        <View>
-          <Image source={require(OffTick)} />
+      <ScrollView>
+        <SafeAreaView>
+          <FlatList
+            numColumns={2}
+            style={styles.listView}
+            data={ITEMSLIST}
+            renderItem={renderItem}
+            keyExtractor={(item) => item.title}
+          />
+        </SafeAreaView>
+        <View style={styles.othersBox}>
+          <View>
+            <Image source={require(OffTick)} />
+          </View>
+          <View>
+            <Text style={styles.othersText}>Others</Text>
+          </View>
         </View>
-        <View>
-          <Text style={styles.othersText}>Others</Text>
-        </View>
-      </View>
 
-      <View style={styles.table}>
-        <View style={styles.tableHeader}>
-          <Text style={styles.tableHeaderText}>Items Selected</Text>
-          <Text style={styles.tableHeaderText}>Quantity</Text>
-        </View>
-        <FlatList
-          style={styles.tableContents}
-          data={ListOfSelectedItems}
-          renderItem={renderListOfItems}
-          keyExtractor={(item) => item.title}
-          extraData={ListOfSelectedItems}
-        />
-      </View>
 
-      <View style={styles.confirmButton}>
-        <AppButton
-          title="Confirm"
-          onPress={() => alert('Confirm Button Tapped')}
-        />
-      </View>
+        <View style={styles.table}>
+          <View style={styles.tableHeader}>
+            <Text style={styles.tableHeaderText}>Items Selected</Text>
+            <Text style={styles.tableHeaderText}>Quantity Required</Text>
+          </View>
+          <FlatList
+            style={styles.tableContents}
+            data={ListOfSelectedItems}
+            renderItem={renderListOfItems}
+            keyExtractor={(item) => item.title}
+            extraData={ListOfSelectedItems}
+          />
+        </View>
+        <View style={styles.confirmButtonLine} />
+        <View style={styles.confirmButton}>
+          <AppButton
+            title="Confirm"
+            onPress={() => alert('Confirm Button Tapped')}
+          />
+        </View>
+      </ScrollView>
     </View>
   );
 }
@@ -130,81 +135,20 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     flexDirection: 'column',
+    justifyContent: 'flex-start',
     backgroundColor: colors.offwhite,
-  },
-  header: {
-    position: 'absolute',
-    width: '100%',
-    height: 89,
-    left: 0,
-    top: 0,
-    backgroundColor: colors.secondary,
-    borderBottomEndRadius: 50,
-  },
-  headerMini: {
-    position: 'absolute',
-    width: '100%',
-    height: 60,
-    top: 89,
-    backgroundColor: colors.secondary,
-  },
-  headerMiniWhite: {
-    position: 'absolute',
-    width: '100%',
-    height: 60,
-    backgroundColor: colors.offwhite,
-    borderTopLeftRadius: 50,
-  },
-  titleText: {
-    position: 'absolute',
-    width: 245,
-    height: 54,
-    left: 65,
-    top: 22,
-    bottom: 16,
-
-    fontFamily: 'Montserrat',
-    fontStyle: 'normal',
-    fontWeight: '500',
-    fontSize: 22,
-    lineHeight: 27,
-    textAlign: 'center',
-
-    color: colors.primary,
   },
 
   listView: {
-    flex: 1,
-    paddingBottom: 360,
-    backgroundColor: colors.offwhite,
-    marginTop: 180,
     alignSelf: 'center',
   },
 
-  heading: {
-    position: 'absolute',
-    width: 184,
-    height: 22,
-    top: 37,
-    alignSelf: 'center',
-
-    fontFamily: 'Montserrat',
-    fontWeight: 'bold',
-    fontSize: 18,
-    lineHeight: 22,
-
-    color: '#FFFFFF',
-  },
-  donorHands: {
-    top: 21.88,
-    left: 17.46,
-  },
   othersBox: {
-    top: 4,
+    marginVertical: 15,
     flexDirection: 'row',
     height: 20,
-    width: 88,
-    left: 50,
+    width: '80%',
+    alignSelf: 'center',
     backgroundColor: colors.offwhite,
   },
   othersText: {
@@ -223,6 +167,7 @@ const styles = StyleSheet.create({
     width: '90%',
     backgroundColor: colors.offwhite,
     alignSelf: 'stretch',
+    alignItems: 'center',
   },
   tableHeader: {
     flexDirection: 'row',
@@ -243,9 +188,8 @@ const styles = StyleSheet.create({
     marginLeft: 20,
   },
   tableContents: {
-    top: 10,
-    height: 100,
-    width: '100%',
+    width: '80%',
+    alignSelf: 'center',
     backgroundColor: colors.offwhite,
     marginLeft: 7,
   },
@@ -284,12 +228,17 @@ const styles = StyleSheet.create({
     backgroundColor: colors.offwhite,
   },
   confirmButton: {
-    flex: 1,
-    top: 20,
     alignSelf: 'center',
-    height: 60,
-    width: 300,
-    bottom: 24,
+    height: 40,
+    width: 200,
+    marginBottom: 20,
+  },
+  confirmButtonLine: {
+    borderBottomColor: colors.lightgrey,
+    borderBottomWidth: 2,
+    marginBottom: 15,
+    width: '80%',
+    alignSelf: 'center',
   },
 });
 

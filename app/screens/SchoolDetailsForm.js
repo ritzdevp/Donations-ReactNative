@@ -60,7 +60,7 @@ export default function SchoolDetailsForm() {
 
   return (
     <View style={styles.container}>
-      <EmptyScreen heading="Enter School Details" />
+      <EmptyScreen heading="Enter School Details" navigation={navigation} />
       <SafeAreaView style={styles.schoolForm}>
         <ScrollView style={styles.schoolFormScroll}>
           <AppTextInput

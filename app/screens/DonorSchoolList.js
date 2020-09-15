@@ -33,7 +33,10 @@ function DonorSchoolList({navigation}) {
 
   return (
     <View style={styles.container}>
-      <EmptyScreen heading="List of Institutes need help" />
+      <EmptyScreen
+        heading="List of Institutes need help"
+        navigation={navigation}
+      />
       <View style={styles.inputContainer}>
         <Image
           style={styles.searchIcon}

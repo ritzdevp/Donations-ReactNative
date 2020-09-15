@@ -5,11 +5,11 @@ import {StyleSheet, View, Text} from 'react-native';
 import colors from '../styling/colorSchemes/colors';
 import AppBanner from '../components/AppBanner';
 
-export default function EmptyScreen({heading}) {
+export default function EmptyScreen({heading, navigation}) {
   return (
     <>
       <View style={styles.header}>
-        <AppBanner />
+        <AppBanner navigation={navigation} />
       </View>
       <View style={styles.headerMini}>
         <View style={styles.headerMiniWhite}>

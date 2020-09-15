@@ -48,7 +48,10 @@ export default function DonorDetailsForm({navigation}) {
 
   return (
     <View style={styles.container}>
-      <EmptyScreen heading="Poornapragathi Vidya Mandir Association" />
+      <EmptyScreen
+        heading="Poornapragathi Vidya Mandir Association"
+        navigation={navigation}
+      />
       <SafeAreaView style={styles.schoolForm}>
         <ScrollView style={styles.schoolFormScroll}>
           <AppTextInput
