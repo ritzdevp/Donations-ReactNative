@@ -13,15 +13,18 @@ import colors from '../styling/colorSchemes/colors';
 import {color} from 'react-native-reanimated';
 import EmptyScreen from './EmptyScreen';
 import {ScrollView} from 'react-native-gesture-handler';
+import {TouchableOpacity} from 'react-native-gesture-handler';
+
 const DonorHands = '../styling/images/donor-logo-1.png';
 const OffTick = '../styling/images/offTick.png';
+const OnTick = '../styling/images/onTick.png';
+const DeleteIcon = '../styling/images/deleteIcon.png';
 
 export default function SchoolRequirements({navigation}) {
   const [ListOfSelectedItems, setListOfSelectedItems] = useState([]);
 
   const putItem = (qty, title) => {
     console.log('putItem called!');
-    console.log(ListOfSelectedItems);
 
     let newListOfSelectedItems = [...ListOfSelectedItems];
     let objIndex = newListOfSelectedItems.findIndex(
@@ -32,11 +35,25 @@ export default function SchoolRequirements({navigation}) {
         title: title,
         qty: qty,
       });
+      console.log(newListOfSelectedItems);
+      console.log(ListOfSelectedItems);
     } else {
       newListOfSelectedItems[objIndex].qty = qty;
     }
-
     setListOfSelectedItems(newListOfSelectedItems);
+  };
+
+  const deleteItem = (title) => {
+    const tempArr = [...ListOfSelectedItems];
+    console.log('title is ');
+    console.log(title);
+    const index = tempArr.findIndex((obj) => obj.title != title);
+    console.log('index is');
+    console.log(index);
+    tempArr.splice(index, 1);
+    setListOfSelectedItems(tempArr);
+    console.log('deleted');
+    console.log(tempArr);
   };
 
   const renderItem = ({item}) => (
@@ -55,8 +72,11 @@ export default function SchoolRequirements({navigation}) {
         backgroundColor: colors.offwhite,
         justifyContent: 'space-between',
       }}>
-      <Text style={styles.tableContentsText}>{item.title}</Text>
-      <Text style={styles.tableContentsText}>{item.qty}</Text>
+      <Text style={styles.tableItemsSelected}>{item.title}</Text>
+      <Text style={styles.tableQuantity}>{item.qty}</Text>
+      <TouchableOpacity onPress={deleteItem} style={styles.deleteButton}>
+        <Image source={require(DeleteIcon)} />
+      </TouchableOpacity>
     </View>
   );
 
@@ -84,6 +104,7 @@ export default function SchoolRequirements({navigation}) {
             <Text style={styles.othersText}>Others</Text>
           </View>
         </View>
+
 
         <View style={styles.table}>
           <View style={styles.tableHeader}>
@@ -139,41 +160,73 @@ const styles = StyleSheet.create({
     color: '#343B83',
   },
   table: {
-    marginVertical: 20,
-    width: '100%',
+    top: 20,
+    left: 30,
+    paddingBottom: 10,
+    marginBottom: 8,
+    width: '90%',
+    backgroundColor: colors.offwhite,
+    alignSelf: 'stretch',
     alignItems: 'center',
   },
   tableHeader: {
     flexDirection: 'row',
-    width: '80%',
+    width: '100%',
     justifyContent: 'space-between',
     paddingBottom: 5,
   },
   tableHeaderText: {
-    paddingVertical: 5,
+    top: 2,
+    paddingTop: 3,
     fontFamily: 'Montserrat',
-    fontSize: 13,
+    fontSize: 14,
     fontWeight: '500',
     lineHeight: 12,
     backgroundColor: colors.offwhite,
     color: '#343B83',
+    flex: 1,
+    marginLeft: 20,
   },
   tableContents: {
     width: '80%',
     alignSelf: 'center',
     backgroundColor: colors.offwhite,
+    marginLeft: 7,
   },
 
-  tableContentsText: {
-    height: 18,
+  tableItemsSelected: {
+    top: 2,
+    paddingTop: 4,
+    height: 24,
+    left: 10,
     fontFamily: 'Montserrat',
     fontWeight: 'bold',
-    fontSize: 12,
+    fontSize: 14,
     lineHeight: 12,
     backgroundColor: colors.offwhite,
     color: '#343B83',
+    alignContent: 'center',
+    flex: 1,
   },
 
+  tableQuantity: {
+    top: 2,
+    paddingTop: 4,
+    height: 24,
+    fontFamily: 'Montserrat',
+    fontWeight: 'bold',
+    fontSize: 14,
+    lineHeight: 12,
+    backgroundColor: colors.offwhite,
+    color: '#343B83',
+    flex: 0.5,
+    backgroundColor: colors.offwhite,
+  },
+  deleteButton: {
+    backgroundColor: colors.offwhite,
+    marginRight: 40,
+    backgroundColor: colors.offwhite,
+  },
   confirmButton: {
     alignSelf: 'center',
     height: 40,
