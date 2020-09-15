@@ -58,13 +58,13 @@ export default function SchoolRequirements() {
     <View
       style={{
         flexDirection: 'row',
-        width: 330,
-        backgroundColor: 'red',
+        width: '100%',
+        backgroundColor: colors.offwhite,
         justifyContent: 'space-between',
       }}>
-      <Text style={styles.tableContentsText}>{item.title}</Text>
-      <Text style={styles.tableContentsText}>{item.qty}</Text>
-      <TouchableOpacity onPress={deleteItem}>
+      <Text style={styles.tableItemsSelected}>{item.title}</Text>
+      <Text style={styles.tableQuantity}>{item.qty}</Text>
+      <TouchableOpacity onPress={deleteItem} style={styles.deleteButton}>
         <Image source={require(DeleteIcon)} />
       </TouchableOpacity>
     </View>
@@ -220,44 +220,69 @@ const styles = StyleSheet.create({
     left: 30,
     paddingBottom: 10,
     marginBottom: 8,
-    width: 340,
-    backgroundColor: 'pink',
+    width: '90%',
+    backgroundColor: colors.offwhite,
     alignSelf: 'stretch',
   },
   tableHeader: {
     flexDirection: 'row',
-    width: 340,
+    width: '100%',
     justifyContent: 'space-between',
     paddingBottom: 5,
   },
   tableHeaderText: {
-    top: 1,
+    top: 2,
     paddingTop: 3,
     fontFamily: 'Montserrat',
-    fontSize: 13,
+    fontSize: 14,
     fontWeight: '500',
     lineHeight: 12,
     backgroundColor: colors.offwhite,
     color: '#343B83',
+    flex: 1,
+    marginLeft: 20,
   },
   tableContents: {
     top: 10,
     height: 100,
     width: '100%',
     backgroundColor: colors.offwhite,
+    marginLeft: 7,
   },
 
-  tableContentsText: {
-    height: 18,
-
+  tableItemsSelected: {
+    top: 2,
+    paddingTop: 4,
+    height: 24,
+    left: 10,
     fontFamily: 'Montserrat',
     fontWeight: 'bold',
-    fontSize: 12,
+    fontSize: 14,
     lineHeight: 12,
     backgroundColor: colors.offwhite,
     color: '#343B83',
+    alignContent: 'center',
+    flex: 1,
   },
 
+  tableQuantity: {
+    top: 2,
+    paddingTop: 4,
+    height: 24,
+    fontFamily: 'Montserrat',
+    fontWeight: 'bold',
+    fontSize: 14,
+    lineHeight: 12,
+    backgroundColor: colors.offwhite,
+    color: '#343B83',
+    flex: 0.5,
+    backgroundColor: colors.offwhite,
+  },
+  deleteButton: {
+    backgroundColor: colors.offwhite,
+    marginRight: 40,
+    backgroundColor: colors.offwhite,
+  },
   confirmButton: {
     flex: 1,
     top: 20,
