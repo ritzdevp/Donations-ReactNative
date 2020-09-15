@@ -105,11 +105,10 @@ export default function SchoolRequirements({navigation}) {
           </View>
         </View>
 
-
         <View style={styles.table}>
           <View style={styles.tableHeader}>
             <Text style={styles.tableHeaderText}>Items Selected</Text>
-            <Text style={styles.tableHeaderText}>Quantity Required</Text>
+            <Text style={styles.tableHeaderText}>Quantity</Text>
           </View>
           <FlatList
             style={styles.tableContents}
@@ -188,17 +187,16 @@ const styles = StyleSheet.create({
     marginLeft: 20,
   },
   tableContents: {
-    width: '80%',
+    width: '100%',
     alignSelf: 'center',
     backgroundColor: colors.offwhite,
-    marginLeft: 7,
+    marginLeft: 40,
   },
 
   tableItemsSelected: {
     top: 2,
     paddingTop: 4,
     height: 24,
-    left: 10,
     fontFamily: 'Montserrat',
     fontWeight: 'bold',
     fontSize: 14,
