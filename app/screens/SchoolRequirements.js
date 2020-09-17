@@ -45,15 +45,15 @@ export default function SchoolRequirements({navigation}) {
 
   const deleteItem = (title) => {
     const tempArr = [...ListOfSelectedItems];
-    console.log('title is ');
-    console.log(title);
+    // console.log('title is ');
+    // console.log(title);
     const index = tempArr.findIndex((obj) => obj.title != title);
-    console.log('index is');
-    console.log(index);
+    // console.log('index is');
+    // console.log(index);
     tempArr.splice(index, 1);
     setListOfSelectedItems(tempArr);
-    console.log('deleted');
-    console.log(tempArr);
+    // console.log('deleted');
+    // console.log(tempArr);
   };
 
   const renderItem = ({item}) => (
@@ -86,46 +86,44 @@ export default function SchoolRequirements({navigation}) {
         heading=" Donations for Educational Institutes"
         navigation={navigation}
       />
-      <ScrollView>
-        <SafeAreaView>
-          <FlatList
-            numColumns={2}
-            style={styles.listView}
-            data={ITEMSLIST}
-            renderItem={renderItem}
-            keyExtractor={(item) => item.title}
-          />
-        </SafeAreaView>
-        <View style={styles.othersBox}>
-          <View>
-            <Image source={require(OffTick)} />
-          </View>
-          <View>
-            <Text style={styles.othersText}>Others</Text>
-          </View>
+      <SafeAreaView>
+        <FlatList
+          numColumns={2}
+          style={styles.listView}
+          data={ITEMSLIST}
+          renderItem={renderItem}
+          keyExtractor={(item) => item.title}
+        />
+      </SafeAreaView>
+      <View style={styles.othersBox}>
+        <View>
+          <Image source={require(OffTick)} />
         </View>
+        <View>
+          <Text style={styles.othersText}>Others</Text>
+        </View>
+      </View>
 
-        <View style={styles.table}>
-          <View style={styles.tableHeader}>
-            <Text style={styles.tableHeaderText}>Items Selected</Text>
-            <Text style={styles.tableHeaderText}>Quantity</Text>
-          </View>
-          <FlatList
-            style={styles.tableContents}
-            data={ListOfSelectedItems}
-            renderItem={renderListOfItems}
-            keyExtractor={(item) => item.title}
-            extraData={ListOfSelectedItems}
-          />
+      <View style={styles.table}>
+        <View style={styles.tableHeader}>
+          <Text style={styles.tableHeaderText}>Items Selected</Text>
+          <Text style={styles.tableHeaderText}>Quantity</Text>
         </View>
-        <View style={styles.confirmButtonLine} />
-        <View style={styles.confirmButton}>
-          <AppButton
-            title="Confirm"
-            onPress={() => alert('Confirm Button Tapped')}
-          />
-        </View>
-      </ScrollView>
+        <FlatList
+          style={styles.tableContents}
+          data={ListOfSelectedItems}
+          renderItem={renderListOfItems}
+          keyExtractor={(item) => item.title}
+          extraData={ListOfSelectedItems}
+        />
+      </View>
+      <View style={styles.confirmButtonLine} />
+      <View style={styles.confirmButton}>
+        <AppButton
+          title="Confirm"
+          onPress={() => alert('Confirm Button Tapped')}
+        />
+      </View>
     </View>
   );
 }
