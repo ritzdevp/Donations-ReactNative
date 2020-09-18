@@ -1,15 +1,25 @@
 import React, {useState} from 'react';
 import {StyleSheet, View} from 'react-native';
 import Navigator from './app/routes/WelcomeScreenStack';
-//import Navigator from './app/routes/SchoolRequirementsStack';
-//todo-navigation
 import SchoolDetailsForm from './app/screens/SchoolDetailsForm';
 import AppBanner from './app/components/AppBanner';
 import WelcomeScreen from './app/screens/WelcomeScreen';
 import DonorSchoolList from './app/screens/DonorSchoolList';
 import SchoolRequirements from './app/screens/SchoolRequirements';
-//import Navigator from './app/routes/DonorStack';
+
+import {Provider} from 'react-redux';
+import {connect} from 'react-redux';
+import {createStore} from 'redux';
+import {bindActionCreators} from 'redux';
+import rootReducer from './app/reducers/index';
+
+const store = createStore(rootReducer);
 
 export default function App() {
-  return <Navigator />;
+  console.log('in app.js');
+  return (
+    <Provider store={store}>
+      <Navigator />
+    </Provider>
+  );
 }
