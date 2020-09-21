@@ -13,10 +13,12 @@ const AppBanner = ({navigation}) => {
         <Image style={styles.bannerLogo} source={require(DonorHands)} />
       </TouchableOpacity>
       <Text style={styles.bannerName}>DONORS SUPPORT</Text>
-      <View style={styles.bannerNav}>
+      <TouchableOpacity
+        style={styles.bannerNav}
+        onPress={() => navigation.openDrawer()}>
         <Image source={require('../styling/images/line-1.png')} />
         <Image source={require('../styling/images/line-2.png')} />
-      </View>
+      </TouchableOpacity>
     </View>
   );
 };

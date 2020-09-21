@@ -24,7 +24,7 @@ export default function SchoolRequirements({navigation}) {
   const [ListOfSelectedItems, setListOfSelectedItems] = useState([]);
 
   const putItem = (qty, title) => {
-    console.log('putItem called!');
+    //console.log('putItem called!');
 
     let newListOfSelectedItems = [...ListOfSelectedItems];
     let objIndex = newListOfSelectedItems.findIndex(
@@ -35,8 +35,8 @@ export default function SchoolRequirements({navigation}) {
         title: title,
         qty: qty,
       });
-      console.log(newListOfSelectedItems);
-      console.log(ListOfSelectedItems);
+      //console.log(newListOfSelectedItems);
+      //console.log(ListOfSelectedItems);
     } else {
       newListOfSelectedItems[objIndex].qty = qty;
     }
@@ -45,15 +45,9 @@ export default function SchoolRequirements({navigation}) {
 
   const deleteItem = (title) => {
     const tempArr = [...ListOfSelectedItems];
-    // console.log('title is ');
-    // console.log(title);
     const index = tempArr.findIndex((obj) => obj.title != title);
-    // console.log('index is');
-    // console.log(index);
     tempArr.splice(index, 1);
     setListOfSelectedItems(tempArr);
-    // console.log('deleted');
-    // console.log(tempArr);
   };
 
   const renderItem = ({item}) => (

@@ -13,4 +13,4 @@ const screens = {
 
 const SchoolRequirementsStack = createStackNavigator(screens);
 
-export default createAppContainer(SchoolRequirementsStack);
+export default SchoolRequirementsStack;

@@ -1,8 +1,6 @@
 import {combineReducers} from 'redux';
-import itemsList from './itemsList';
+import selectedItemsList from './selectedItemsList';
 
-const rootReducer = combineReducers({
-  itemsListReducer: itemsList,
+export default combineReducers({
+  selectedItemsList,
 });
-
-export default rootReducer;

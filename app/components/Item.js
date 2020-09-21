@@ -10,6 +10,7 @@ import {
 } from 'react-native';
 import {connect} from 'react-redux';
 import {addItemToSelectedItemsList} from '../actions';
+import selectedItemsList from '../reducers/selectedItemsList';
 
 import colors from '../styling/colorSchemes/colors';
 
@@ -40,38 +41,28 @@ const Item = (props) => {
         keyboardType="numeric"
         onChangeText={(quantity) => {
           //props.putItem(quantity, props.itemName);
-          const payload = {
-            type: 'ADD_ITEM_TO_SELECTEDITEMSLIST',
-            id: 1234,
-            title: props.itemName,
-            qty: quantity,
-          };
-          props.addItemToSelectedItemsList(payload);
+          console.log('calling props.addItemToSelectedItemsList...');
+          props.dispatch(addItemToSelectedItemsList(props.itemName, quantity));
           setQuantity(quantity);
         }}
         editable={selected}
       />
-      <View>
-        <Text>{console.log(props.selectedItemsList)}</Text>
-      </View>
     </View>
   );
 };
 
-const mapStateToProps = (state /*, ownProps*/) => {
+const mapStateToProps = (state) => {
   return {
     selectedItemsList: state.selectedItemsList,
   };
 };
 
-const mapDispatchToProps = (dispatch) => ({
-  addItemToSelectedItemsList: (payload) => ({
-    type: 'ADD_ITEM_TO_SELECTEDITEMSLIST',
-    id: payload.id,
-    title: payload.title,
-    qty: payload.qty,
-  }),
-});
+// const mapDispatchToProps = (dispatch) => ({
+//   addItemToSelectedItemsList: (title, qty) =>
+//     dispatch(addItemToSelectedItemsList(title, qty)),
+// });
+
+export default connect(mapStateToProps, null)(Item);
 
 const styles = StyleSheet.create({
   card: {
@@ -143,5 +134,3 @@ const styles = StyleSheet.create({
     top: 8,
   },
 });
-
-export default connect(mapStateToProps, mapDispatchToProps)(Item);

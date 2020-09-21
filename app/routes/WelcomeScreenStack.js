@@ -49,4 +49,4 @@ const screens = {
 
 const WelcomeScreenStack = createStackNavigator(screens);
 
-export default createAppContainer(WelcomeScreenStack);
+export default WelcomeScreenStack;
