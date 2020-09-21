@@ -1,23 +1,46 @@
-import {StyleSheet, View, Text} from 'react-native';
+import {
+  StyleSheet,
+  View,
+  Text,
+  TextInput,
+  Image,
+  FlatList,
+  SafeAreaView,
+  TouchableOpacity,
+} from 'react-native';
 import colors from '../styling/colorSchemes/colors';
-import React from 'react';
+import React, {useEffect} from 'react';
 import EmptyScreen from './EmptyScreen';
-import {TextInput, Image, FlatList} from 'react-native';
-import {SafeAreaView} from 'react-native-safe-area-context';
-import {TouchableOpacity} from 'react-native';
+
+import schoolListingApi from '../api/schoolListing';
+
+SCHOOL_LIST = {};
 
 function DonorSchoolList({navigation}) {
   const [searchSchool, onSearchChange] = React.useState('');
   const [myList, updateList] = React.useState(SCHOOL_LIST);
+  const [SCHOOL_LIST, updatefullList] = React.useState('');
+  const [loading, setLoading] = React.useState(true);
 
-  const Item = ({item}) => (
+  // importing data from backend
+  useEffect(() => {
+    if (loading) loadSchoolListing();
+  }, []);
+
+  const loadSchoolListing = async () => {
+    const response = await schoolListingApi.getAllSchools();
+    updatefullList(response.data);
+    setLoading(false);
+  };
+
+  const Item = ({schoolName, city, id}) => (
     <View style={styles.item}>
       <View>
-        <Text style={styles.title}>{item.title}</Text>
-        <Text style={styles.address}>{item.address}</Text>
+        <Text style={styles.title}>{schoolName}</Text>
+        <Text style={styles.address}>{city}</Text>
       </View>
       <TouchableOpacity
-        onPress={() => navigation.navigate('SchoolDetails', {item})}>
+        onPress={() => navigation.navigate('SchoolDetails', {id})}>
         <Image source={require('../styling/Icons/info.png')} />
       </TouchableOpacity>
     </View>
@@ -29,7 +52,13 @@ function DonorSchoolList({navigation}) {
     onSearchChange(text);
   }
 
-  const renderItem = ({item}) => <Item item={item} />;
+  const renderItem = ({item}) => (
+    <Item
+      schoolName={item.schoolName}
+      city={item.schoolAddress.city}
+      id={item.schoolId}
+    />
+  );
 
   return (
     <View style={styles.container}>
@@ -53,7 +82,7 @@ function DonorSchoolList({navigation}) {
         <FlatList
           data={myList}
           renderItem={renderItem}
-          keyExtractor={(item) => item.id}
+          keyExtractor={(item) => item.schoolId}
         />
       </SafeAreaView>
     </View>
@@ -114,7 +143,7 @@ const styles = StyleSheet.create({
 export default DonorSchoolList;
 
 const infoIcon = '../styling/Icons/info.png';
-const SCHOOL_LIST = [
+/*const SCHOOL_LIST = [
   {
     id: '1',
     title: 'Poornapragathi Vidya Mandir Association',
@@ -175,4 +204,4 @@ const SCHOOL_LIST = [
     title: 'Queens School',
     address: 'Indore',
   },
-];
+];*/
