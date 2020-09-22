@@ -10,18 +10,10 @@ import WelcomeScreen from './app/screens/WelcomeScreen';
 import DonorSchoolList from './app/screens/DonorSchoolList';
 import SchoolRequirements from './app/screens/SchoolRequirements';
 
-import {Provider} from 'react-redux';
-import {createStore} from 'redux';
-import rootReducer from './app/reducers';
-
-const store = createStore(rootReducer);
-
 export default function App() {
   return (
     <NavigationContainer>
-      <Provider store={store}>
-        <Navigator />
-      </Provider>
+      <Navigator />
     </NavigationContainer>
   );
 }

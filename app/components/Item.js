@@ -41,8 +41,8 @@ const Item = (props) => {
         keyboardType="numeric"
         onChangeText={(quantity) => {
           //props.putItem(quantity, props.itemName);
-          console.log('calling props.addItemToSelectedItemsList...');
-          props.dispatch(addItemToSelectedItemsList(props.itemName, quantity));
+          console.log('calling props.addItem...');
+          props.addItem('hello', 1);
           setQuantity(quantity);
         }}
         editable={selected}
@@ -52,17 +52,20 @@ const Item = (props) => {
 };
 
 const mapStateToProps = (state) => {
+  console.log('in mapStateToProps, state is ' + state.selectedItemsList);
   return {
     selectedItemsList: state.selectedItemsList,
   };
 };
 
-// const mapDispatchToProps = (dispatch) => ({
-//   addItemToSelectedItemsList: (title, qty) =>
-//     dispatch(addItemToSelectedItemsList(title, qty)),
-// });
+const mapDispatchToProps = (dispatch) => {
+  console.log('in mapDispatchToProps');
+  return {
+    addItem: (title, qty) => dispatch(addItemToSelectedItemsList(title, qty)),
+  };
+};
 
-export default connect(mapStateToProps, null)(Item);
+export default connect(mapStateToProps, mapDispatchToProps)(Item);
 
 const styles = StyleSheet.create({
   card: {
