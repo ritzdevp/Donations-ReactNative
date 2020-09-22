@@ -122,7 +122,7 @@ export default function SchoolRequirements({navigation}) {
         <View style={styles.confirmButton}>
           <AppButton
             title="Confirm"
-            onPress={() => alert('Confirm Button Tapped')}
+            onPress={() => navigation.navigate('SchoolForm')}
           />
         </View>
       </ScrollView>

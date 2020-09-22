@@ -4,8 +4,9 @@ import colors from '../styling/colorSchemes/colors';
 import AppButton from '../components/AppButton';
 import AppTextInput from '../components/AppTextInput';
 import EmptyScreen from './EmptyScreen';
+import SchoolApi from '../api/schoolListing';
 
-export default function SchoolDetailsForm() {
+export default function SchoolDetailsForm({navigation}) {
   const [schoolName, onChangeSchoolName] = React.useState('');
   const [schoolAddress, onChangeSchoolAddress] = React.useState('');
   const [city, onChangeCity] = React.useState('');
@@ -18,14 +19,18 @@ export default function SchoolDetailsForm() {
   const [emailErrorMsg, onChangeEmailError] = React.useState('');
   const [cityErrorMsg, onChangeCityError] = React.useState('');
 
-  function handleSubmit() {
-    console.log(schoolName, city, contact, email);
+  const handleSubmit = async () => {
+    // console.log(schoolName, city, contact, email);
     if (schoolName != '' && contact.length == 10 && email != '' && city != '') {
-      alert('Form Submitted!');
+      const schoolRequest = {schoolName, schoolAddress, city, contact, email};
+      const result = await SchoolApi.submitSchoolRequest(schoolRequest);
+      if (!result.ok) return alert('Could not save the details!');
+      alert(`Thank you ${result.data} for using donor support`);
+      navigation.navigate('WelcomeScreen');
     } else {
       alert('Please check you details again!');
     }
-  }
+  };
   function onBlurName(inputVal) {
     if (inputVal.length < 1) {
       onChangeNameError('* required \n');

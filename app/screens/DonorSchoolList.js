@@ -7,48 +7,55 @@ import {
   FlatList,
   SafeAreaView,
   TouchableOpacity,
+  ActivityIndicator,
 } from 'react-native';
 import colors from '../styling/colorSchemes/colors';
 import React, {useEffect} from 'react';
 import EmptyScreen from './EmptyScreen';
-
 import schoolListingApi from '../api/schoolListing';
-
-SCHOOL_LIST = {};
+import AppButton from '../components/AppButton';
+import useApi from '../hooks/useApi';
 
 function DonorSchoolList({navigation}) {
   const [searchSchool, onSearchChange] = React.useState('');
-  const [myList, updateList] = React.useState(SCHOOL_LIST);
-  const [SCHOOL_LIST, updatefullList] = React.useState('');
-  const [loading, setLoading] = React.useState(true);
+  const [myList, updateList] = React.useState('');
+  const {data: fullList, error, loading, request: loadSchoolListing} = useApi(
+    schoolListingApi.getAllSchools,
+  );
 
   // importing data from backend
   useEffect(() => {
-    if (loading) loadSchoolListing();
+    loadSchoolListing().then(updateList(fullList));
   }, []);
 
-  const loadSchoolListing = async () => {
-    const response = await schoolListingApi.getAllSchools();
-    updatefullList(response.data);
-    setLoading(false);
-  };
+  // const loadSchoolListing = async () => {
+  //   setLoading(true);
+  //   const response = await schoolListingApi.getAllSchools();
+  //   if (!response.ok) {
+  //     console.log(response.originalError);
+  //     setError(true);
+  //   }
+  //   setError(false);
+
+  //   updatefullList(response.data);
+  //   // console.log(SCHOOL_LIST);
+  //   setLoading(false);
+  // };
 
   const Item = ({schoolName, city, id}) => (
-    <View style={styles.item}>
+    <TouchableOpacity
+      onPress={() => navigation.navigate('SchoolDetails', {id})}
+      style={styles.item}>
       <View>
         <Text style={styles.title}>{schoolName}</Text>
         <Text style={styles.address}>{city}</Text>
       </View>
-      <TouchableOpacity
-        onPress={() => navigation.navigate('SchoolDetails', {id})}>
-        <Image source={require('../styling/Icons/info.png')} />
-      </TouchableOpacity>
-    </View>
+    </TouchableOpacity>
   );
 
   function updateInputAndList(text) {
     var reg = new RegExp(text, 'i');
-    updateList(SCHOOL_LIST.filter((item) => reg.test(item.title)));
+    updateList(fullList.filter((item) => reg.test(item.schoolName)));
     onSearchChange(text);
   }
 
@@ -66,6 +73,17 @@ function DonorSchoolList({navigation}) {
         heading="List of Institutes need help"
         navigation={navigation}
       />
+      {error && (
+        <>
+          <Text style={styles.title}> Couldn't retrieve the listing </Text>
+          <AppButton
+            title="Retry"
+            style={{width: 200}}
+            onPress={loadSchoolListing}
+          />
+        </>
+      )}
+
       <View style={styles.inputContainer}>
         <Image
           style={styles.searchIcon}
@@ -78,6 +96,13 @@ function DonorSchoolList({navigation}) {
           placeholder="Search school name"
         />
       </View>
+      {loading && (
+        <ActivityIndicator
+          animating={loading}
+          size="large"
+          color={colors.primary}
+        />
+      )}
       <SafeAreaView style={styles.listContainer}>
         <FlatList
           data={myList}
@@ -142,7 +167,6 @@ const styles = StyleSheet.create({
 
 export default DonorSchoolList;
 
-const infoIcon = '../styling/Icons/info.png';
 /*const SCHOOL_LIST = [
   {
     id: '1',
