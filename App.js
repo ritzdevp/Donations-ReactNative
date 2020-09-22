@@ -1,6 +1,7 @@
 import React, {useState} from 'react';
 import {StyleSheet, View} from 'react-native';
 import 'react-native-gesture-handler';
+//import Navigator from './app/routes/drawer';
 import Navigator from './app/routes/drawer';
 import {NavigationContainer} from '@react-navigation/native';
 import SchoolDetailsForm from './app/screens/SchoolDetailsForm';
