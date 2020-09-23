@@ -10,7 +10,6 @@ import {
 } from 'react-native';
 import {connect} from 'react-redux';
 import {addItemToSelectedItemsList} from '../actions';
-import selectedItemsList from '../reducers/selectedItemsList';
 
 import colors from '../styling/colorSchemes/colors';
 
@@ -52,9 +51,8 @@ const Item = (props) => {
 };
 
 const mapStateToProps = (state) => {
-  console.log('in mapStateToProps, state is ' + state.selectedItemsList);
   return {
-    selectedItemsList: state.selectedItemsList,
+    selectedItemsList: state.selectedItemsList.selectedItemsList,
   };
 };
 
