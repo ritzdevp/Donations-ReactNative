@@ -15,32 +15,31 @@ import EmptyScreen from './EmptyScreen';
 import schoolListingApi from '../api/schoolListing';
 import AppButton from '../components/AppButton';
 import useApi from '../hooks/useApi';
+import {set} from 'react-native-reanimated';
 
 function DonorSchoolList({navigation}) {
   const [searchSchool, onSearchChange] = React.useState('');
   const [myList, updateList] = React.useState('');
-  const {data: fullList, error, loading, request: loadSchoolListing} = useApi(
-    schoolListingApi.getAllSchools,
-  );
+  const [loading, setLoading] = React.useState(false);
+  const {
+    data: fullList,
+    error,
+    loading: apiLoading,
+    request: loadSchoolListing,
+  } = useApi(schoolListingApi.getAllSchools);
 
   // importing data from backend
   useEffect(() => {
-    loadSchoolListing().then(updateList(fullList));
+    updateSearchListing();
   }, []);
 
-  // const loadSchoolListing = async () => {
-  //   setLoading(true);
-  //   const response = await schoolListingApi.getAllSchools();
-  //   if (!response.ok) {
-  //     console.log(response.originalError);
-  //     setError(true);
-  //   }
-  //   setError(false);
-
-  //   updatefullList(response.data);
-  //   // console.log(SCHOOL_LIST);
-  //   setLoading(false);
-  // };
+  const updateSearchListing = async () => {
+    setLoading(true);
+    const SCHOOL_LIST = await loadSchoolListing();
+    updateList(SCHOOL_LIST);
+    // console.log(SCHOOL_LIST);
+    setLoading(false);
+  };
 
   const Item = ({schoolName, city, id}) => (
     <TouchableOpacity
