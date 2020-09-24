@@ -17,6 +17,15 @@ const selectedItemsListReducer = (state = initalState, action) => {
           }),
       };
 
+    case 'DELETE_ITEM_FROM_SELECTEDITEMSLIST':
+      console.log('deleting item');
+      return {
+        ...state,
+        selectedItemsList: state.selectedItemsList.filter((item) => {
+          item.title != action.title;
+        }),
+      };
+
     default:
       return state;
   }

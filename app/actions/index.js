@@ -6,3 +6,8 @@ export const addItemToSelectedItemsList = (title, qty) => ({
   title: title,
   qty: qty,
 });
+
+export const deleteItemFromSelectedItemsList = (title) => ({
+  type: 'DELETE_ITEM_FROM_SELECTEDITEMSLIST',
+  title: title,
+});

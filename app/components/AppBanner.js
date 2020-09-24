@@ -1,7 +1,6 @@
 import React from 'react';
 import {StyleSheet, View, Text, Image} from 'react-native';
 import {TouchableOpacity} from 'react-native';
-
 import colors from '../styling/colorSchemes/colors';
 
 const DonorHands = '../styling/images/donor-logo-1.png';

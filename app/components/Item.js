@@ -39,7 +39,6 @@ const Item = (props) => {
         placeholder="QTY"
         keyboardType="numeric"
         onChangeText={(quantity) => {
-          //props.putItem(quantity, props.itemName);
           console.log('calling props.addItem...');
           props.addItem(props.itemName, quantity);
           setQuantity(quantity);

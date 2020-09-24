@@ -4,5 +4,3 @@ import selectedItemsListReducer from './selectedItemsListReducer';
 export default combineReducers({
   selectedItemsListReducer,
 });
-
-//
