@@ -12,6 +12,7 @@ import colors from '../styling/colorSchemes/colors';
 import AppButton from '../components/AppButton';
 import AppTextInput from '../components/AppTextInput';
 import EmptyScreen from './EmptyScreen';
+import DonorApi from '../api/donorListing';
 
 export default function DonorDetailsForm({navigation}) {
   const [donorName, onChangeName] = React.useState('');
@@ -22,14 +23,20 @@ export default function DonorDetailsForm({navigation}) {
   const [emailErrorMsg, onChangeEmailError] = React.useState('');
   const [modalVisible, setModalVisible] = React.useState(false);
 
-  function handleSubmit() {
-    console.log(donorName, contact, email);
+  var schoolId = navigation.getParam('schoolId');
+
+  const handleSubmit = async () => {
+    // console.log(donorName, contact, email);
     if (donorName != '' && contact.length == 10 && email != '') {
-      alert('Form Submitted!');
+      const donorRequest = {donorName, contact, email, schoolId};
+      const result = await DonorApi.submitDonorRequest(donorRequest);
+      if (!result.ok) return alert('Could not save the details!');
+      alert(`Thank you ${result.data} for using donor support`);
+      navigation.navigate('WelcomeScreen');
     } else {
       alert('Please check you details again');
     }
-  }
+  };
   function onBlurName(inputVal) {
     if (inputVal.length < 1) {
       onChangeNameError('* required \n');

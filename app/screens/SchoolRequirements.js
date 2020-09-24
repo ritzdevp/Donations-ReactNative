@@ -114,7 +114,7 @@ const SchoolRequirements = (props, {navigation}) => {
       <View style={styles.confirmButton}>
         <AppButton
           title="Confirm"
-          onPress={() => alert('Confirm Button Tapped')}
+          onPress={() => navigation.navigate('SchoolForm')}
         />
       </View>
     </View>
