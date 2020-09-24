@@ -8,6 +8,7 @@ import {
   SafeAreaView,
 } from 'react-native';
 import Item from '../components/Item';
+import CartList from '../components/CartList';
 import AppButton from '../components/AppButton';
 import colors from '../styling/colorSchemes/colors';
 import EmptyScreen from './EmptyScreen';
@@ -89,11 +90,13 @@ const SchoolRequirements = (props, {navigation}) => {
       </View>
 
       <View style={styles.table}>
-        <View style={styles.tableHeader}>
+        {/* <View style={styles.tableHeader}>
           <Text style={styles.tableHeaderText}>Items Selected</Text>
           <Text style={styles.tableHeaderText}>Quantity</Text>
-        </View>
-        <FlatList
+        </View> */}
+
+        {/* /////////////////////////////////////////////////////////////////////////////////////// */}
+        {/* <FlatList
           // style={styles.tableContents}
           // data={ListOfSelectedItems}
           // renderItem={renderListOfItems}
@@ -108,13 +111,17 @@ const SchoolRequirements = (props, {navigation}) => {
           //   (state) =>
           //     state.allReducers.selectedItemsListReducer.selectedItemsList,
           // )}
-        />
+        /> */}
+        {/* /////////////////////////////////////////////////////////////////////////////////////// */}
+
+        <CartList style={styles.tableContents} />
       </View>
       <View style={styles.confirmButtonLine} />
       <View style={styles.confirmButton}>
         <AppButton
           title="Confirm"
-          onPress={() => navigation.navigate('SchoolForm')}
+          //onPress={() => navigation.navigate('SchoolForm')}
+          onPress={() => alert('confirm button tapped')}
         />
       </View>
     </View>
@@ -167,72 +174,15 @@ const styles = StyleSheet.create({
     color: '#343B83',
   },
   table: {
-    top: 20,
-    left: 30,
-    paddingBottom: 10,
-    marginBottom: 8,
+    top: 10,
     width: '90%',
-    backgroundColor: colors.offwhite,
-    alignSelf: 'stretch',
-    alignItems: 'center',
-  },
-  tableHeader: {
-    flexDirection: 'row',
-    width: '100%',
-    justifyContent: 'space-between',
-    paddingBottom: 5,
-  },
-  tableHeaderText: {
-    top: 2,
-    paddingTop: 3,
-    fontFamily: 'Montserrat',
-    fontSize: 14,
-    fontWeight: '500',
-    lineHeight: 12,
-    backgroundColor: colors.offwhite,
-    color: '#343B83',
-    flex: 1,
-    marginLeft: 20,
-  },
-  tableContents: {
-    width: '100%',
+    backgroundColor: 'yellow',
     alignSelf: 'center',
-    backgroundColor: colors.offwhite,
-    marginLeft: 40,
-  },
-
-  tableItemsSelected: {
-    top: 2,
-    paddingTop: 4,
-    height: 24,
-    fontFamily: 'Montserrat',
-    fontWeight: 'bold',
-    fontSize: 14,
-    lineHeight: 12,
-    backgroundColor: colors.offwhite,
-    color: '#343B83',
-    alignContent: 'center',
+    alignItems: 'center',
+    justifyContent: 'center',
     flex: 1,
   },
 
-  tableQuantity: {
-    top: 2,
-    paddingTop: 4,
-    height: 24,
-    fontFamily: 'Montserrat',
-    fontWeight: 'bold',
-    fontSize: 14,
-    lineHeight: 12,
-    backgroundColor: colors.offwhite,
-    color: '#343B83',
-    flex: 0.5,
-    backgroundColor: colors.offwhite,
-  },
-  deleteButton: {
-    backgroundColor: colors.offwhite,
-    marginRight: 40,
-    backgroundColor: colors.offwhite,
-  },
   confirmButton: {
     alignSelf: 'center',
     height: 40,

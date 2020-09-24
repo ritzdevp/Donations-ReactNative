@@ -10,6 +10,7 @@ import {
 } from 'react-native';
 import {connect} from 'react-redux';
 import {addItemToSelectedItemsList} from '../actions';
+import {deleteItemFromSelectedItemsList} from '../actions';
 
 import colors from '../styling/colorSchemes/colors';
 
@@ -20,8 +21,12 @@ const Item = (props) => {
   const [selected, setSelected] = useState(false);
   const [quantity, setQuantity] = useState(0);
 
+  console.log('ok wow ' + typeof props.itemName);
+
   const onPress = () => {
     setSelected(!selected);
+    // console.log('YESSS' + props.itemName);
+    // props.deleteItem(props.itemName);
   };
 
   return (
@@ -60,6 +65,7 @@ const mapDispatchToProps = (dispatch) => {
   console.log('in mapDispatchToProps');
   return {
     addItem: (title, qty) => dispatch(addItemToSelectedItemsList(title, qty)),
+    deleteItem: (title) => dispatch(deleteItemFromSelectedItemsList(title)),
   };
 };
 

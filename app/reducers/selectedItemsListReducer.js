@@ -22,7 +22,10 @@ const selectedItemsListReducer = (state = initalState, action) => {
       return {
         ...state,
         selectedItemsList: state.selectedItemsList.filter((item) => {
-          item.title != action.title;
+          console.log('item.title ' + item.title);
+          console.log('action.title ' + action.title);
+          item.title !== action.title;
+          console.log(item.title == action.title);
         }),
       };
 
