@@ -15,18 +15,18 @@ import EmptyScreen from './EmptyScreen';
 import schoolListingApi from '../api/schoolListing';
 import AppButton from '../components/AppButton';
 import useApi from '../hooks/useApi';
-import {set} from 'react-native-reanimated';
+
+const searchIcon = require('../styling/Icons/Search-40px.png');
+const sortIcon = require('../styling/Icons/chevron-down.png');
 
 function DonorSchoolList({navigation}) {
   const [searchSchool, onSearchChange] = React.useState('');
   const [myList, updateList] = React.useState('');
+  const [fullList, updateFullList] = React.useState([]);
   const [loading, setLoading] = React.useState(false);
-  const {
-    data: fullList,
-    error,
-    loading: apiLoading,
-    request: loadSchoolListing,
-  } = useApi(schoolListingApi.getAllSchools);
+  const {data, error, loading: apiLoading, request: loadSchoolListing} = useApi(
+    schoolListingApi.getAllSchools,
+  );
 
   // importing data from backend
   useEffect(() => {
@@ -37,10 +37,21 @@ function DonorSchoolList({navigation}) {
     setLoading(true);
     const SCHOOL_LIST = await loadSchoolListing();
     updateList(SCHOOL_LIST);
+    updateFullList(SCHOOL_LIST);
     // console.log(SCHOOL_LIST);
     setLoading(false);
   };
 
+  const sortByName = () => {
+    let sortedList = fullList;
+    sortedList.sort((a, b) => {
+      let fa = a.schoolName.toLowerCase();
+      let fb = b.schoolName.toLowerCase();
+      return fa < fb ? -1 : 1;
+    });
+    updateFullList(sortedList);
+    updateList(sortedList);
+  };
   const Item = ({schoolName, city, id}) => (
     <TouchableOpacity
       onPress={() => navigation.navigate('SchoolDetails', {id})}
@@ -84,16 +95,18 @@ function DonorSchoolList({navigation}) {
       )}
 
       <View style={styles.inputContainer}>
-        <Image
-          style={styles.searchIcon}
-          source={require('../styling/Icons/Search-40px.png')}
-        />
+        <Image style={styles.searchIcon} source={searchIcon} />
         <TextInput
           style={styles.textInput}
           onChangeText={(text) => updateInputAndList(text)}
           value={searchSchool}
           placeholder="Search school name"
         />
+      </View>
+      <View style={styles.sortBox}>
+        <TouchableOpacity onPress={sortByName}>
+          <Image style={styles.sortIcon} source={sortIcon} />
+        </TouchableOpacity>
       </View>
       {loading && (
         <ActivityIndicator
@@ -161,6 +174,15 @@ const styles = StyleSheet.create({
     marginVertical: 20,
     width: '80%',
     paddingVertical: 10,
+  },
+  sortBox: {
+    width: '80%',
+    flexDirection: 'row',
+    justifyContent: 'flex-end',
+  },
+  sortIcon: {
+    height: 10,
+    width: 10,
   },
 });
 
