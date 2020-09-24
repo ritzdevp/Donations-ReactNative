@@ -41,7 +41,7 @@ const Item = (props) => {
         onChangeText={(quantity) => {
           //props.putItem(quantity, props.itemName);
           console.log('calling props.addItem...');
-          props.addItem('hello', 1);
+          props.addItem(props.itemName, quantity);
           setQuantity(quantity);
         }}
         editable={selected}
@@ -52,7 +52,8 @@ const Item = (props) => {
 
 const mapStateToProps = (state) => {
   return {
-    selectedItemsList: state.selectedItemsList.selectedItemsList,
+    selectedItemsList:
+      state.allReducers.selectedItemsListReducer.selectedItemsList,
   };
 };
 

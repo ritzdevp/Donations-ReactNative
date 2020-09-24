@@ -1,8 +1,8 @@
-import { combineReducers } from 'redux';
-import selectedItemsList from './selectedItemsList';
+import {combineReducers} from 'redux';
+import selectedItemsListReducer from './selectedItemsListReducer';
 
 export default combineReducers({
-  selectedItemsList,
+  selectedItemsListReducer,
 });
 
 //

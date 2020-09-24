@@ -1,8 +1,8 @@
 import {createStore, combineReducers} from 'redux';
-import selectedItemsList from './reducers';
+import allReducers from './reducers';
 
 const rootReducer = combineReducers({
-  selectedItemsList: selectedItemsList,
+  allReducers,
 });
 
 const configureStore = () =>
