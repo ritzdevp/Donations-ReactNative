@@ -29,4 +29,4 @@ const screens = {
 
 const DonorStack = createStackNavigator(screens);
 
-export default createAppContainer(DonorStack);
+export default DonorStack;
