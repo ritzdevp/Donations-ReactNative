@@ -8,6 +8,8 @@ import {
   TouchableHighlight,
   TouchableOpacity,
 } from 'react-native';
+import {connect} from 'react-redux';
+import {addItemToSelectedItemsList} from '../actions';
 
 import colors from '../styling/colorSchemes/colors';
 
@@ -37,7 +39,8 @@ const Item = (props) => {
         placeholder="QTY"
         keyboardType="numeric"
         onChangeText={(quantity) => {
-          props.putItem(quantity, props.itemName);
+          console.log('calling props.addItem...');
+          props.addItem(props.itemName, quantity);
           setQuantity(quantity);
         }}
         editable={selected}
@@ -45,6 +48,22 @@ const Item = (props) => {
     </View>
   );
 };
+
+const mapStateToProps = (state) => {
+  return {
+    selectedItemsList:
+      state.allReducers.selectedItemsListReducer.selectedItemsList,
+  };
+};
+
+const mapDispatchToProps = (dispatch) => {
+  console.log('in mapDispatchToProps');
+  return {
+    addItem: (title, qty) => dispatch(addItemToSelectedItemsList(title, qty)),
+  };
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(Item);
 
 const styles = StyleSheet.create({
   card: {
@@ -116,5 +135,3 @@ const styles = StyleSheet.create({
     top: 8,
   },
 });
-
-export default Item;

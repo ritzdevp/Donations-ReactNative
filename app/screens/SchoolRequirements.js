@@ -10,58 +10,42 @@ import {
 import Item from '../components/Item';
 import AppButton from '../components/AppButton';
 import colors from '../styling/colorSchemes/colors';
-import {color} from 'react-native-reanimated';
 import EmptyScreen from './EmptyScreen';
-import {ScrollView} from 'react-native-gesture-handler';
 import {TouchableOpacity} from 'react-native-gesture-handler';
+import {connect, useSelector, useDispatch} from 'react-redux';
+import {addItemToSelectedItemsList} from '../actions';
+import {deleteItemFromSelectedItemsList} from '../actions';
 
 const DonorHands = '../styling/images/donor-logo-1.png';
 const OffTick = '../styling/images/offTick.png';
 const OnTick = '../styling/images/onTick.png';
 const DeleteIcon = '../styling/images/deleteIcon.png';
 
-export default function SchoolRequirements({navigation}) {
-  const [ListOfSelectedItems, setListOfSelectedItems] = useState([]);
+const SchoolRequirements = (props, {navigation}) => {
+  // const [ListOfSelectedItems, setListOfSelectedItems] = useState(
+  //   useSelector(
+  //     (state) => state.allReducers.selectedItemsListReducer.selectedItemsList,
+  //   ),
+  // );
 
-  const putItem = (qty, title) => {
-    console.log('putItem called!');
+  // console.log(
+  //   'okayyy ' +
+  //     useSelector(
+  //       (state) => state.allReducers.selectedItemsListReducer.selectedItemsList,
+  //     ),
+  // );
 
-    let newListOfSelectedItems = [...ListOfSelectedItems];
-    let objIndex = newListOfSelectedItems.findIndex(
-      (obj) => obj.title == title,
-    );
-    if (objIndex < 0) {
-      newListOfSelectedItems.push({
-        title: title,
-        qty: qty,
-      });
-      console.log(newListOfSelectedItems);
-      console.log(ListOfSelectedItems);
-    } else {
-      newListOfSelectedItems[objIndex].qty = qty;
-    }
-    setListOfSelectedItems(newListOfSelectedItems);
-  };
+  console.log('props is ' + props);
 
   const deleteItem = (title) => {
-    const tempArr = [...ListOfSelectedItems];
-    console.log('title is ');
-    console.log(title);
-    const index = tempArr.findIndex((obj) => obj.title != title);
-    console.log('index is');
-    console.log(index);
-    tempArr.splice(index, 1);
-    setListOfSelectedItems(tempArr);
-    console.log('deleted');
-    console.log(tempArr);
+    props.deleteItem(title);
   };
 
   const renderItem = ({item}) => (
     <Item
       itemName={item.title}
       //itemQty={item.qty}
-      imageSrc={item.imageSrc}
-      putItem={putItem}></Item>
+      imageSrc={item.imageSrc}></Item>
   );
 
   const renderListOfItems = ({item}) => (
@@ -86,49 +70,73 @@ export default function SchoolRequirements({navigation}) {
         heading=" Donations for Educational Institutes"
         navigation={navigation}
       />
-      <ScrollView>
-        <SafeAreaView>
-          <FlatList
-            numColumns={2}
-            style={styles.listView}
-            data={ITEMSLIST}
-            renderItem={renderItem}
-            keyExtractor={(item) => item.title}
-          />
-        </SafeAreaView>
-        <View style={styles.othersBox}>
-          <View>
-            <Image source={require(OffTick)} />
-          </View>
-          <View>
-            <Text style={styles.othersText}>Others</Text>
-          </View>
+      <SafeAreaView>
+        <FlatList
+          numColumns={2}
+          style={styles.listView}
+          data={ITEMSLIST}
+          renderItem={renderItem}
+          keyExtractor={(item) => item.title}
+        />
+      </SafeAreaView>
+      <View style={styles.othersBox}>
+        <View>
+          <Image source={require(OffTick)} />
         </View>
+        <View>
+          <Text style={styles.othersText}>Others</Text>
+        </View>
+      </View>
 
-        <View style={styles.table}>
-          <View style={styles.tableHeader}>
-            <Text style={styles.tableHeaderText}>Items Selected</Text>
-            <Text style={styles.tableHeaderText}>Quantity</Text>
-          </View>
-          <FlatList
-            style={styles.tableContents}
-            data={ListOfSelectedItems}
-            renderItem={renderListOfItems}
-            keyExtractor={(item) => item.title}
-            extraData={ListOfSelectedItems}
-          />
+      <View style={styles.table}>
+        <View style={styles.tableHeader}>
+          <Text style={styles.tableHeaderText}>Items Selected</Text>
+          <Text style={styles.tableHeaderText}>Quantity</Text>
         </View>
-        <View style={styles.confirmButtonLine} />
-        <View style={styles.confirmButton}>
-          <AppButton
-            title="Confirm"
-            onPress={() => alert('Confirm Button Tapped')}
-          />
-        </View>
-      </ScrollView>
+        <FlatList
+          // style={styles.tableContents}
+          // data={ListOfSelectedItems}
+          // renderItem={renderListOfItems}
+          // keyExtractor={(item) => item.title}
+          // extraData={ListOfSelectedItems}
+
+          style={styles.tableContents}
+          data={props.selectedItemsList}
+          renderItem={renderListOfItems}
+          keyExtractor={(item) => item.title}
+          // extraData={useSelector(
+          //   (state) =>
+          //     state.allReducers.selectedItemsListReducer.selectedItemsList,
+          // )}
+        />
+      </View>
+      <View style={styles.confirmButtonLine} />
+      <View style={styles.confirmButton}>
+        <AppButton
+          title="Confirm"
+          onPress={() => alert('Confirm Button Tapped')}
+        />
+      </View>
     </View>
   );
-}
+};
+
+const mapStateToProps = (state) => {
+  return {
+    selectedItemsList:
+      state.allReducers.selectedItemsListReducer.selectedItemsList,
+  };
+};
+
+const mapDispatchToProps = (dispatch) => {
+  console.log('in mapDispatchToProps');
+  return {
+    addItem: (title, qty) => dispatch(addItemToSelectedItemsList(title, qty)),
+    deleteItem: (title) => dispatch(deleteItemFromSelectedItemsList(title)),
+  };
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(SchoolRequirements);
 
 const styles = StyleSheet.create({
   container: {

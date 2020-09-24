@@ -1,7 +1,6 @@
 import React from 'react';
 import {StyleSheet, View, Text, Image} from 'react-native';
 import {TouchableOpacity} from 'react-native';
-
 import colors from '../styling/colorSchemes/colors';
 
 const DonorHands = '../styling/images/donor-logo-1.png';
@@ -13,10 +12,12 @@ const AppBanner = ({navigation}) => {
         <Image style={styles.bannerLogo} source={require(DonorHands)} />
       </TouchableOpacity>
       <Text style={styles.bannerName}>DONORS SUPPORT</Text>
-      <View style={styles.bannerNav}>
+      <TouchableOpacity
+        style={styles.bannerNav}
+        onPress={() => navigation.openDrawer()}>
         <Image source={require('../styling/images/line-1.png')} />
         <Image source={require('../styling/images/line-2.png')} />
-      </View>
+      </TouchableOpacity>
     </View>
   );
 };
