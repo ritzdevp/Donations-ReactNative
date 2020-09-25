@@ -19,14 +19,36 @@ const selectedItemsListReducer = (state = initalState, action) => {
 
     case 'DELETE_ITEM_FROM_SELECTEDITEMSLIST':
       console.log('deleting item');
+
+      // ####################### ASK SAI WHY IS THIS NOT WORKING #####################//
+      // return {
+      //   ...state,
+      //   selectedItemsList: state.selectedItemsList.filter((item) => {
+      //     console.log('item.title=' + item.title);
+      //     console.log('action.title=' + action.title);
+      //     item.title !== action.title;
+      //     //item.title === 'Bags';
+      //   }),
+      // };
+      //###############################################################################//
+
+      const tempArr = [...state.selectedItemsList];
+      console.log('tempArr initial ' + tempArr);
+      const index = tempArr.findIndex(function (item) {
+        return item.title == action.title;
+      });
+      if (index < 0) {
+        return {
+          ...state,
+          selectedItemsList: state.selectedItemsList,
+        };
+      }
+      tempArr.splice(index, 1);
+      console.log('tempArr now ' + tempArr);
+      state.selectedItemsList = [...tempArr];
       return {
         ...state,
-        selectedItemsList: state.selectedItemsList.filter((item) => {
-          console.log('item.title ' + item.title);
-          console.log('action.title ' + action.title);
-          item.title !== action.title;
-          console.log(item.title == action.title);
-        }),
+        selectedItemsList: state.selectedItemsList,
       };
 
     default:

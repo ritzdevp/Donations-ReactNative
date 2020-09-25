@@ -21,12 +21,9 @@ const Item = (props) => {
   const [selected, setSelected] = useState(false);
   const [quantity, setQuantity] = useState(0);
 
-  console.log('ok wow ' + typeof props.itemName);
-
   const onPress = () => {
     setSelected(!selected);
-    // console.log('YESSS' + props.itemName);
-    // props.deleteItem(props.itemName);
+    props.deleteItem(props.itemName);
   };
 
   return (
