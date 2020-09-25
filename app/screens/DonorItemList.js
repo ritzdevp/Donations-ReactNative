@@ -1,22 +1,17 @@
+import React, {useState} from 'react';
 import {
   StyleSheet,
   View,
   Text,
-  ScrollView,
-  ActivityIndicator,
-  SafeAreaView,
   FlatList,
   Image,
-  TouchableOpacity,
+  SafeAreaView,
 } from 'react-native';
-import colors from '../styling/colorSchemes/colors';
-import React from 'react';
 import DonorItem from '../components/DonorItem';
-import EmptyScreen from './EmptyScreen';
 import AppButton from '../components/AppButton';
-import schoolListingApi from '../api/schoolListing';
-import {useEffect} from 'react';
-import useApi from '../hooks/useApi';
+import colors from '../styling/colorSchemes/colors';
+import EmptyScreen from './EmptyScreen';
+import {ScrollView, TouchableOpacity} from 'react-native-gesture-handler';
 import {connect} from 'react-redux';
 import {addItemToDonateItemsList} from '../actions';
 import {deleteItemFromDonateItemsList} from '../actions';
@@ -25,15 +20,19 @@ const OffTick = '../styling/images/offTick.png';
 const OnTick = '../styling/images/onTick.png';
 const DeleteIcon = '../styling/images/deleteIcon.png';
 
-const DonorSchoolDetails = (props, {navigation}) => {
-  var schoolId = '1';
-  const {data: school, error, loading, request: loadSchoolDetails} = useApi(
-    schoolListingApi.getSchoolDetails,
-  );
+const DonorItemList = (props, {navigation}) => {
+  // const [ListOfSelectedItems, setListOfSelectedItems] = useState(
+  //   useSelector(
+  //     (state) => state.allReducers.selectedItemsListReducer.selectedItemsList,
+  //   ),
+  // );
 
-  useEffect(() => {
-    loadSchoolDetails(schoolId);
-  }, []);
+  // console.log(
+  //   'okayyy ' +
+  //     useSelector(
+  //       (state) => state.allReducers.selectedItemsListReducer.selectedItemsList,
+  //     ),
+  // );
 
   console.log('props is ' + props);
 
@@ -44,10 +43,11 @@ const DonorSchoolDetails = (props, {navigation}) => {
   const renderItem = ({item}) => (
     <DonorItem
       itemName={item.title}
+      schoolList={SCHOOLS_PER_ITEM}
       totalUnits={item.totalUnits}
       metric={item.metric}
       imageSrc={item.imageSrc}
-      isSchoolList={false}></DonorItem>
+      isSchoolList={true}></DonorItem>
   );
 
   const renderListOfItems = ({item}) => (
@@ -68,47 +68,11 @@ const DonorSchoolDetails = (props, {navigation}) => {
 
   return (
     <View style={styles.container}>
-      <EmptyScreen heading={school.schoolName} navigation={navigation} />
-      {loading && (
-        <ActivityIndicator
-          animating={loading}
-          size="large"
-          color={colors.primary}
-        />
-      )}
-      {error && (
-        <>
-          <Text style={styles.title}> Couldn't retrieve the Details </Text>
-          <AppButton
-            title="Retry"
-            style={{width: 200}}
-            onPress={loadSchoolListing}
-          />
-        </>
-      )}
+      <EmptyScreen
+        heading=" Donations for Educational Institutes"
+        navigation={navigation}
+      />
       <ScrollView>
-        {!loading && !error && (
-          <View style={styles.detailContainer}>
-            <Text style={styles.subheading}>Address </Text>
-            <Text style={styles.content}>
-              {school.schoolAddress.addressLine1}{' '}
-              {school.schoolAddress.addressLine2}
-            </Text>
-            <Text style={styles.content}>
-              {school.schoolAddress.city} {school.schoolAddress.pincode}
-            </Text>
-            <Text style={styles.subheading}>Details </Text>
-            <Text style={styles.content}>{school.details.board}</Text>
-            <Text style={styles.content}>{school.details.recognition}</Text>
-            <Text style={styles.content}>
-              {school.details.studentsPerClass}
-              {' Students per class'}
-            </Text>
-            <Text style={styles.subheading}>Infrastructure </Text>
-            <Text style={styles.content}>{school.infrastructure}</Text>
-          </View>
-        )}
-
         <SafeAreaView style={{width: '100%'}}>
           <FlatList
             style={styles.listView}
@@ -151,8 +115,8 @@ const DonorSchoolDetails = (props, {navigation}) => {
         <View style={styles.confirmButtonLine} />
         <View style={styles.confirmButton}>
           <AppButton
-            title="Donate"
-            onPress={() => navigation.navigate('DonorForm', {schoolId})}
+            title="Confirm"
+            onPress={() => navigation.navigate('DonorForm')}
           />
         </View>
       </ScrollView>
@@ -174,7 +138,7 @@ const mapDispatchToProps = (dispatch) => {
   };
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(DonorSchoolDetails);
+export default connect(mapStateToProps, mapDispatchToProps)(DonorItemList);
 
 const styles = StyleSheet.create({
   container: {
@@ -184,53 +148,6 @@ const styles = StyleSheet.create({
     backgroundColor: colors.offwhite,
   },
 
-  inputContainer: {
-    position: 'relative',
-    backgroundColor: colors.offwhite,
-    borderRadius: 20,
-    flexDirection: 'row',
-    //  width: '80%',
-    marginVertical: 10,
-    borderColor: colors.lightgrey,
-    borderWidth: 2,
-    alignItems: 'center',
-  },
-
-  confirmButton: {
-    position: 'relative',
-    //height: 40,
-    width: 200,
-    alignSelf: 'center',
-  },
-  content: {
-    fontSize: 15,
-    lineHeight: 20,
-    color: colors.darkblue,
-    marginVertical: 2,
-  },
-  subheading: {
-    fontWeight: 'bold',
-    fontSize: 18,
-    lineHeight: 20,
-    marginVertical: 2,
-    marginTop: 20,
-    color: colors.darkblue,
-  },
-  detailContainer: {
-    fontFamily: 'Montserrat',
-    width: '100%',
-    paddingHorizontal: '10%',
-    marginBottom: 20,
-  },
-  confirmButtonLine: {
-    borderBottomColor: colors.lightgrey,
-    borderBottomWidth: 2,
-    marginBottom: 15,
-    width: '80%',
-    alignSelf: 'center',
-  },
-
-  // style copies from donorItemsList
   listView: {
     alignSelf: 'center',
     width: '100%',
@@ -321,6 +238,19 @@ const styles = StyleSheet.create({
     marginRight: 40,
     backgroundColor: colors.offwhite,
   },
+  confirmButton: {
+    alignSelf: 'center',
+    height: 40,
+    width: 200,
+    marginBottom: 20,
+  },
+  confirmButtonLine: {
+    borderBottomColor: colors.lightgrey,
+    borderBottomWidth: 2,
+    marginBottom: 15,
+    width: '80%',
+    alignSelf: 'center',
+  },
 });
 
 const ITEMSLIST = [
@@ -352,4 +282,13 @@ const ITEMSLIST = [
     totalUnits: '20000',
     imageSrc: require('../styling/images/Copies.png'),
   },
+];
+
+const SCHOOLS_PER_ITEM = [
+  {schoolName: 'Seema Public School', reqUnits: '20', city: 'Banglore'},
+  {schoolName: 'Poornapragathi Vidya Mandir', reqUnits: '24', city: 'Delhi'},
+  {schoolName: 'Teresa Public School', reqUnits: '60', city: 'Mumbai'},
+  {schoolName: 'Tinu Public School', reqUnits: '20', city: 'Banglore'},
+  {schoolName: 'Vidya Mandir School', reqUnits: '24', city: 'Delhi'},
+  {schoolName: 'Tagore Intl. Public School', reqUnits: '60', city: 'Mumbai'},
 ];

@@ -6,6 +6,7 @@ import DonorSchoolList from '../screens/DonorSchoolList';
 import DonorSchoolDetails from '../screens/DonorSchoolDetails';
 import DonorDetailsForm from '../screens/DonorDetailsForm';
 import SchoolDetailsForm from '../screens/SchoolDetailsForm';
+import DonorItemList from '../screens/DonorItemList';
 
 const screens = {
   WelcomeScreen: {
@@ -22,6 +23,12 @@ const screens = {
   },
   DonorSchoolList: {
     screen: DonorSchoolList,
+    navigationOptions: {
+      headerShown: false,
+    },
+  },
+  DonorItemList: {
+    screen: DonorItemList,
     navigationOptions: {
       headerShown: false,
     },
