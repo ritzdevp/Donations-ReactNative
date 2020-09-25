@@ -8,6 +8,7 @@ import {
   TouchableHighlight,
   TouchableOpacity,
   FlatList,
+  KeyboardAvoidingView,
 } from 'react-native';
 
 import {connect} from 'react-redux';
@@ -29,6 +30,7 @@ const CartList = (props) => {
         <Text style={styles.tableHeaderText}>Items Selected</Text>
         <Text style={styles.tableHeaderText}>Quantity</Text>
       </View>
+
       <FlatList
         data={props.selectedItemsList}
         renderItem={renderListOfItems}
@@ -69,7 +71,7 @@ const styles = StyleSheet.create({
     fontSize: 14,
     fontWeight: '500',
     lineHeight: 12,
-    backgroundColor: 'lightblue',
+    backgroundColor: colors.offwhite,
     color: '#343B83',
     flex: 1,
     marginLeft: 20,

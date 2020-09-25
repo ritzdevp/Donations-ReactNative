@@ -92,10 +92,6 @@ export default function DonorDetailsForm({navigation}) {
             </Text>
             <TouchableHighlight
               style={{...styles.openButton, backgroundColor: colors.secondary}}
-              // onPress={() => {
-              //   setModalVisible(!modalVisible);
-              //   goToWelcomeScreen;
-              // }}
               onPress={goToWelcomeScreen}>
               <Text style={styles.textStyle}>OK</Text>
             </TouchableHighlight>

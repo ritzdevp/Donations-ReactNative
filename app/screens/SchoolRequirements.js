@@ -6,13 +6,14 @@ import {
   FlatList,
   Image,
   SafeAreaView,
+  KeyboardAvoidingView,
 } from 'react-native';
 import Item from '../components/Item';
 import CartList from '../components/CartList';
 import AppButton from '../components/AppButton';
 import colors from '../styling/colorSchemes/colors';
 import EmptyScreen from './EmptyScreen';
-import {TouchableOpacity} from 'react-native-gesture-handler';
+import {ScrollView, TouchableOpacity} from 'react-native-gesture-handler';
 import {connect, useSelector, useDispatch} from 'react-redux';
 import {addItemToSelectedItemsList} from '../actions';
 import {deleteItemFromSelectedItemsList} from '../actions';
@@ -22,20 +23,7 @@ const OffTick = '../styling/images/offTick.png';
 const OnTick = '../styling/images/onTick.png';
 const DeleteIcon = '../styling/images/deleteIcon.png';
 
-const SchoolRequirements = (props, {navigation}) => {
-  // const [ListOfSelectedItems, setListOfSelectedItems] = useState(
-  //   useSelector(
-  //     (state) => state.allReducers.selectedItemsListReducer.selectedItemsList,
-  //   ),
-  // );
-
-  // console.log(
-  //   'okayyy ' +
-  //     useSelector(
-  //       (state) => state.allReducers.selectedItemsListReducer.selectedItemsList,
-  //     ),
-  // );
-
+const SchoolRequirements = (props) => {
   console.log('props is ' + props);
 
   const deleteItem = (title) => {
@@ -69,61 +57,41 @@ const SchoolRequirements = (props, {navigation}) => {
     <View style={styles.container}>
       <EmptyScreen
         heading=" Donations for Educational Institutes"
-        navigation={navigation}
+        //navigation={navigation}
       />
-      <SafeAreaView>
-        <FlatList
-          numColumns={2}
-          style={styles.listView}
-          data={ITEMSLIST}
-          renderItem={renderItem}
-          keyExtractor={(item) => item.title}
-        />
-      </SafeAreaView>
-      <View style={styles.othersBox}>
-        <View>
-          <Image source={require(OffTick)} />
+
+      <ScrollView>
+        <SafeAreaView>
+          <FlatList
+            numColumns={2}
+            style={styles.listView}
+            data={ITEMSLIST}
+            renderItem={renderItem}
+            keyExtractor={(item) => item.title}
+          />
+        </SafeAreaView>
+        <View style={styles.othersBox}>
+          <View>
+            <Image source={require(OffTick)} />
+          </View>
+          <View>
+            <Text style={styles.othersText}>Others</Text>
+          </View>
         </View>
-        <View>
-          <Text style={styles.othersText}>Others</Text>
+
+        <View style={styles.table}>
+          <CartList style={styles.tableContents} />
         </View>
-      </View>
 
-      <View style={styles.table}>
-        {/* <View style={styles.tableHeader}>
-          <Text style={styles.tableHeaderText}>Items Selected</Text>
-          <Text style={styles.tableHeaderText}>Quantity</Text>
-        </View> */}
-
-        {/* /////////////////////////////////////////////////////////////////////////////////////// */}
-        {/* <FlatList
-          // style={styles.tableContents}
-          // data={ListOfSelectedItems}
-          // renderItem={renderListOfItems}
-          // keyExtractor={(item) => item.title}
-          // extraData={ListOfSelectedItems}
-
-          style={styles.tableContents}
-          data={props.selectedItemsList}
-          renderItem={renderListOfItems}
-          keyExtractor={(item) => item.title}
-          // extraData={useSelector(
-          //   (state) =>
-          //     state.allReducers.selectedItemsListReducer.selectedItemsList,
-          // )}
-        /> */}
-        {/* /////////////////////////////////////////////////////////////////////////////////////// */}
-
-        <CartList style={styles.tableContents} />
-      </View>
-      <View style={styles.confirmButtonLine} />
-      <View style={styles.confirmButton}>
-        <AppButton
-          title="Confirm"
-          //onPress={() => navigation.navigate('SchoolForm')}
-          onPress={() => alert('confirm button tapped')}
-        />
-      </View>
+        <View style={styles.confirmButtonLine} />
+        <View style={styles.confirmButton}>
+          <AppButton
+            title="Confirm"
+            //onPress={() => navigation.navigate('SchoolForm')}
+            onPress={() => alert('confirm button tapped')}
+          />
+        </View>
+      </ScrollView>
     </View>
   );
 };
@@ -175,7 +143,7 @@ const styles = StyleSheet.create({
   table: {
     top: 10,
     width: '90%',
-    backgroundColor: 'yellow',
+    backgroundColor: colors.offwhite,
     alignSelf: 'center',
     alignItems: 'center',
     justifyContent: 'center',
@@ -186,11 +154,12 @@ const styles = StyleSheet.create({
     alignSelf: 'center',
     height: 40,
     width: 200,
-    marginBottom: 20,
+    marginBottom: 2,
   },
   confirmButtonLine: {
     borderBottomColor: colors.lightgrey,
     borderBottomWidth: 2,
+    marginTop: 14,
     marginBottom: 15,
     width: '80%',
     alignSelf: 'center',
