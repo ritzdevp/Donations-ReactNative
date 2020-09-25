@@ -136,7 +136,6 @@ const mapStateToProps = (state) => {
 };
 
 const mapDispatchToProps = (dispatch) => {
-  console.log('in mapDispatchToProps');
   return {
     addItem: (title, qty) => dispatch(addItemToSelectedItemsList(title, qty)),
     deleteItem: (title) => dispatch(deleteItemFromSelectedItemsList(title)),

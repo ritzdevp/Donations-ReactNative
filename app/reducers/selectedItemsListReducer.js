@@ -5,7 +5,6 @@ const initalState = {
 const selectedItemsListReducer = (state = initalState, action) => {
   switch (action.type) {
     case 'ADD_ITEM_TO_SELECTEDITEMSLIST':
-      console.log('state is ' + state.selectedItemsList);
       return {
         ...state,
         selectedItemsList: state.selectedItemsList
@@ -33,7 +32,6 @@ const selectedItemsListReducer = (state = initalState, action) => {
       //###############################################################################//
 
       const tempArr = [...state.selectedItemsList];
-      console.log('tempArr initial ' + tempArr);
       const index = tempArr.findIndex(function (item) {
         return item.title == action.title;
       });
@@ -44,7 +42,6 @@ const selectedItemsListReducer = (state = initalState, action) => {
         };
       }
       tempArr.splice(index, 1);
-      console.log('tempArr now ' + tempArr);
       state.selectedItemsList = [...tempArr];
       return {
         ...state,

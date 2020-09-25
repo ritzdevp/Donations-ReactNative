@@ -49,7 +49,6 @@ const mapStateToProps = (state) => {
 };
 
 const mapDispatchToProps = (dispatch) => {
-  console.log('in mapDispatchToProps');
   return {
     addItem: (title, qty) => dispatch(addItemToSelectedItemsList(title, qty)),
     deleteItem: (title) => dispatch(deleteItemFromSelectedItemsList(title)),
@@ -86,6 +85,7 @@ const styles = StyleSheet.create({
     color: '#343B83',
     flex: 0.5,
   },
+
   deleteButton: {
     backgroundColor: colors.offwhite,
     marginRight: 15,
