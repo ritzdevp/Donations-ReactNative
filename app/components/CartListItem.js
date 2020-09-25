@@ -63,7 +63,7 @@ const CartListItem = (props) => {
             />
 
             <TouchableOpacity
-              style={styles.openButton}
+              style={styles.submitButton}
               onPress={() => setEditModalVisible(!editModalVisible)}>
               <Image source={require(SmallConfirm)} />
             </TouchableOpacity>
@@ -110,6 +110,7 @@ const styles = StyleSheet.create({
     top: 2,
     left: 20,
     paddingTop: 4,
+    paddingRight: 15,
     height: 24,
     fontFamily: 'Montserrat',
     fontWeight: 'bold',
@@ -141,6 +142,7 @@ const styles = StyleSheet.create({
 
   deleteButton: {
     marginRight: 10,
+    paddingRight: 10,
     backgroundColor: colors.offwhite,
   },
 
@@ -161,7 +163,7 @@ const styles = StyleSheet.create({
     shadowRadius: 3.84,
     elevation: 5,
   },
-  openButton: {
+  submitButton: {
     marginTop: '10%',
     backgroundColor: colors.offwhite,
     borderRadius: 7,
