@@ -5,6 +5,7 @@ import {createStackNavigator} from 'react-navigation-stack';
 import DonorDetailsForm from '../screens/DonorDetailsForm';
 import DonorSchoolDetails from '../screens/DonorSchoolDetails';
 import DonorSchoolList from '../screens/DonorSchoolList';
+import SchoolDetailsForm from '../screens/SchoolDetailsForm';
 
 const screens = {
   SchoolList: {
@@ -21,6 +22,12 @@ const screens = {
   },
   DonorForm: {
     screen: DonorDetailsForm,
+    navigationOptions: {
+      headerShown: false,
+    },
+  },
+  SchoolDetailsForm: {
+    screen: SchoolDetailsForm,
     navigationOptions: {
       headerShown: false,
     },

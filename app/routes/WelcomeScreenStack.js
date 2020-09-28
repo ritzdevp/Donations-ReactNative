@@ -46,7 +46,7 @@ const screens = {
     },
   },
 
-  SchoolForm: {
+  SchoolDetailsForm: {
     screen: SchoolDetailsForm,
     navigationOptions: {
       headerShown: false,
