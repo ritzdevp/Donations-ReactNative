@@ -18,7 +18,7 @@ import {addItemToDonateItemsList} from '../actions';
 import {deleteItemFromDonateItemsList} from '../actions';
 import DonateCartList from '../components/DonateCartList';
 
-export default function DonorDetailsForm(props, {navigation}) {
+export default function DonorDetailsForm({navigation}) {
   const [donorName, onChangeName] = React.useState('');
   const [contact, onChangeContact] = React.useState('');
   const [email, onChangeEmail] = React.useState('');
@@ -79,9 +79,7 @@ export default function DonorDetailsForm(props, {navigation}) {
         heading="Poornapragathi Vidya Mandir Association"
         navigation={navigation}
       />
-      <View style={styles.table}>
-        <DonateCartList style={styles.tableContents} />
-      </View>
+
       <Modal
         animationType="fade"
         transparent={true}
@@ -99,16 +97,21 @@ export default function DonorDetailsForm(props, {navigation}) {
               shortly.
             </Text>
             <TouchableHighlight
-              style={{...styles.openButton, backgroundColor: colors.secondary}}
+              style={{
+                ...styles.openButton,
+                backgroundColor: colors.secondary,
+              }}
               onPress={goToWelcomeScreen}>
               <Text style={styles.textStyle}>OK</Text>
             </TouchableHighlight>
           </View>
         </View>
       </Modal>
-
       <SafeAreaView style={styles.schoolForm}>
         <ScrollView style={styles.schoolFormScroll}>
+          <View style={styles.table}>
+            <DonateCartList style={styles.tableContents} showButtons={false} />
+          </View>
           <AppTextInput
             mylabel="NAME"
             autoCorrect={false}
@@ -237,10 +240,10 @@ const styles = StyleSheet.create({
     left: 30,
     paddingBottom: 10,
     marginBottom: 8,
-    width: '90%',
+    width: '100%',
     backgroundColor: colors.offwhite,
-    alignSelf: 'stretch',
-    alignItems: 'center',
+    //alignSelf: 'stretch',
+    //alignItems: 'center',
     flex: 1,
   },
   tableContents: {

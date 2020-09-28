@@ -59,13 +59,13 @@ const DonorItemList = (props, {navigation}) => {
         </View>
 
         <View style={styles.table}>
-          <DonateCartList style={styles.tableContents} />
+          <DonateCartList showButton={true} />
         </View>
         <View style={styles.confirmButtonLine} />
         <View style={styles.confirmButton}>
           <AppButton
             title="Confirm"
-            onPress={() => navigation.navigate('DonorForm')}
+            onPress={() => props.navigation.navigate('DonorForm')}
           />
         </View>
       </ScrollView>

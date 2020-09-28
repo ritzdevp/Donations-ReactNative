@@ -108,7 +108,7 @@ const DonorSchoolDetails = (props, {navigation}) => {
         </View>
 
         <View style={styles.table}>
-          <DonateCartList style={styles.tableContents} />
+          <DonateCartList showButton={true} />
         </View>
 
         <View style={styles.confirmButtonLine} />

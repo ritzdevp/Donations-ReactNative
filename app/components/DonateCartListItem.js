@@ -36,47 +36,57 @@ const DonateCartListItem = (props) => {
       }}>
       <Text style={styles.tableItemsSelected}>{props.itemName}</Text>
       <Text style={styles.tableQuantity}>{props.itemQty}</Text>
-      <View>
-        <Modal
-          animationType="fade"
-          transparent={true}
-          visible={editModalVisible}
-          onRequestClose={() => {
-            Alert.alert('Modal has been closed.');
-          }}>
-          <View style={styles.modalView}>
-            <TextInput
-              style={styles.editQuantityInModal}
-              placeholder="QTY"
-              keyboardType="numeric"
-              onChangeText={(qty) => {
-                props.addItem(props.itemName, qty);
-              }}
-            />
+      {/* <View
+        style={{
+          flexDirection: 'row',
+          minWidth: '20%',
+        }}> */}
+      {props.showButton && (
+        <>
+          <View>
+            <Modal
+              animationType="fade"
+              transparent={true}
+              visible={editModalVisible}
+              onRequestClose={() => {
+                Alert.alert('Modal has been closed.');
+              }}>
+              <View style={styles.modalView}>
+                <TextInput
+                  style={styles.editQuantityInModal}
+                  placeholder="QTY"
+                  keyboardType="numeric"
+                  onChangeText={(qty) => {
+                    props.addItem(props.itemName, qty);
+                  }}
+                />
 
+                <TouchableOpacity
+                  style={styles.submitButton}
+                  onPress={() => setEditModalVisible(!editModalVisible)}>
+                  <Image source={require(SmallConfirm)} />
+                </TouchableOpacity>
+              </View>
+            </Modal>
+          </View>
+
+          <View>
             <TouchableOpacity
-              style={styles.submitButton}
+              activeOpacity={0.4}
+              style={styles.editPenButton}
               onPress={() => setEditModalVisible(!editModalVisible)}>
-              <Image source={require(SmallConfirm)} />
+              <Image source={require(EditPen)} />
             </TouchableOpacity>
           </View>
-        </Modal>
-      </View>
 
-      <View>
-        <TouchableOpacity
-          activeOpacity={0.4}
-          style={styles.editPenButton}
-          onPress={() => setEditModalVisible(!editModalVisible)}>
-          <Image source={require(EditPen)} />
-        </TouchableOpacity>
-      </View>
-
-      <TouchableOpacity
-        onPress={deleteItemFromList}
-        style={styles.deleteButton}>
-        <Image source={require(DeleteIcon)} />
-      </TouchableOpacity>
+          <TouchableOpacity
+            onPress={deleteItemFromList}
+            style={styles.deleteButton}>
+            <Image source={require(DeleteIcon)} />
+          </TouchableOpacity>
+        </>
+      )}
+      {/* </View> */}
     </View>
   );
 };

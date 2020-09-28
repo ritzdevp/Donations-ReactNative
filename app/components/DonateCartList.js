@@ -19,7 +19,11 @@ const DeleteIcon = '../styling/images/deleteIcon.png';
 
 const DonateCartList = (props) => {
   const renderListOfItems = ({item}) => (
-    <DonateCartListItem itemName={item.title} itemQty={item.qty} />
+    <DonateCartListItem
+      itemName={item.title}
+      itemQty={item.qty}
+      showButton={props.showButton}
+    />
   );
 
   return (
