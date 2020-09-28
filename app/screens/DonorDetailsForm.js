@@ -13,8 +13,12 @@ import AppButton from '../components/AppButton';
 import AppTextInput from '../components/AppTextInput';
 import EmptyScreen from './EmptyScreen';
 import DonorApi from '../api/donorListing';
+import {connect} from 'react-redux';
+import {addItemToDonateItemsList} from '../actions';
+import {deleteItemFromDonateItemsList} from '../actions';
+import DonateCartList from '../components/DonateCartList';
 
-export default function DonorDetailsForm({navigation}) {
+export default function DonorDetailsForm(props, {navigation}) {
   const [donorName, onChangeName] = React.useState('');
   const [contact, onChangeContact] = React.useState('');
   const [email, onChangeEmail] = React.useState('');
@@ -30,9 +34,11 @@ export default function DonorDetailsForm({navigation}) {
     if (donorName != '' && contact.length == 10 && email != '') {
       const donorRequest = {donorName, contact, email, schoolId};
       const result = await DonorApi.submitDonorRequest(donorRequest);
-      if (!result.ok) return alert('Could not save the details!');
-      alert(`Thank you ${result.data} for using donor support`);
-      navigation.navigate('WelcomeScreen');
+      if (!result.ok) {
+        return alert('Could not save the details!');
+      }
+      setModalVisible(true);
+      //navigation.navigate('WelcomeScreen');
     } else {
       alert('Please check you details again');
     }
@@ -73,7 +79,9 @@ export default function DonorDetailsForm({navigation}) {
         heading="Poornapragathi Vidya Mandir Association"
         navigation={navigation}
       />
-
+      <View style={styles.table}>
+        <DonateCartList style={styles.tableContents} />
+      </View>
       <Modal
         animationType="fade"
         transparent={true}
@@ -137,12 +145,7 @@ export default function DonorDetailsForm({navigation}) {
           <Text style={styles.errorMsg}>{emailErrorMsg}</Text>
           <View style={styles.confirmButtonLine} />
           <View style={styles.confirmButton}>
-            <AppButton
-              title="Submit"
-              onPress={() => {
-                setModalVisible(true);
-              }}
-            />
+            <AppButton title="Submit" onPress={handleSubmit} />
           </View>
         </ScrollView>
       </SafeAreaView>
@@ -228,5 +231,22 @@ const styles = StyleSheet.create({
     fontSize: 18,
     color: '#343B83',
     textAlign: 'center',
+  },
+  table: {
+    top: 20,
+    left: 30,
+    paddingBottom: 10,
+    marginBottom: 8,
+    width: '90%',
+    backgroundColor: colors.offwhite,
+    alignSelf: 'stretch',
+    alignItems: 'center',
+    flex: 1,
+  },
+  tableContents: {
+    width: '100%',
+    alignSelf: 'center',
+    backgroundColor: colors.offwhite,
+    marginLeft: 40,
   },
 });

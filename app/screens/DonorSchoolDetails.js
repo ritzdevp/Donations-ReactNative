@@ -38,10 +38,6 @@ const DonorSchoolDetails = (props, {navigation}) => {
 
   console.log('props is ' + props);
 
-  const deleteItem = (title) => {
-    props.deleteItem(title);
-  };
-
   const renderItem = ({item}) => (
     <DonorItem
       itemName={item.title}
@@ -50,22 +46,6 @@ const DonorSchoolDetails = (props, {navigation}) => {
       imageSrc={item.imageSrc}
       isSchoolList={false}></DonorItem>
   );
-
-  // const renderListOfItems = ({item}) => (
-  //   <View
-  //     style={{
-  //       flexDirection: 'row',
-  //       width: '100%',
-  //       backgroundColor: colors.offwhite,
-  //       justifyContent: 'space-between',
-  //     }}>
-  //     <Text style={styles.tableItemsSelected}>{item.title}</Text>
-  //     <Text style={styles.tableQuantity}>{item.qty}</Text>
-  //     <TouchableOpacity onPress={deleteItem} style={styles.deleteButton}>
-  //       <Image source={require(DeleteIcon)} />
-  //     </TouchableOpacity>
-  //   </View>
-  // );
 
   return (
     <View style={styles.container}>
@@ -208,7 +188,7 @@ const styles = StyleSheet.create({
   confirmButtonLine: {
     borderBottomColor: colors.lightgrey,
     borderBottomWidth: 2,
-    marginBottom: 15,
+    marginVertical: 15,
     width: '80%',
     alignSelf: 'center',
   },

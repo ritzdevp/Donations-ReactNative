@@ -9,8 +9,8 @@ const WelcomeScreen = ({navigation}) => {
     navigation.navigate('SchoolRequirements');
   };
   const goToDonorSchoolList = () => {
-    navigation.navigate('DonorSchoolList');
-    //navigation.navigate('DonorItemList');
+    // navigation.navigate('DonorSchoolList');
+    navigation.navigate('DonorItemList');
   };
 
   return (

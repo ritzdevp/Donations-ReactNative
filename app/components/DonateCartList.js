@@ -30,7 +30,7 @@ const DonateCartList = (props) => {
       </View>
 
       <FlatList
-        data={props.selectedItemsList}
+        data={props.donateItemsList}
         renderItem={renderListOfItems}
         keyExtractor={(item) => item.title}
         //extraData={}
