@@ -1,24 +1,15 @@
 import {createAppContainer} from 'react-navigation';
 import {createStackNavigator} from 'react-navigation-stack';
-import SchoolRequirements from '../screens/SchoolRequirements';
-import WelcomeScreen from '../screens/WelcomeScreen';
 import SchoolDetailsForm from '../screens/SchoolDetailsForm';
+import WelcomeScreen from '../screens/WelcomeScreen';
 
 const screens = {
-  SchoolRequirements: {
-    screen: SchoolRequirements,
-    navigationOptions: {
-      headerShown: false,
-    },
-  },
-
   SchoolDetailsForm: {
     screen: SchoolDetailsForm,
     navigationOptions: {
       headerShown: false,
     },
   },
-
   WelcomeScreen: {
     screen: WelcomeScreen,
     navigationOptions: {
@@ -27,6 +18,6 @@ const screens = {
   },
 };
 
-const SchoolRequirementsStack = createStackNavigator(screens);
+const SchoolDetailsFormStack = createStackNavigator(screens);
 
-export default SchoolRequirementsStack;
+export default SchoolDetailsFormStack;
