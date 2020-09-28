@@ -21,11 +21,34 @@ const donateItemsListReducer = (state = initalState, action) => {
 
     case 'DELETE_ITEM':
       console.log('deleting item');
+
+      // ####################### ASK SAI WHY IS THIS NOT WORKING #####################//
+      // return {
+      //   ...state,
+      //   selectedItemsList: state.selectedItemsList.filter((item) => {
+      //     console.log('item.title=' + item.title);
+      //     console.log('action.title=' + action.title);
+      //     item.title !== action.title;
+      //     //item.title === 'Bags';
+      //   }),
+      // };
+      //###############################################################################//
+
+      const tempArr = [...state.donateItemsList];
+      const index = tempArr.findIndex(function (item) {
+        return item.title == action.title;
+      });
+      if (index < 0) {
+        return {
+          ...state,
+          donateItemsList: state.donateItemsList,
+        };
+      }
+      tempArr.splice(index, 1);
+      state.donateItemsList = [...tempArr];
       return {
         ...state,
-        donateItemsList: state.donateItemsList.filter((item) => {
-          item.title != action.title;
-        }),
+        donateItemsList: state.donateItemsList,
       };
 
     default:

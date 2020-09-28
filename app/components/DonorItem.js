@@ -26,6 +26,7 @@ const DonorItem = (props) => {
   const onPress = () => {
     setSelected(!selected);
   };
+
   const renderSchool = ({item}) => (
     <Item
       schoolName={item.schoolName}

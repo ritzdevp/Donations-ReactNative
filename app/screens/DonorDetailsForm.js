@@ -13,6 +13,10 @@ import AppButton from '../components/AppButton';
 import AppTextInput from '../components/AppTextInput';
 import EmptyScreen from './EmptyScreen';
 import DonorApi from '../api/donorListing';
+import {connect} from 'react-redux';
+import {addItemToDonateItemsList} from '../actions';
+import {deleteItemFromDonateItemsList} from '../actions';
+import DonateCartList from '../components/DonateCartList';
 
 export default function DonorDetailsForm({navigation}) {
   const [donorName, onChangeName] = React.useState('');
@@ -23,16 +27,18 @@ export default function DonorDetailsForm({navigation}) {
   const [emailErrorMsg, onChangeEmailError] = React.useState('');
   const [modalVisible, setModalVisible] = React.useState(false);
 
-  var schoolId = navigation.getParam('schoolId');
-
+  //var schoolId = navigation.getParam('schoolId');
+  var schoolId = '1';
   const handleSubmit = async () => {
     // console.log(donorName, contact, email);
     if (donorName != '' && contact.length == 10 && email != '') {
       const donorRequest = {donorName, contact, email, schoolId};
       const result = await DonorApi.submitDonorRequest(donorRequest);
-      if (!result.ok) return alert('Could not save the details!');
-      alert(`Thank you ${result.data} for using donor support`);
-      navigation.navigate('WelcomeScreen');
+      if (!result.ok) {
+        return alert('Could not save the details!');
+      }
+      setModalVisible(true);
+      //navigation.navigate('WelcomeScreen');
     } else {
       alert('Please check you details again');
     }
@@ -91,15 +97,20 @@ export default function DonorDetailsForm({navigation}) {
               shortly.
             </Text>
             <TouchableHighlight
-              style={{...styles.openButton, backgroundColor: colors.secondary}}
+              style={{
+                ...styles.openButton,
+                backgroundColor: colors.secondary,
+              }}
               onPress={goToWelcomeScreen}>
               <Text style={styles.textStyle}>OK</Text>
             </TouchableHighlight>
           </View>
         </View>
       </Modal>
-
       <SafeAreaView style={styles.schoolForm}>
+        <View style={styles.table}>
+          <DonateCartList style={styles.tableContents} showButtons={false} />
+        </View>
         <ScrollView style={styles.schoolFormScroll}>
           <AppTextInput
             mylabel="NAME"
@@ -137,12 +148,7 @@ export default function DonorDetailsForm({navigation}) {
           <Text style={styles.errorMsg}>{emailErrorMsg}</Text>
           <View style={styles.confirmButtonLine} />
           <View style={styles.confirmButton}>
-            <AppButton
-              title="Submit"
-              onPress={() => {
-                setModalVisible(true);
-              }}
-            />
+            <AppButton title="Submit" onPress={handleSubmit} />
           </View>
         </ScrollView>
       </SafeAreaView>
@@ -228,5 +234,22 @@ const styles = StyleSheet.create({
     fontSize: 18,
     color: '#343B83',
     textAlign: 'center',
+  },
+  table: {
+    top: 20,
+    left: 30,
+    paddingBottom: 10,
+    marginBottom: 8,
+    width: '100%',
+    backgroundColor: colors.offwhite,
+    //alignSelf: 'stretch',
+    alignItems: 'center',
+    flex: 1,
+  },
+  tableContents: {
+    width: '100%',
+    alignSelf: 'center',
+    backgroundColor: colors.offwhite,
+    marginLeft: 40,
   },
 });
