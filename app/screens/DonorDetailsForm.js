@@ -108,10 +108,10 @@ export default function DonorDetailsForm({navigation}) {
         </View>
       </Modal>
       <SafeAreaView style={styles.schoolForm}>
+        <View style={styles.table}>
+          <DonateCartList style={styles.tableContents} showButtons={false} />
+        </View>
         <ScrollView style={styles.schoolFormScroll}>
-          <View style={styles.table}>
-            <DonateCartList style={styles.tableContents} showButtons={false} />
-          </View>
           <AppTextInput
             mylabel="NAME"
             autoCorrect={false}
@@ -243,7 +243,7 @@ const styles = StyleSheet.create({
     width: '100%',
     backgroundColor: colors.offwhite,
     //alignSelf: 'stretch',
-    //alignItems: 'center',
+    alignItems: 'center',
     flex: 1,
   },
   tableContents: {
