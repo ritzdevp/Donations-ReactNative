@@ -23,8 +23,8 @@ export default function DonorDetailsForm({navigation}) {
   const [emailErrorMsg, onChangeEmailError] = React.useState('');
   const [modalVisible, setModalVisible] = React.useState(false);
 
-  var schoolId = navigation.getParam('schoolId');
-
+  //var schoolId = navigation.getParam('schoolId');
+  var schoolId = '1';
   const handleSubmit = async () => {
     // console.log(donorName, contact, email);
     if (donorName != '' && contact.length == 10 && email != '') {

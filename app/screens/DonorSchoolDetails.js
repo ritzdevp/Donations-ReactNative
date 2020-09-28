@@ -20,6 +20,7 @@ import useApi from '../hooks/useApi';
 import {connect} from 'react-redux';
 import {addItemToDonateItemsList} from '../actions';
 import {deleteItemFromDonateItemsList} from '../actions';
+import DonateCartList from '../components/DonateCartList';
 
 const OffTick = '../styling/images/offTick.png';
 const OnTick = '../styling/images/onTick.png';
@@ -50,21 +51,21 @@ const DonorSchoolDetails = (props, {navigation}) => {
       isSchoolList={false}></DonorItem>
   );
 
-  const renderListOfItems = ({item}) => (
-    <View
-      style={{
-        flexDirection: 'row',
-        width: '100%',
-        backgroundColor: colors.offwhite,
-        justifyContent: 'space-between',
-      }}>
-      <Text style={styles.tableItemsSelected}>{item.title}</Text>
-      <Text style={styles.tableQuantity}>{item.qty}</Text>
-      <TouchableOpacity onPress={deleteItem} style={styles.deleteButton}>
-        <Image source={require(DeleteIcon)} />
-      </TouchableOpacity>
-    </View>
-  );
+  // const renderListOfItems = ({item}) => (
+  //   <View
+  //     style={{
+  //       flexDirection: 'row',
+  //       width: '100%',
+  //       backgroundColor: colors.offwhite,
+  //       justifyContent: 'space-between',
+  //     }}>
+  //     <Text style={styles.tableItemsSelected}>{item.title}</Text>
+  //     <Text style={styles.tableQuantity}>{item.qty}</Text>
+  //     <TouchableOpacity onPress={deleteItem} style={styles.deleteButton}>
+  //       <Image source={require(DeleteIcon)} />
+  //     </TouchableOpacity>
+  //   </View>
+  // );
 
   return (
     <View style={styles.container}>
@@ -127,32 +128,14 @@ const DonorSchoolDetails = (props, {navigation}) => {
         </View>
 
         <View style={styles.table}>
-          <View style={styles.tableHeader}>
-            <Text style={styles.tableHeaderText}>Items Selected</Text>
-            <Text style={styles.tableHeaderText}>Quantity</Text>
-          </View>
-          <FlatList
-            // style={styles.tableContents}
-            // data={ListOfSelectedItems}
-            // renderItem={renderListOfItems}
-            // keyExtractor={(item) => item.title}
-            // extraData={ListOfSelectedItems}
-
-            style={styles.tableContents}
-            data={props.donateItemsList}
-            renderItem={renderListOfItems}
-            keyExtractor={(item) => item.title}
-            // extraData={useSelector(
-            //   (state) =>
-            //     state.allReducers.selectedItemsListReducer.selectedItemsList,
-            // )}
-          />
+          <DonateCartList style={styles.tableContents} />
         </View>
+
         <View style={styles.confirmButtonLine} />
         <View style={styles.confirmButton}>
           <AppButton
             title="Donate"
-            onPress={() => navigation.navigate('DonorForm', {schoolId})}
+            onPress={() => navigation.navigate('DonorForm')}
           />
         </View>
       </ScrollView>
@@ -263,63 +246,13 @@ const styles = StyleSheet.create({
     backgroundColor: colors.offwhite,
     alignSelf: 'stretch',
     alignItems: 'center',
-  },
-  tableHeader: {
-    flexDirection: 'row',
-    width: '100%',
-    justifyContent: 'space-between',
-    paddingBottom: 5,
-  },
-  tableHeaderText: {
-    top: 2,
-    paddingTop: 3,
-    fontFamily: 'Montserrat',
-    fontSize: 14,
-    fontWeight: '500',
-    lineHeight: 12,
-    backgroundColor: colors.offwhite,
-    color: '#343B83',
     flex: 1,
-    marginLeft: 20,
   },
   tableContents: {
     width: '100%',
     alignSelf: 'center',
     backgroundColor: colors.offwhite,
     marginLeft: 40,
-  },
-
-  tableItemsSelected: {
-    top: 2,
-    paddingTop: 4,
-    height: 24,
-    fontFamily: 'Montserrat',
-    fontWeight: 'bold',
-    fontSize: 14,
-    lineHeight: 12,
-    backgroundColor: colors.offwhite,
-    color: '#343B83',
-    alignContent: 'center',
-    flex: 1,
-  },
-
-  tableQuantity: {
-    top: 2,
-    paddingTop: 4,
-    height: 24,
-    fontFamily: 'Montserrat',
-    fontWeight: 'bold',
-    fontSize: 14,
-    lineHeight: 12,
-    backgroundColor: colors.offwhite,
-    color: '#343B83',
-    flex: 0.5,
-    backgroundColor: colors.offwhite,
-  },
-  deleteButton: {
-    backgroundColor: colors.offwhite,
-    marginRight: 40,
-    backgroundColor: colors.offwhite,
   },
 });
 
