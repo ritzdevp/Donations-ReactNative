@@ -23,7 +23,7 @@ const OffTick = '../styling/images/offTick.png';
 const OnTick = '../styling/images/onTick.png';
 const DeleteIcon = '../styling/images/deleteIcon.png';
 
-const SchoolRequirements = (props) => {
+const SchoolRequirements = ({navigation}, props) => {
   console.log('props is ' + props);
 
   const deleteItem = (title) => {
@@ -37,27 +37,11 @@ const SchoolRequirements = (props) => {
       imageSrc={item.imageSrc}></Item>
   );
 
-  const renderListOfItems = ({item}) => (
-    <View
-      style={{
-        flexDirection: 'row',
-        width: '100%',
-        backgroundColor: colors.offwhite,
-        justifyContent: 'space-between',
-      }}>
-      <Text style={styles.tableItemsSelected}>{item.title}</Text>
-      <Text style={styles.tableQuantity}>{item.qty}</Text>
-      <TouchableOpacity onPress={deleteItem} style={styles.deleteButton}>
-        <Image source={require(DeleteIcon)} />
-      </TouchableOpacity>
-    </View>
-  );
-
   return (
     <View style={styles.container}>
       <EmptyScreen
         heading=" Donations for Educational Institutes"
-        //navigation={navigation}
+        navigation={navigation}
       />
 
       <ScrollView>
@@ -87,8 +71,8 @@ const SchoolRequirements = (props) => {
         <View style={styles.confirmButton}>
           <AppButton
             title="Confirm"
-            //onPress={() => navigation.navigate('SchoolForm')}
-            onPress={() => alert('confirm button tapped')}
+            onPress={() => navigation.navigate('SchoolDetailsForm')}
+            //onPress={() => alert('confirm button tapped')}
           />
         </View>
       </ScrollView>

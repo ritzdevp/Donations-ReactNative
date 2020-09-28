@@ -26,7 +26,7 @@ const OffTick = '../styling/images/offTick.png';
 const OnTick = '../styling/images/onTick.png';
 const DeleteIcon = '../styling/images/deleteIcon.png';
 
-const DonorSchoolDetails = (props, {navigation}) => {
+const DonorSchoolDetails = ({navigation}, props) => {
   var schoolId = '1';
   const {data: school, error, loading, request: loadSchoolDetails} = useApi(
     schoolListingApi.getSchoolDetails,
