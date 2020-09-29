@@ -50,6 +50,7 @@ const OthersBox = (props) => {
         <View style={styles.othersCollapsibleBox}>
           <TextInput
             style={styles.nameEntry}
+            multiline={true}
             onChangeText={(name) => setOthersName(name)}
           />
           <View
