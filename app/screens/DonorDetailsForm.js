@@ -14,11 +14,9 @@ import AppTextInput from '../components/AppTextInput';
 import EmptyScreen from './EmptyScreen';
 import DonorApi from '../api/donorListing';
 import {connect} from 'react-redux';
-import {addItemToDonateItemsList} from '../actions';
-import {deleteItemFromDonateItemsList} from '../actions';
 import DonateCartList from '../components/DonateCartList';
 
-export default function DonorDetailsForm({navigation}) {
+function DonorDetailsForm(props, {navigation}) {
   const [donorName, onChangeName] = React.useState('');
   const [contact, onChangeContact] = React.useState('');
   const [email, onChangeEmail] = React.useState('');
@@ -29,10 +27,11 @@ export default function DonorDetailsForm({navigation}) {
 
   //var schoolId = navigation.getParam('schoolId');
   var schoolId = '1';
+  var itemList = props.donateItemsList;
   const handleSubmit = async () => {
     // console.log(donorName, contact, email);
     if (donorName != '' && contact.length == 10 && email != '') {
-      const donorRequest = {donorName, contact, email, schoolId};
+      const donorRequest = {donorName, contact, email, schoolId, itemList};
       const result = await DonorApi.submitDonorRequest(donorRequest);
       if (!result.ok) {
         return alert('Could not save the details!');
@@ -155,6 +154,14 @@ export default function DonorDetailsForm({navigation}) {
     </View>
   );
 }
+
+const mapStateToProps = (state) => {
+  return {
+    donateItemsList: state.allReducers.donateItemsListReducer.donateItemsList,
+  };
+};
+
+export default connect(mapStateToProps)(DonorDetailsForm);
 
 const styles = StyleSheet.create({
   container: {
