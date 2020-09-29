@@ -85,7 +85,11 @@ function SchoolDetailsForm(props, {navigation}) {
   return (
     <View style={styles.container}>
       <EmptyScreen heading="Enter School Details" navigation={navigation} />
-      <AppMessage visible={modalVisible} onPress={goToWelcomeScreen} />
+      <AppMessage
+        visible={modalVisible}
+        onPress={goToWelcomeScreen}
+        userName={schoolName}
+      />
       <SafeAreaView style={styles.schoolForm}>
         <ScrollView style={styles.schoolFormScroll}>
           <AppTextInput

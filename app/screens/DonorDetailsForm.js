@@ -15,6 +15,7 @@ import EmptyScreen from './EmptyScreen';
 import DonorApi from '../api/donorListing';
 import {connect} from 'react-redux';
 import DonateCartList from '../components/DonateCartList';
+import AppMessage from '../components/AppMessage';
 
 function DonorDetailsForm(props, {navigation}) {
   const [donorName, onChangeName] = React.useState('');
@@ -42,6 +43,7 @@ function DonorDetailsForm(props, {navigation}) {
       alert('Please check you details again');
     }
   };
+
   function onBlurName(inputVal) {
     if (inputVal.length < 1) {
       onChangeNameError('* required \n');
@@ -69,7 +71,7 @@ function DonorDetailsForm(props, {navigation}) {
 
   const goToWelcomeScreen = () => {
     setModalVisible(!modalVisible);
-    navigation.navigate('WelcomeScreen');
+    props.navigation.navigate('WelcomeScreen');
   };
 
   return (
@@ -78,34 +80,11 @@ function DonorDetailsForm(props, {navigation}) {
         heading="Poornapragathi Vidya Mandir Association"
         navigation={navigation}
       />
-
-      <Modal
-        animationType="fade"
-        transparent={true}
+      <AppMessage
         visible={modalVisible}
-        onRequestClose={() => {
-          Alert.alert('Modal has been closed.');
-        }}>
-        <View style={styles.centeredView}>
-          <View style={styles.modalView}>
-            <Text style={styles.modalText}>
-              Thank you for using Donors Support!
-            </Text>
-            <Text style={styles.modalTextMessage}>
-              We have received your request. Our personnel will get back to you
-              shortly.
-            </Text>
-            <TouchableHighlight
-              style={{
-                ...styles.openButton,
-                backgroundColor: colors.secondary,
-              }}
-              onPress={goToWelcomeScreen}>
-              <Text style={styles.textStyle}>OK</Text>
-            </TouchableHighlight>
-          </View>
-        </View>
-      </Modal>
+        onPress={goToWelcomeScreen}
+        userName={donorName}
+      />
       <SafeAreaView style={styles.schoolForm}>
         <View style={styles.table}>
           <DonateCartList style={styles.tableContents} showButtons={false} />

@@ -1,8 +1,16 @@
 import React from 'react';
-import {StyleSheet, View, Text, Modal, TouchableHighlight} from 'react-native';
+import {
+  StyleSheet,
+  View,
+  Text,
+  Modal,
+  TouchableOpacity,
+  Image,
+} from 'react-native';
 import colors from '../styling/colorSchemes/colors';
+const cancelIconUri = require('../styling/Icons/cancel.png');
 
-const AppMessage = ({visible, onPress}) => {
+const AppMessage = ({visible, onPress, userName}) => {
   return (
     <Modal
       animationType="fade"
@@ -14,22 +22,15 @@ const AppMessage = ({visible, onPress}) => {
       <View style={styles.centeredView}>
         <View style={styles.modalView}>
           <Text style={styles.modalText}>
-            {' '}
-            Thank you for using Donors Support!
+            Thank you, {userName} {'\n'} for using {'\n'} Donors Support!!
           </Text>
           <Text style={styles.modalTextMessage}>
-            {' '}
             We have received your request. Our personnel will get back to you
             shortly.
           </Text>
-          <TouchableHighlight
-            style={{
-              ...styles.openButton,
-              backgroundColor: colors.secondary,
-            }}
-            onPress={onPress}>
-            <Text style={styles.textStyle}>OK</Text>
-          </TouchableHighlight>
+          <TouchableOpacity style={styles.cancelIcon} onPress={onPress}>
+            <Image style={styles.stretch} source={cancelIconUri} />
+          </TouchableOpacity>
         </View>
       </View>
     </Modal>
@@ -67,9 +68,25 @@ const styles = StyleSheet.create({
   modalTextMessage: {
     margin: '2%',
     fontFamily: 'Montserrat',
-    fontWeight: 'normal',
+    fontWeight: '500',
     fontSize: 18,
     color: '#343B83',
     textAlign: 'center',
+  },
+  textStyle: {
+    color: '#fff',
+    fontWeight: '700',
+    textAlign: 'center',
+    fontSize: 24,
+  },
+  cancelIcon: {
+    position: 'absolute',
+    right: 30,
+    top: 30,
+  },
+  stretch: {
+    width: 20,
+    height: 20,
+    resizeMode: 'stretch',
   },
 });
