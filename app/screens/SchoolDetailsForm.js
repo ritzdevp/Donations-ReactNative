@@ -5,13 +5,16 @@ import AppButton from '../components/AppButton';
 import AppTextInput from '../components/AppTextInput';
 import EmptyScreen from './EmptyScreen';
 import SchoolApi from '../api/schoolListing';
+import {connect} from 'react-redux';
+import AppMessage from '../components/AppMessage';
 
-export default function SchoolDetailsForm({navigation}) {
+function SchoolDetailsForm(props, {navigation}) {
   const [schoolName, onChangeSchoolName] = React.useState('');
   const [schoolAddress, onChangeSchoolAddress] = React.useState('');
   const [city, onChangeCity] = React.useState('');
   const [contact, onChangeContact] = React.useState('');
   const [email, onChangeEmail] = React.useState('');
+  const [modalVisible, setModalVisible] = React.useState(false);
 
   // ERROR MESAGES HOOK
   const [contactErrorMsg, onChangeContactError] = React.useState('');
@@ -19,18 +22,34 @@ export default function SchoolDetailsForm({navigation}) {
   const [emailErrorMsg, onChangeEmailError] = React.useState('');
   const [cityErrorMsg, onChangeCityError] = React.useState('');
 
+  var itemList = props.selectedItemsList;
+
   const handleSubmit = async () => {
     // console.log(schoolName, city, contact, email);
     if (schoolName != '' && contact.length == 10 && email != '' && city != '') {
-      const schoolRequest = {schoolName, schoolAddress, city, contact, email};
+      const schoolRequest = {
+        schoolName,
+        schoolAddress,
+        city,
+        contact,
+        email,
+        itemList,
+      };
       const result = await SchoolApi.submitSchoolRequest(schoolRequest);
       if (!result.ok) return alert('Could not save the details!');
-      alert(`Thank you ${result.data} for using donor support`);
-      navigation.navigate('WelcomeScreen');
+      setModalVisible(true);
+      //alert(`Thank you ${result.data} for using donor support`);
+      //props.navigation.navigate('WelcomeScreen');
     } else {
       alert('Please check you details again!');
     }
   };
+
+  const goToWelcomeScreen = () => {
+    setModalVisible(!modalVisible);
+    props.navigation.navigate('WelcomeScreen');
+  };
+
   function onBlurName(inputVal) {
     if (inputVal.length < 1) {
       onChangeNameError('* required \n');
@@ -66,6 +85,7 @@ export default function SchoolDetailsForm({navigation}) {
   return (
     <View style={styles.container}>
       <EmptyScreen heading="Enter School Details" navigation={navigation} />
+      <AppMessage visible={modalVisible} onPress={goToWelcomeScreen} />
       <SafeAreaView style={styles.schoolForm}>
         <ScrollView style={styles.schoolFormScroll}>
           <AppTextInput
@@ -132,6 +152,15 @@ export default function SchoolDetailsForm({navigation}) {
   );
 }
 
+const mapStateToProps = (state) => {
+  return {
+    selectedItemsList:
+      state.allReducers.selectedItemsListReducer.selectedItemsList,
+  };
+};
+
+export default connect(mapStateToProps)(SchoolDetailsForm);
+
 const styles = StyleSheet.create({
   container: {
     flex: 1,
@@ -159,7 +188,8 @@ const styles = StyleSheet.create({
     // marginBottom: 10,
   },
   schoolFormScroll: {
-    width: '80%',
+    width: '100%',
+    paddingHorizontal: '10%',
     // backgroundColor: colors.black,
   },
   errorMsg: {
