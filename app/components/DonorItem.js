@@ -7,8 +7,8 @@ import {
   Image,
   SafeAreaView,
   TouchableOpacity,
+  FlatList,
 } from 'react-native';
-import {FlatList} from 'react-native-gesture-handler';
 import {connect} from 'react-redux';
 import {addItemToDonateItemsList} from '../actions';
 

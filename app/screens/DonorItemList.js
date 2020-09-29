@@ -17,6 +17,7 @@ import {addItemToDonateItemsList} from '../actions';
 import {deleteItemFromDonateItemsList} from '../actions';
 import DonateCartList from '../components/DonateCartList';
 import DonorOthersBox from '../components/DonorOthersBox';
+import OthersList from '../components/OthersList';
 
 const OffTick = '../styling/images/offTick.png';
 const OnTick = '../styling/images/onTick.png';
@@ -50,6 +51,7 @@ const DonorItemList = (props, {navigation}) => {
             keyExtractor={(item) => item.title}
           />
         </SafeAreaView>
+        <OthersList />
         <DonorOthersBox />
 
         <View style={styles.table}>
@@ -161,28 +163,6 @@ const ITEMSLIST = [
   },
 ];
 
-const OTHER_ITEMS = [
-  {
-    id: '1',
-    title: 'Outdoor Sports Accessories',
-    totalUnits: '20',
-  },
-  {
-    id: '2',
-    title: 'Dreses for rehearsal',
-    totalUnits: '250',
-  },
-  {
-    id: '3',
-    title: 'Swimming Pool Constructions',
-    totalUnits: '2000',
-  },
-  {
-    id: '4',
-    title: 'Auditorium Equipments',
-    totalUnits: '20000',
-  },
-];
 const SCHOOLS_PER_ITEM = [
   {schoolName: 'Seema Public School', reqUnits: '20', city: 'Banglore'},
   {schoolName: 'Poornapragathi Vidya Mandir', reqUnits: '24', city: 'Delhi'},
