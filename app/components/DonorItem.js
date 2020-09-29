@@ -11,6 +11,7 @@ import {
 } from 'react-native';
 import {connect} from 'react-redux';
 import {addItemToDonateItemsList} from '../actions';
+import {deleteItemFromDonateItemsList} from '../actions';
 
 import Collapsible from 'react-native-collapsible';
 
@@ -25,6 +26,7 @@ const DonorItem = (props) => {
 
   const onPress = () => {
     setSelected(!selected);
+    props.deleteItem(props.itemName);
   };
 
   const renderSchool = ({item}) => (
@@ -109,6 +111,7 @@ const mapDispatchToProps = (dispatch) => {
   console.log('in mapDispatchToProps');
   return {
     addItem: (title, qty) => dispatch(addItemToDonateItemsList(title, qty)),
+    deleteItem: (title) => dispatch(deleteItemFromDonateItemsList(title)),
   };
 };
 
