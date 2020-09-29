@@ -14,11 +14,10 @@ import AppTextInput from '../components/AppTextInput';
 import EmptyScreen from './EmptyScreen';
 import DonorApi from '../api/donorListing';
 import {connect} from 'react-redux';
-import {addItemToDonateItemsList} from '../actions';
-import {deleteItemFromDonateItemsList} from '../actions';
 import DonateCartList from '../components/DonateCartList';
+import AppMessage from '../components/AppMessage';
 
-export default function DonorDetailsForm({navigation}) {
+function DonorDetailsForm(props, {navigation}) {
   const [donorName, onChangeName] = React.useState('');
   const [contact, onChangeContact] = React.useState('');
   const [email, onChangeEmail] = React.useState('');
@@ -29,10 +28,11 @@ export default function DonorDetailsForm({navigation}) {
 
   //var schoolId = navigation.getParam('schoolId');
   var schoolId = '1';
+  var itemList = props.donateItemsList;
   const handleSubmit = async () => {
     // console.log(donorName, contact, email);
     if (donorName != '' && contact.length == 10 && email != '') {
-      const donorRequest = {donorName, contact, email, schoolId};
+      const donorRequest = {donorName, contact, email, schoolId, itemList};
       const result = await DonorApi.submitDonorRequest(donorRequest);
       if (!result.ok) {
         return alert('Could not save the details!');
@@ -43,6 +43,7 @@ export default function DonorDetailsForm({navigation}) {
       alert('Please check you details again');
     }
   };
+
   function onBlurName(inputVal) {
     if (inputVal.length < 1) {
       onChangeNameError('* required \n');
@@ -70,7 +71,7 @@ export default function DonorDetailsForm({navigation}) {
 
   const goToWelcomeScreen = () => {
     setModalVisible(!modalVisible);
-    navigation.navigate('WelcomeScreen');
+    props.navigation.navigate('WelcomeScreen');
   };
 
   return (
@@ -79,34 +80,11 @@ export default function DonorDetailsForm({navigation}) {
         heading="Poornapragathi Vidya Mandir Association"
         navigation={navigation}
       />
-
-      <Modal
-        animationType="fade"
-        transparent={true}
+      <AppMessage
         visible={modalVisible}
-        onRequestClose={() => {
-          Alert.alert('Modal has been closed.');
-        }}>
-        <View style={styles.centeredView}>
-          <View style={styles.modalView}>
-            <Text style={styles.modalText}>
-              Thank you for using Donors Support!
-            </Text>
-            <Text style={styles.modalTextMessage}>
-              We have received your request. Our personnel will get back to you
-              shortly.
-            </Text>
-            <TouchableHighlight
-              style={{
-                ...styles.openButton,
-                backgroundColor: colors.secondary,
-              }}
-              onPress={goToWelcomeScreen}>
-              <Text style={styles.textStyle}>OK</Text>
-            </TouchableHighlight>
-          </View>
-        </View>
-      </Modal>
+        onPress={goToWelcomeScreen}
+        userName={donorName}
+      />
       <SafeAreaView style={styles.schoolForm}>
         <View style={styles.table}>
           <DonateCartList style={styles.tableContents} showButtons={false} />
@@ -155,6 +133,14 @@ export default function DonorDetailsForm({navigation}) {
     </View>
   );
 }
+
+const mapStateToProps = (state) => {
+  return {
+    donateItemsList: state.allReducers.donateItemsListReducer.donateItemsList,
+  };
+};
+
+export default connect(mapStateToProps)(DonorDetailsForm);
 
 const styles = StyleSheet.create({
   container: {
