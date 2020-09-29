@@ -169,7 +169,7 @@ const OTHER_ITEMS = [
   },
   {
     id: '2',
-    title: 'Other Bags',
+    title: 'Dreses for rehearsal',
     totalUnits: '250',
   },
   {

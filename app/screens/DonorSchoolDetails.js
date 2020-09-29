@@ -21,6 +21,7 @@ import {connect} from 'react-redux';
 import {addItemToDonateItemsList} from '../actions';
 import {deleteItemFromDonateItemsList} from '../actions';
 import DonateCartList from '../components/DonateCartList';
+import DonorOthersBox from '../components/DonorOthersBox';
 
 const OffTick = '../styling/images/offTick.png';
 const OnTick = '../styling/images/onTick.png';
@@ -98,14 +99,7 @@ const DonorSchoolDetails = ({navigation}, props) => {
             keyExtractor={(item) => item.title}
           />
         </SafeAreaView>
-        <View style={styles.othersBox}>
-          <View>
-            <Image source={require(OffTick)} />
-          </View>
-          <View>
-            <Text style={styles.othersText}>Others</Text>
-          </View>
-        </View>
+        <DonorOthersBox />
 
         <View style={styles.table}>
           <DonateCartList showButton={true} />
