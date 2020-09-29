@@ -13,6 +13,7 @@ import CartList from '../components/CartList';
 import AppButton from '../components/AppButton';
 import colors from '../styling/colorSchemes/colors';
 import EmptyScreen from './EmptyScreen';
+import OthersBox from '../components/OthersBox';
 import {ScrollView, TouchableOpacity} from 'react-native-gesture-handler';
 import {connect, useSelector, useDispatch} from 'react-redux';
 import {addItemToSelectedItemsList} from '../actions';
@@ -54,14 +55,16 @@ const SchoolRequirements = ({navigation}, props) => {
             keyExtractor={(item) => item.title}
           />
         </SafeAreaView>
-        <View style={styles.othersBox}>
+
+        {/* <View style={styles.othersBox}>
           <View>
             <Image source={require(OffTick)} />
           </View>
           <View>
             <Text style={styles.othersText}>Others</Text>
           </View>
-        </View>
+        </View> */}
+        <OthersBox />
 
         <View style={styles.table}>
           <CartList style={styles.tableContents} />
