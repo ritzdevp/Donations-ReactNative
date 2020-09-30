@@ -28,6 +28,7 @@ const DonorItem = (props) => {
   const onPress = () => {
     setSelected(!selected);
     props.deleteItem(props.itemName);
+    setQuantity(0);
   };
 
   const renderSchool = ({item}) => (
@@ -40,8 +41,8 @@ const DonorItem = (props) => {
   const Item = ({schoolName, city, reqUnits}) => (
     <View style={styles.schoolItem}>
       <View style={{flexDirection: 'row'}}>
-        <Text style={(styles.title, styles.text)}>{schoolName}</Text>
-        <Text style={(styles.city, styles.text)}>
+        <Text style={styles.title}>{schoolName}</Text>
+        <Text style={styles.text}>
           {', '}
           {city}
         </Text>
@@ -154,6 +155,11 @@ const styles = StyleSheet.create({
   text: {
     fontFamily: 'Montserrat',
     color: colors.darkblue,
+  },
+  title: {
+    fontFamily: 'Montserrat',
+    color: colors.darkblue,
+    fontWeight: 'bold',
   },
   itemName: {
     fontWeight: 'bold',

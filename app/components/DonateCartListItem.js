@@ -32,15 +32,15 @@ const DonateCartListItem = (props) => {
         flexDirection: 'row',
         width: '100%',
         backgroundColor: colors.offwhite,
-        justifyContent: 'space-between',
+        justifyContent: 'space-evenly',
       }}>
       <Text style={styles.tableItemsSelected}>{props.itemName}</Text>
-      <Text style={styles.tableQuantity}>{props.itemQty}</Text>
+
       <View
         style={{
           flexDirection: 'row',
-          minWidth: '20%',
         }}>
+        <Text style={styles.tableQuantity}>{props.itemQty}</Text>
         {props.showButton && (
           <>
             <View>
@@ -109,7 +109,6 @@ export default connect(mapStateToProps, mapDispatchToProps)(DonateCartListItem);
 const styles = StyleSheet.create({
   tableItemsSelected: {
     top: 2,
-    left: 20,
     paddingTop: 4,
     paddingRight: 15,
     height: 24,
@@ -133,11 +132,11 @@ const styles = StyleSheet.create({
     lineHeight: 12,
     backgroundColor: colors.offwhite,
     color: '#343B83',
-    flex: 0.5,
+    // flex: 0.5,
   },
 
   editPenButton: {
-    marginRight: 14,
+    marginHorizontal: 15,
     backgroundColor: colors.offwhite,
   },
 

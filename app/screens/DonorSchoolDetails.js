@@ -101,10 +101,7 @@ const DonorSchoolDetails = ({navigation}, props) => {
         </SafeAreaView>
         <DonorOthersBox />
 
-        <View style={styles.table}>
-          <DonateCartList showButton={true} />
-        </View>
-
+        <DonateCartList showButton={true} />
         <View style={styles.confirmButtonLine} />
         <View style={styles.confirmButton}>
           <AppButton
@@ -210,23 +207,6 @@ const styles = StyleSheet.create({
 
     left: 9,
     color: '#343B83',
-  },
-  table: {
-    top: 20,
-    left: 30,
-    paddingBottom: 10,
-    marginBottom: 8,
-    width: '90%',
-    backgroundColor: colors.offwhite,
-    alignSelf: 'stretch',
-    alignItems: 'center',
-    flex: 1,
-  },
-  tableContents: {
-    width: '100%',
-    alignSelf: 'center',
-    backgroundColor: colors.offwhite,
-    marginLeft: 40,
   },
 });
 
