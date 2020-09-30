@@ -148,12 +148,12 @@ const styles = StyleSheet.create({
   },
 
   modalView: {
-    marginTop: '160%',
+    marginTop: '120%',
     marginLeft: '60%',
     backgroundColor: colors.offwhite,
     borderRadius: 20,
     width: '20%',
-    height: '10%',
+    height: '14%',
     alignItems: 'center',
     shadowColor: '#000',
     shadowOffset: {
