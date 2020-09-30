@@ -20,7 +20,7 @@ const EditPen = '../styling/images/editPen.png';
 const SmallConfirm = '../styling/images/smallConfirm.png';
 
 const DonateCartListItem = (props) => {
-  const [editModalVisible, setEditModalVisible] = React.useState(false);
+  const [editQty, setEditQty] = React.useState(false);
 
   const deleteItemFromList = () => {
     props.deleteItem(props.itemName);
@@ -40,42 +40,28 @@ const DonateCartListItem = (props) => {
         style={{
           flexDirection: 'row',
         }}>
-        <Text style={styles.tableQuantity}>{props.itemQty}</Text>
+        {/* <Text style={styles.tableQuantity}>{props.itemQty}</Text> */}
         {props.showButton && (
           <>
-            <View>
-              <Modal
-                animationType="fade"
-                transparent={true}
-                visible={editModalVisible}
-                onRequestClose={() => {
-                  Alert.alert('Modal has been closed.');
-                }}>
-                <View style={styles.modalView}>
-                  <TextInput
-                    style={styles.editQuantityInModal}
-                    placeholder="QTY"
-                    keyboardType="numeric"
-                    onChangeText={(qty) => {
-                      props.addItem(props.itemName, qty);
-                    }}
-                  />
-
-                  <TouchableOpacity
-                    style={styles.submitButton}
-                    onPress={() => setEditModalVisible(!editModalVisible)}>
-                    <Image source={require(SmallConfirm)} />
-                  </TouchableOpacity>
-                </View>
-              </Modal>
-            </View>
+            <TextInput
+              style={
+                editQty ? styles.tableQuantityActive : styles.tableQuantity
+              }
+              value={props.itemQty}
+              editable={editQty}
+              onChangeText={(qty) => {
+                props.addItem(props.itemName, qty);
+              }}
+            />
 
             <View>
               <TouchableOpacity
                 activeOpacity={0.4}
                 style={styles.editPenButton}
-                onPress={() => setEditModalVisible(!editModalVisible)}>
-                <Image source={require(EditPen)} />
+                onPress={() => setEditQty(!editQty)}>
+                <Image
+                  source={editQty ? require(SmallConfirm) : require(EditPen)}
+                />
               </TouchableOpacity>
             </View>
 
@@ -123,16 +109,41 @@ const styles = StyleSheet.create({
   },
 
   tableQuantity: {
-    top: 2,
+    flex: 0.5,
+    height: 30,
+    width: 30,
     paddingTop: 4,
-    height: 24,
     fontFamily: 'Montserrat',
     fontWeight: 'bold',
     fontSize: 14,
     lineHeight: 12,
     backgroundColor: colors.offwhite,
+    borderWidth: 2,
+    borderColor: colors.offwhite,
     color: '#343B83',
-    // flex: 0.5,
+  },
+
+  tableQuantityActive: {
+    flex: 0.5,
+    height: 35,
+    paddingTop: 4,
+    fontFamily: 'Montserrat',
+    fontWeight: 'bold',
+    fontSize: 14,
+    lineHeight: 12,
+    backgroundColor: colors.offwhite,
+    borderWidth: 2,
+    borderColor: colors.primary,
+    borderRadius: 10,
+    color: '#343B83',
+    elevation: 60,
+    shadowColor: '#000',
+    shadowOffset: {
+      width: 0,
+      height: 2,
+    },
+    shadowOpacity: 1.0,
+    shadowRadius: 3.84,
   },
 
   editPenButton: {
@@ -144,64 +155,5 @@ const styles = StyleSheet.create({
     marginRight: 10,
     paddingRight: 10,
     backgroundColor: colors.offwhite,
-  },
-
-  modalView: {
-    marginTop: '120%',
-    marginLeft: '60%',
-    backgroundColor: colors.offwhite,
-    borderRadius: 20,
-    width: '20%',
-    height: '14%',
-    alignItems: 'center',
-    shadowColor: '#000',
-    shadowOffset: {
-      width: 0,
-      height: 2,
-    },
-    shadowOpacity: 1.0,
-    shadowRadius: 3.84,
-    elevation: 5,
-  },
-  submitButton: {
-    marginTop: '10%',
-    backgroundColor: colors.offwhite,
-    borderRadius: 7,
-    paddingHorizontal: 15,
-    paddingVertical: 10,
-    elevation: 1,
-  },
-  modalText: {
-    fontFamily: 'Montserrat',
-    fontWeight: 'bold',
-    fontSize: 10,
-    color: colors.primary,
-    textAlign: 'center',
-  },
-  modalTextMessage: {
-    fontFamily: 'Montserrat',
-    fontWeight: 'normal',
-    fontSize: 10,
-    color: '#343B83',
-    textAlign: 'center',
-  },
-
-  editQuantityInModal: {
-    marginTop: '10%',
-    width: 50,
-    height: 35,
-
-    backgroundColor: '#EBEFF2',
-    borderWidth: 2,
-    borderColor: colors.primary,
-    borderRadius: 10,
-
-    alignSelf: 'center',
-
-    fontFamily: 'Montserrat',
-    fontWeight: '500',
-    fontSize: 12,
-    lineHeight: 15,
-    textAlign: 'center',
   },
 });

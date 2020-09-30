@@ -10,7 +10,6 @@ import {
   FlatList,
   useState,
   Alert,
-  Modal,
   KeyboardAvoidingView,
   Platform,
 } from 'react-native';
@@ -43,9 +42,6 @@ const CartListItem = (props) => {
         justifyContent: 'space-between',
       }}>
       <Text style={styles.tableItemsSelected}>{props.itemName}</Text>
-      {/* <View style={styles.qtybox}> */}
-      {/* <Text style={styles.tableQuantity}>{props.itemQty}</Text>
-       */}
 
       <TextInput
         style={editQty ? styles.tableQuantityActive : styles.tableQuantity}
@@ -55,7 +51,6 @@ const CartListItem = (props) => {
           props.addItem(props.itemName, qty);
         }}
       />
-      {/* </View> */}
 
       <View>
         <TouchableOpacity
@@ -156,72 +151,5 @@ const styles = StyleSheet.create({
     marginRight: 10,
     paddingRight: 10,
     backgroundColor: colors.offwhite,
-  },
-
-  modalView: {
-    flexDirection: 'row',
-    backgroundColor: 'yellow',
-    margin: '50%',
-    borderRadius: 20,
-    width: '30%',
-    height: '7%',
-    alignSelf: 'center',
-    justifyContent: 'space-around',
-    shadowColor: '#000',
-    shadowOffset: {
-      width: 0,
-      height: 2,
-    },
-    shadowOpacity: 1.0,
-    shadowRadius: 3.84,
-    elevation: 60,
-  },
-  submitButton: {
-    backgroundColor: 'orange',
-    borderRadius: 7,
-    alignItems: 'center',
-    alignSelf: 'center',
-    width: '40%',
-    paddingVertical: 10,
-    elevation: 1,
-  },
-  modalText: {
-    fontFamily: 'Montserrat',
-    fontWeight: 'bold',
-    fontSize: 10,
-    color: colors.primary,
-    textAlign: 'center',
-  },
-  modalTextMessage: {
-    fontFamily: 'Montserrat',
-    fontWeight: 'normal',
-    fontSize: 10,
-    color: '#343B83',
-    textAlign: 'center',
-  },
-
-  qtybox: {
-    flex: 0.5,
-    backgroundColor: colors.offwhite,
-    height: '20%',
-    paddingRight: '2%',
-  },
-
-  editQuantityInModal: {
-    width: 50,
-    height: 35,
-
-    backgroundColor: '#EBEFF2',
-    borderWidth: 2,
-    borderColor: colors.primary,
-    borderRadius: 10,
-
-    alignSelf: 'center',
-
-    fontFamily: 'Montserrat',
-    fontWeight: '500',
-    fontSize: 12,
-    lineHeight: 15,
-    textAlign: 'center',
   },
 });

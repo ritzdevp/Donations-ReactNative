@@ -31,7 +31,7 @@ const DonateCartList = (props) => {
       <View style={styles.tableHeader}>
         <Text style={styles.tableHeaderText}>Items Selected</Text>
         <Text style={styles.tableHeaderText}>
-          {props.showButton && 'Quantity Required'}
+          {props.showButton && 'Quantity'}
           {!props.showButton && 'Quantities'}
         </Text>
       </View>
