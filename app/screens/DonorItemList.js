@@ -21,7 +21,7 @@ const OffTick = '../styling/images/offTick.png';
 const OnTick = '../styling/images/onTick.png';
 const DeleteIcon = '../styling/images/deleteIcon.png';
 
-const DonorItemList = (props, {navigation}) => {
+const DonorItemList = ({navigation}, props) => {
   console.log('props is ' + props);
 
   const renderItem = ({item}) => (
@@ -65,7 +65,7 @@ const DonorItemList = (props, {navigation}) => {
         <View style={styles.confirmButton}>
           <AppButton
             title="Confirm"
-            onPress={() => props.navigation.navigate('DonorForm')}
+            onPress={() => navigation.navigate('DonorForm')}
           />
         </View>
       </ScrollView>
