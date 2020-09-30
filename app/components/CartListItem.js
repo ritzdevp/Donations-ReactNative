@@ -28,7 +28,7 @@ const EditPen = '../styling/images/editPen.png';
 const SmallConfirm = '../styling/images/smallConfirm.png';
 
 const CartListItem = (props) => {
-  const [editModalVisible, setEditModalVisible] = React.useState(false);
+  const [editQty, setEditQty] = React.useState(false);
 
   const deleteItemFromList = () => {
     props.deleteItem(props.itemName);
@@ -43,40 +43,26 @@ const CartListItem = (props) => {
         justifyContent: 'space-between',
       }}>
       <Text style={styles.tableItemsSelected}>{props.itemName}</Text>
-      <Text style={styles.tableQuantity}>{props.itemQty}</Text>
-      <View>
-        <Modal
-          animationType="fade"
-          transparent={true}
-          visible={editModalVisible}
-          onRequestClose={() => {
-            Alert.alert('Modal has been closed.');
-          }}>
-          <View style={styles.modalView}>
-            <TextInput
-              style={styles.editQuantityInModal}
-              placeholder="QTY"
-              keyboardType="numeric"
-              onChangeText={(qty) => {
-                props.addItem(props.itemName, qty);
-              }}
-            />
+      {/* <View style={styles.qtybox}> */}
+      {/* <Text style={styles.tableQuantity}>{props.itemQty}</Text>
+       */}
 
-            <TouchableOpacity
-              style={styles.submitButton}
-              onPress={() => setEditModalVisible(!editModalVisible)}>
-              <Image source={require(SmallConfirm)} />
-            </TouchableOpacity>
-          </View>
-        </Modal>
-      </View>
+      <TextInput
+        style={editQty ? styles.tableQuantityActive : styles.tableQuantity}
+        value={props.itemQty}
+        editable={editQty}
+        onChangeText={(qty) => {
+          props.addItem(props.itemName, qty);
+        }}
+      />
+      {/* </View> */}
 
       <View>
         <TouchableOpacity
           activeOpacity={0.4}
           style={styles.editPenButton}
-          onPress={() => setEditModalVisible(!editModalVisible)}>
-          <Image source={require(EditPen)} />
+          onPress={() => setEditQty(!editQty)}>
+          <Image source={editQty ? require(SmallConfirm) : require(EditPen)} />
         </TouchableOpacity>
       </View>
 
@@ -123,21 +109,47 @@ const styles = StyleSheet.create({
   },
 
   tableQuantity: {
-    top: 2,
+    flex: 0.5,
+    height: 30,
     paddingTop: 4,
-    height: 24,
     fontFamily: 'Montserrat',
     fontWeight: 'bold',
     fontSize: 14,
     lineHeight: 12,
     backgroundColor: colors.offwhite,
+    borderWidth: 2,
+    borderColor: colors.offwhite,
     color: '#343B83',
+  },
+
+  tableQuantityActive: {
     flex: 0.5,
+    height: 35,
+    paddingTop: 4,
+    fontFamily: 'Montserrat',
+    fontWeight: 'bold',
+    fontSize: 14,
+    lineHeight: 12,
+    backgroundColor: colors.offwhite,
+    borderWidth: 2,
+    borderColor: colors.primary,
+    borderRadius: 10,
+    color: '#343B83',
+    elevation: 60,
+    shadowColor: '#000',
+    shadowOffset: {
+      width: 0,
+      height: 2,
+    },
+    shadowOpacity: 1.0,
+    shadowRadius: 3.84,
   },
 
   editPenButton: {
+    marginLeft: 4,
     marginRight: 14,
     backgroundColor: colors.offwhite,
+    height: 10,
   },
 
   deleteButton: {
@@ -147,13 +159,14 @@ const styles = StyleSheet.create({
   },
 
   modalView: {
-    marginTop: '160%',
-    marginLeft: '60%',
-    backgroundColor: colors.offwhite,
+    flexDirection: 'row',
+    backgroundColor: 'yellow',
+    margin: '50%',
     borderRadius: 20,
-    width: '20%',
-    height: '10%',
-    alignItems: 'center',
+    width: '30%',
+    height: '7%',
+    alignSelf: 'center',
+    justifyContent: 'space-around',
     shadowColor: '#000',
     shadowOffset: {
       width: 0,
@@ -161,13 +174,14 @@ const styles = StyleSheet.create({
     },
     shadowOpacity: 1.0,
     shadowRadius: 3.84,
-    elevation: 5,
+    elevation: 60,
   },
   submitButton: {
-    marginTop: '10%',
-    backgroundColor: colors.offwhite,
+    backgroundColor: 'orange',
     borderRadius: 7,
-    paddingHorizontal: 15,
+    alignItems: 'center',
+    alignSelf: 'center',
+    width: '40%',
     paddingVertical: 10,
     elevation: 1,
   },
@@ -186,8 +200,14 @@ const styles = StyleSheet.create({
     textAlign: 'center',
   },
 
+  qtybox: {
+    flex: 0.5,
+    backgroundColor: colors.offwhite,
+    height: '20%',
+    paddingRight: '2%',
+  },
+
   editQuantityInModal: {
-    marginTop: '10%',
     width: 50,
     height: 35,
 
