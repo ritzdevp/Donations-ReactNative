@@ -17,7 +17,7 @@ import {connect} from 'react-redux';
 import DonateCartList from '../components/DonateCartList';
 import AppMessage from '../components/AppMessage';
 
-function DonorDetailsForm(props, {navigation}) {
+function DonorDetailsForm({navigation}, props) {
   const [donorName, onChangeName] = React.useState('');
   const [contact, onChangeContact] = React.useState('');
   const [email, onChangeEmail] = React.useState('');
@@ -71,7 +71,7 @@ function DonorDetailsForm(props, {navigation}) {
 
   const goToWelcomeScreen = () => {
     setModalVisible(!modalVisible);
-    props.navigation.navigate('WelcomeScreen');
+    navigation.navigate('WelcomeScreen');
   };
 
   return (
