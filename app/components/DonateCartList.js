@@ -27,10 +27,13 @@ const DonateCartList = (props) => {
   );
 
   return (
-    <View>
+    <View style={styles.table}>
       <View style={styles.tableHeader}>
         <Text style={styles.tableHeaderText}>Items Selected</Text>
-        <Text style={styles.tableHeaderText}>Quantity</Text>
+        <Text style={styles.tableHeaderText}>
+          {props.showButton && 'Quantity Required'}
+          {!props.showButton && 'Quantities'}
+        </Text>
       </View>
 
       <FlatList
@@ -74,8 +77,23 @@ const styles = StyleSheet.create({
     lineHeight: 12,
     backgroundColor: colors.offwhite,
     color: '#343B83',
-    flex: 1,
-    marginLeft: 20,
+  },
+  table: {
+    paddingBottom: 10,
+    margin: 10,
+    width: '100%',
+    backgroundColor: colors.offwhite,
+    //alignSelf: 'stretch',
+    justifyContent: 'flex-start',
+    alignItems: 'center',
+    paddingHorizontal: '10%',
+  },
+
+  tableContents: {
+    width: '100%',
+    alignSelf: 'center',
+    backgroundColor: colors.offwhite,
+    marginLeft: 40,
   },
   //   tableItemsSelected: {
   //     top: 2,

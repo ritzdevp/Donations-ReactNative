@@ -1,13 +1,5 @@
 import React from 'react';
-import {
-  StyleSheet,
-  View,
-  SafeAreaView,
-  ScrollView,
-  Text,
-  Modal,
-  TouchableHighlight,
-} from 'react-native';
+import {StyleSheet, View, SafeAreaView, ScrollView, Text} from 'react-native';
 import colors from '../styling/colorSchemes/colors';
 import AppButton from '../components/AppButton';
 import AppTextInput from '../components/AppTextInput';
@@ -86,9 +78,7 @@ function DonorDetailsForm({navigation}, props) {
         userName={donorName}
       />
       <SafeAreaView style={styles.schoolForm}>
-        <View style={styles.table}>
-          <DonateCartList style={styles.tableContents} showButtons={false} />
-        </View>
+        <DonateCartList showButtons={false} />
         <ScrollView style={styles.schoolFormScroll}>
           <AppTextInput
             mylabel="NAME"
@@ -220,22 +210,5 @@ const styles = StyleSheet.create({
     fontSize: 18,
     color: '#343B83',
     textAlign: 'center',
-  },
-  table: {
-    top: 20,
-    left: 30,
-    paddingBottom: 10,
-    marginBottom: 8,
-    width: '100%',
-    backgroundColor: colors.offwhite,
-    //alignSelf: 'stretch',
-    alignItems: 'center',
-    flex: 1,
-  },
-  tableContents: {
-    width: '100%',
-    alignSelf: 'center',
-    backgroundColor: colors.offwhite,
-    marginLeft: 40,
   },
 });

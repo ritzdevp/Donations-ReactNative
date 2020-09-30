@@ -21,6 +21,7 @@ import {connect} from 'react-redux';
 import {addItemToDonateItemsList} from '../actions';
 import {deleteItemFromDonateItemsList} from '../actions';
 import DonateCartList from '../components/DonateCartList';
+import DonorOthersBox from '../components/DonorOthersBox';
 
 const OffTick = '../styling/images/offTick.png';
 const OnTick = '../styling/images/onTick.png';
@@ -98,19 +99,9 @@ const DonorSchoolDetails = ({navigation}, props) => {
             keyExtractor={(item) => item.title}
           />
         </SafeAreaView>
-        <View style={styles.othersBox}>
-          <View>
-            <Image source={require(OffTick)} />
-          </View>
-          <View>
-            <Text style={styles.othersText}>Others</Text>
-          </View>
-        </View>
+        <DonorOthersBox />
 
-        <View style={styles.table}>
-          <DonateCartList showButton={true} />
-        </View>
-
+        <DonateCartList showButton={true} />
         <View style={styles.confirmButtonLine} />
         <View style={styles.confirmButton}>
           <AppButton
@@ -216,23 +207,6 @@ const styles = StyleSheet.create({
 
     left: 9,
     color: '#343B83',
-  },
-  table: {
-    top: 20,
-    left: 30,
-    paddingBottom: 10,
-    marginBottom: 8,
-    width: '90%',
-    backgroundColor: colors.offwhite,
-    alignSelf: 'stretch',
-    alignItems: 'center',
-    flex: 1,
-  },
-  tableContents: {
-    width: '100%',
-    alignSelf: 'center',
-    backgroundColor: colors.offwhite,
-    marginLeft: 40,
   },
 });
 
