@@ -18,6 +18,9 @@ import {deleteItemFromDonateItemsList} from '../actions';
 import DonateCartList from '../components/DonateCartList';
 import DonorOthersBox from '../components/DonorOthersBox';
 import OthersList from '../components/OthersList';
+import itemListingApi from '../api/itemsListing';
+// Image components
+import imageSrc from '../constants/itemImageSource';
 
 const OffTick = '../styling/images/offTick.png';
 const OnTick = '../styling/images/onTick.png';
@@ -25,6 +28,16 @@ const DeleteIcon = '../styling/images/deleteIcon.png';
 
 const DonorItemList = ({navigation}, props) => {
   console.log('props is ' + props);
+  // const {
+  //   data: itemList,
+  //   error: itemError,
+  //   loading: itemLoading,
+  //   request: loadItemDetails,
+  // } = useApi(itemListingApi.getAllItem);
+
+  // useEffect(() => {
+  //   loadItemDetails();
+  // }, []);
 
   const renderItem = ({item}) => (
     <DonorItem

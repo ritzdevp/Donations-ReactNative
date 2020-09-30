@@ -15,6 +15,7 @@ import DonorItem from '../components/DonorItem';
 import EmptyScreen from './EmptyScreen';
 import AppButton from '../components/AppButton';
 import schoolListingApi from '../api/schoolListing';
+import itemListingApi from '../api/itemsListing';
 import {useEffect} from 'react';
 import useApi from '../hooks/useApi';
 import {connect} from 'react-redux';
@@ -27,14 +28,24 @@ const OffTick = '../styling/images/offTick.png';
 const OnTick = '../styling/images/onTick.png';
 const DeleteIcon = '../styling/images/deleteIcon.png';
 
+// Image components
+import imageSrc from '../constants/itemImageSource';
+
 const DonorSchoolDetails = ({navigation}, props) => {
   var schoolId = '1';
   const {data: school, error, loading, request: loadSchoolDetails} = useApi(
     schoolListingApi.getSchoolDetails,
   );
+  const {
+    data: itemList,
+    error: itemError,
+    loading: itemLoading,
+    request: loadItemDetails,
+  } = useApi(itemListingApi.getAllItem);
 
   useEffect(() => {
     loadSchoolDetails(schoolId);
+    loadItemDetails();
   }, []);
 
   console.log('props is ' + props);
@@ -44,7 +55,7 @@ const DonorSchoolDetails = ({navigation}, props) => {
       itemName={item.title}
       totalUnits={item.totalUnits}
       metric={item.metric}
-      imageSrc={item.imageSrc}
+      imageSrc={imageSrc[item.imageId]}
       isSchoolList={false}></DonorItem>
   );
 
@@ -90,15 +101,16 @@ const DonorSchoolDetails = ({navigation}, props) => {
             <Text style={styles.content}>{school.infrastructure}</Text>
           </View>
         )}
-
-        <SafeAreaView style={{width: '100%'}}>
-          <FlatList
-            style={styles.listView}
-            data={ITEMSLIST}
-            renderItem={renderItem}
-            keyExtractor={(item) => item.title}
-          />
-        </SafeAreaView>
+        {!itemLoading && !itemError && (
+          <SafeAreaView style={{width: '100%'}}>
+            <FlatList
+              style={styles.listView}
+              data={itemList}
+              renderItem={renderItem}
+              keyExtractor={(item) => item.title}
+            />
+          </SafeAreaView>
+        )}
         <DonorOthersBox />
 
         <DonateCartList showButton={true} />
@@ -210,33 +222,37 @@ const styles = StyleSheet.create({
   },
 });
 
-const ITEMSLIST = [
-  {
-    id: '1',
-    title: 'Accessories',
-    metric: 'units',
-    totalUnits: '20',
-    imageSrc: require('../styling/images/Accessories.png'),
-  },
-  {
-    id: '2',
-    title: 'Bags',
-    metric: 'pcs',
-    totalUnits: '250',
-    imageSrc: require('../styling/images/Bags.png'),
-  },
-  {
-    id: '3',
-    title: 'Transportations',
-    metric: 'unit',
-    totalUnits: '2000',
-    imageSrc: require('../styling/images/Transportations.png'),
-  },
-  {
-    id: '4',
-    title: 'Copies',
-    metric: 'pcs',
-    totalUnits: '20000',
-    imageSrc: require('../styling/images/Copies.png'),
-  },
-];
+// const ITEMSLIST = [
+//   {
+//     id: '1',
+//     title: 'Accessories',
+//     metric: 'units',
+//     totalUnits: '20',
+//     imageSrc: '../styling/images/Accessories.png',
+//     //imageSrc: require('../styling/images/Accessories.png'),
+//   },
+//   {
+//     id: '2',
+//     title: 'Bags',
+//     metric: 'pcs',
+//     totalUnits: '250',
+//     imageSrc: '../styling/images/Accessories.png',
+//     //imageSrc: require('../styling/images/Bags.png'),
+//   },
+//   {
+//     id: '3',
+//     title: 'Transportations',
+//     metric: 'unit',
+//     totalUnits: '2000',
+//     imageSrc: '../styling/images/Accessories.png',
+//     //imageSrc: require('../styling/images/Transportations.png'),
+//   },
+//   {
+//     id: '4',
+//     title: 'Copies',
+//     metric: 'pcs',
+//     totalUnits: '20000',
+//     imageSrc: '../styling/images/Accessories.png',
+//     //imageSrc: require('../styling/images/Copies.png'),
+//   },
+// ];

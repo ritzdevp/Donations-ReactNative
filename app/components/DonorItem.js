@@ -13,7 +13,6 @@ import {FlatList} from 'react-native-gesture-handler';
 import {connect} from 'react-redux';
 import {addItemToDonateItemsList} from '../actions';
 import {deleteItemFromDonateItemsList} from '../actions';
-
 import Collapsible from 'react-native-collapsible';
 
 import colors from '../styling/colorSchemes/colors';
@@ -50,7 +49,6 @@ const DonorItem = (props) => {
       <Text style={(styles.title, styles.text)}>{reqUnits}</Text>
     </View>
   );
-
   return (
     <View style={selected ? styles.onTouch : styles.card}>
       <TouchableOpacity
