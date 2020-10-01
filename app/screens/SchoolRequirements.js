@@ -18,6 +18,9 @@ import {ScrollView, TouchableOpacity} from 'react-native-gesture-handler';
 import {connect, useSelector, useDispatch} from 'react-redux';
 import {addItemToSelectedItemsList} from '../actions';
 import {deleteItemFromSelectedItemsList} from '../actions';
+import itemListingApi from '../api/itemsListing';
+// Image components
+import imageSrc from '../constants/itemImageSource';
 
 const DonorHands = '../styling/images/donor-logo-1.png';
 const OffTick = '../styling/images/offTick.png';
@@ -26,6 +29,14 @@ const DeleteIcon = '../styling/images/deleteIcon.png';
 
 const SchoolRequirements = ({navigation}, props) => {
   console.log('props is ' + props);
+
+  // const {data: itemList, error, loading, request: loadItemDetails} = useApi(
+  //   itemListingApi.getAllItem,
+  // );
+
+  // useEffect(() => {
+  //   loadItemDetails();
+  // }, []);
 
   const deleteItem = (title) => {
     props.deleteItem(title);

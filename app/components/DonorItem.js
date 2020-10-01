@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, {useEffect, useState} from 'react';
 import {
   StyleSheet,
   View,
@@ -14,6 +14,7 @@ import {connect} from 'react-redux';
 import {addItemToDonateItemsList} from '../actions';
 import {deleteItemFromDonateItemsList} from '../actions';
 import Collapsible from 'react-native-collapsible';
+import itemListingApi from '../api/itemsListing';
 
 import colors from '../styling/colorSchemes/colors';
 
@@ -23,6 +24,16 @@ const OnTick = '../styling/images/onTick.png';
 const DonorItem = (props) => {
   const [selected, setSelected] = useState(false);
   const [quantity, setQuantity] = useState(0);
+  const {
+    data: schoolsPerItem,
+    error,
+    loading,
+    request: loadSchoolsPerItem,
+  } = useApi(itemListingApi.getSchoolsPerItem);
+
+  useEffect(() => {
+    if (props.isSchoolList) loadSchoolsPerItem(props.id);
+  }, []);
 
   const onPress = () => {
     setSelected(!selected);
@@ -35,12 +46,16 @@ const DonorItem = (props) => {
       schoolName={item.schoolName}
       city={item.city}
       reqUnits={item.reqUnits}
+      id={item.schoolId}
     />
   );
-  const Item = ({schoolName, city, reqUnits}) => (
+  const Item = ({schoolName, city, reqUnits, id}) => (
     <View style={styles.schoolItem}>
       <View style={{flexDirection: 'row'}}>
-        <Text style={styles.title}>{schoolName}</Text>
+        <TouchableOpacity
+          onPress={() => props.navigation.navigate('SchoolDetails', {id})}>
+          <Text style={styles.title}>{schoolName}</Text>
+        </TouchableOpacity>
         <Text style={styles.text}>
           {', '}
           {city}
@@ -75,11 +90,11 @@ const DonorItem = (props) => {
         </View>
       </TouchableOpacity>
       <Collapsible collapsed={!selected}>
-        {props.isSchoolList && (
+        {props.isSchoolList && !loading && !error && (
           <SafeAreaView style={styles.schoolList}>
             <FlatList
               style={styles.listView}
-              data={props.schoolList}
+              data={schoolsPerItem}
               renderItem={renderSchool}
               keyExtractor={(item) => item.schoolName}
             />
@@ -141,7 +156,7 @@ const styles = StyleSheet.create({
     marginTop: 15,
   },
   schoolList: {
-    height: 80,
+    height: 120,
     padding: 10,
     borderTopWidth: 1,
     borderTopColor: colors.lightgrey,
@@ -224,3 +239,42 @@ const styles = StyleSheet.create({
     alignItems: 'center',
   },
 });
+
+const SCHOOLS_PER_ITEM = [
+  {
+    schoolId: '1',
+    schoolName: 'Seema Public School',
+    reqUnits: '20',
+    city: 'Banglore',
+  },
+  {
+    schoolId: '2',
+    schoolName: 'Poornapragathi Vidya Mandir',
+    reqUnits: '24',
+    city: 'Delhi',
+  },
+  {
+    schoolId: '3',
+    schoolName: 'Teresa Public School',
+    reqUnits: '60',
+    city: 'Mumbai',
+  },
+  {
+    schoolId: '4',
+    schoolName: 'Tinu Public School',
+    reqUnits: '20',
+    city: 'Banglore',
+  },
+  {
+    schoolId: '5',
+    schoolName: 'Vidya Mandir School',
+    reqUnits: '24',
+    city: 'Delhi',
+  },
+  {
+    schoolId: '6',
+    schoolName: 'Tagore Intl. Public School',
+    reqUnits: '60',
+    city: 'Mumbai',
+  },
+];

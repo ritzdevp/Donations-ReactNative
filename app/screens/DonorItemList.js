@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, {useEffect, useState} from 'react';
 import {
   StyleSheet,
   View,
@@ -7,6 +7,7 @@ import {
   Image,
   SafeAreaView,
   ScrollView,
+  ActivityIndicator,
 } from 'react-native';
 import DonorItem from '../components/DonorItem';
 import AppButton from '../components/AppButton';
@@ -28,25 +29,23 @@ const DeleteIcon = '../styling/images/deleteIcon.png';
 
 const DonorItemList = ({navigation}, props) => {
   console.log('props is ' + props);
-  // const {
-  //   data: itemList,
-  //   error: itemError,
-  //   loading: itemLoading,
-  //   request: loadItemDetails,
-  // } = useApi(itemListingApi.getAllItem);
+  const {data: itemList, error, loading, request: loadItemDetails} = useApi(
+    itemListingApi.getAllItem,
+  );
 
-  // useEffect(() => {
-  //   loadItemDetails();
-  // }, []);
+  useEffect(() => {
+    loadItemDetails();
+  }, []);
 
   const renderItem = ({item}) => (
     <DonorItem
       itemName={item.title}
-      schoolList={SCHOOLS_PER_ITEM}
       totalUnits={item.totalUnits}
       metric={item.metric}
-      imageSrc={item.imageSrc}
-      isSchoolList={true}></DonorItem>
+      imageSrc={imageSrc[item.imageId]}
+      id={item.id}
+      isSchoolList={true}
+      navigation={navigation}></DonorItem>
   );
 
   return (
@@ -55,16 +54,35 @@ const DonorItemList = ({navigation}, props) => {
         heading="Donations for Educational Institutes"
         navigation={navigation}
       />
-      <ScrollView>
-        <SafeAreaView style={{width: '100%'}}>
-          <FlatList
-            style={styles.listView}
-            data={ITEMSLIST}
-            renderItem={renderItem}
-            keyExtractor={(item) => item.title}
+      {loading && (
+        <ActivityIndicator
+          animating={loading}
+          size="large"
+          color={colors.primary}
+        />
+      )}
+      {error && (
+        <>
+          <Text style={styles.title}> Couldn't retrieve the Details </Text>
+          <AppButton
+            title="Retry"
+            style={{width: 200}}
+            onPress={loadSchoolListing}
           />
-        </SafeAreaView>
-        <OthersList />
+        </>
+      )}
+      <ScrollView>
+        {!loading && !error && (
+          <SafeAreaView style={{width: '100%'}}>
+            <FlatList
+              style={styles.listView}
+              data={itemList}
+              renderItem={renderItem}
+              keyExtractor={(item) => item.title}
+            />
+          </SafeAreaView>
+        )}
+        {/* <OthersList /> */}
         <DonorOthersBox />
 
         <DonateCartList showButton={true} />
@@ -131,6 +149,7 @@ const ITEMSLIST = [
     title: 'Accessories',
     metric: 'units',
     totalUnits: '20',
+    imageId: 1,
     imageSrc: require('../styling/images/Accessories.png'),
   },
   {
@@ -138,6 +157,7 @@ const ITEMSLIST = [
     title: 'Bags',
     metric: 'pcs',
     totalUnits: '250',
+    imageId: 2,
     imageSrc: require('../styling/images/Bags.png'),
   },
   {
@@ -145,6 +165,7 @@ const ITEMSLIST = [
     title: 'Transportations',
     metric: 'unit',
     totalUnits: '2000',
+    imageId: 3,
     imageSrc: require('../styling/images/Transportations.png'),
   },
   {
@@ -152,15 +173,7 @@ const ITEMSLIST = [
     title: 'Copies',
     metric: 'pcs',
     totalUnits: '20000',
+    imageId: 4,
     imageSrc: require('../styling/images/Copies.png'),
   },
-];
-
-const SCHOOLS_PER_ITEM = [
-  {schoolName: 'Seema Public School', reqUnits: '20', city: 'Banglore'},
-  {schoolName: 'Poornapragathi Vidya Mandir', reqUnits: '24', city: 'Delhi'},
-  {schoolName: 'Teresa Public School', reqUnits: '60', city: 'Mumbai'},
-  {schoolName: 'Tinu Public School', reqUnits: '20', city: 'Banglore'},
-  {schoolName: 'Vidya Mandir School', reqUnits: '24', city: 'Delhi'},
-  {schoolName: 'Tagore Intl. Public School', reqUnits: '60', city: 'Mumbai'},
 ];
