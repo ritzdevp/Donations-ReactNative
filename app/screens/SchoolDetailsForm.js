@@ -8,7 +8,7 @@ import SchoolApi from '../api/schoolListing';
 import {connect} from 'react-redux';
 import AppMessage from '../components/AppMessage';
 
-function SchoolDetailsForm(props, {navigation}) {
+function SchoolDetailsForm({navigation}, props) {
   const [schoolName, onChangeSchoolName] = React.useState('');
   const [schoolAddress, onChangeSchoolAddress] = React.useState('');
   const [city, onChangeCity] = React.useState('');
