@@ -39,21 +39,20 @@ const DonateCartListItem = (props) => {
       <View
         style={{
           flexDirection: 'row',
+          width: '40%',
+          justifyContent: 'flex-end',
         }}>
         {/* <Text style={styles.tableQuantity}>{props.itemQty}</Text> */}
+        <TextInput
+          style={editQty ? styles.tableQuantityActive : styles.tableQuantity}
+          value={props.itemQty}
+          editable={editQty}
+          onChangeText={(qty) => {
+            props.addItem(props.itemName, qty);
+          }}
+        />
         {props.showButton && (
           <>
-            <TextInput
-              style={
-                editQty ? styles.tableQuantityActive : styles.tableQuantity
-              }
-              value={props.itemQty}
-              editable={editQty}
-              onChangeText={(qty) => {
-                props.addItem(props.itemName, qty);
-              }}
-            />
-
             <View>
               <TouchableOpacity
                 activeOpacity={0.4}
@@ -109,9 +108,8 @@ const styles = StyleSheet.create({
   },
 
   tableQuantity: {
-    flex: 0.5,
-    height: 30,
-    width: 30,
+    height: 35,
+    width: '50%',
     paddingTop: 4,
     fontFamily: 'Montserrat',
     fontWeight: 'bold',
@@ -124,9 +122,10 @@ const styles = StyleSheet.create({
   },
 
   tableQuantityActive: {
-    flex: 0.5,
     height: 35,
-    paddingTop: 4,
+    width: '50%',
+    justifyContent: 'center',
+    alignItems: 'center',
     fontFamily: 'Montserrat',
     fontWeight: 'bold',
     fontSize: 14,
