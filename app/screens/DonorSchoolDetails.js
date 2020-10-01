@@ -36,19 +36,12 @@ const DonorSchoolDetails = ({navigation}, props) => {
   const {data: school, error, loading, request: loadSchoolDetails} = useApi(
     schoolListingApi.getSchoolDetails,
   );
-  const {
-    data: itemList,
-    error: itemError,
-    loading: itemLoading,
-    request: loadItemDetails,
-  } = useApi(itemListingApi.getAllItem);
 
   useEffect(() => {
     loadSchoolDetails(schoolId);
-    loadItemDetails();
   }, []);
 
-  console.log('props is ' + props);
+  //console.log('props is ' + props);
 
   const renderItem = ({item}) => (
     <DonorItem
@@ -81,35 +74,36 @@ const DonorSchoolDetails = ({navigation}, props) => {
       )}
       <ScrollView>
         {!loading && !error && (
-          <View style={styles.detailContainer}>
-            <Text style={styles.subheading}>Address </Text>
-            <Text style={styles.content}>
-              {school.schoolAddress.addressLine1}{' '}
-              {school.schoolAddress.addressLine2}
-            </Text>
-            <Text style={styles.content}>
-              {school.schoolAddress.city} {school.schoolAddress.pincode}
-            </Text>
-            <Text style={styles.subheading}>Details </Text>
-            <Text style={styles.content}>{school.details.board}</Text>
-            <Text style={styles.content}>{school.details.recognition}</Text>
-            <Text style={styles.content}>
-              {school.details.studentsPerClass}
-              {' Students per class'}
-            </Text>
-            <Text style={styles.subheading}>Infrastructure </Text>
-            <Text style={styles.content}>{school.infrastructure}</Text>
-          </View>
-        )}
-        {!itemLoading && !itemError && (
-          <SafeAreaView style={{width: '100%'}}>
-            <FlatList
-              style={styles.listView}
-              data={itemList}
-              renderItem={renderItem}
-              keyExtractor={(item) => item.title}
-            />
-          </SafeAreaView>
+          <>
+            <View style={styles.detailContainer}>
+              <Text style={styles.subheading}>Address </Text>
+              <Text style={styles.content}>
+                {school.schoolAddress.addressLine1}{' '}
+                {school.schoolAddress.addressLine2}
+              </Text>
+              <Text style={styles.content}>
+                {school.schoolAddress.city} {school.schoolAddress.pincode}
+              </Text>
+              <Text style={styles.subheading}>Details </Text>
+              <Text style={styles.content}>{school.details.board}</Text>
+              <Text style={styles.content}>{school.details.recognition}</Text>
+              <Text style={styles.content}>
+                {school.details.studentsPerClass}
+                {' Students per class'}
+              </Text>
+              <Text style={styles.subheading}>Infrastructure </Text>
+              <Text style={styles.content}>{school.infrastructure}</Text>
+            </View>
+
+            <SafeAreaView style={{width: '100%'}}>
+              <FlatList
+                style={styles.listView}
+                data={school.items}
+                renderItem={renderItem}
+                keyExtractor={(item) => item.title}
+              />
+            </SafeAreaView>
+          </>
         )}
         <DonorOthersBox />
 
