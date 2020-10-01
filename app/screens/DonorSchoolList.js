@@ -14,6 +14,7 @@ import React, {useEffect} from 'react';
 import EmptyScreen from './EmptyScreen';
 import schoolListingApi from '../api/schoolListing';
 import AppButton from '../components/AppButton';
+import TabSwitch from '../components/TabSwitch';
 import useApi from '../hooks/useApi';
 
 const searchIcon = require('../styling/Icons/Search-40px.png');
@@ -90,6 +91,18 @@ function DonorSchoolList({navigation}) {
           />
         </>
       )}
+
+      <View style={styles.switchtabs}>
+        <TabSwitch
+          title="Items List"
+          onPress={() => navigation.navigate('DonorItemList')}
+        />
+        <TabSwitch
+          title="Schools List"
+          selectedStatus="true"
+          //onPress={() => navigation.navigate('DonorSchoolList')}
+        />
+      </View>
 
       <View style={styles.inputContainer}>
         <Image style={styles.searchIcon} source={searchIcon} />
@@ -180,6 +193,16 @@ const styles = StyleSheet.create({
   sortIcon: {
     height: 10,
     width: 10,
+  },
+  switchtabs: {
+    flexDirection: 'row',
+    alignSelf: 'center',
+    backgroundColor: colors.offwhite,
+    borderColor: colors.primary,
+    width: '90%',
+    borderWidth: 2,
+    borderRadius: 50,
+    justifyContent: 'center',
   },
 });
 
