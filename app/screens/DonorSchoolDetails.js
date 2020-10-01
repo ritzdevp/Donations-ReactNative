@@ -15,6 +15,7 @@ import DonorItem from '../components/DonorItem';
 import EmptyScreen from './EmptyScreen';
 import AppButton from '../components/AppButton';
 import schoolListingApi from '../api/schoolListing';
+import itemListingApi from '../api/itemsListing';
 import {useEffect} from 'react';
 import useApi from '../hooks/useApi';
 import {connect} from 'react-redux';
@@ -27,6 +28,9 @@ const OffTick = '../styling/images/offTick.png';
 const OnTick = '../styling/images/onTick.png';
 const DeleteIcon = '../styling/images/deleteIcon.png';
 
+// Image components
+import imageSrc from '../constants/itemImageSource';
+
 const DonorSchoolDetails = ({navigation}, props) => {
   var schoolId = '1';
   const {data: school, error, loading, request: loadSchoolDetails} = useApi(
@@ -37,14 +41,14 @@ const DonorSchoolDetails = ({navigation}, props) => {
     loadSchoolDetails(schoolId);
   }, []);
 
-  console.log('props is ' + props);
+  //console.log('props is ' + props);
 
   const renderItem = ({item}) => (
     <DonorItem
       itemName={item.title}
       totalUnits={item.totalUnits}
       metric={item.metric}
-      imageSrc={item.imageSrc}
+      imageSrc={imageSrc[item.imageId]}
       isSchoolList={false}></DonorItem>
   );
 
@@ -70,35 +74,37 @@ const DonorSchoolDetails = ({navigation}, props) => {
       )}
       <ScrollView>
         {!loading && !error && (
-          <View style={styles.detailContainer}>
-            <Text style={styles.subheading}>Address </Text>
-            <Text style={styles.content}>
-              {school.schoolAddress.addressLine1}{' '}
-              {school.schoolAddress.addressLine2}
-            </Text>
-            <Text style={styles.content}>
-              {school.schoolAddress.city} {school.schoolAddress.pincode}
-            </Text>
-            <Text style={styles.subheading}>Details </Text>
-            <Text style={styles.content}>{school.details.board}</Text>
-            <Text style={styles.content}>{school.details.recognition}</Text>
-            <Text style={styles.content}>
-              {school.details.studentsPerClass}
-              {' Students per class'}
-            </Text>
-            <Text style={styles.subheading}>Infrastructure </Text>
-            <Text style={styles.content}>{school.infrastructure}</Text>
-          </View>
-        )}
+          <>
+            <View style={styles.detailContainer}>
+              <Text style={styles.subheading}>Address </Text>
+              <Text style={styles.content}>
+                {school.schoolAddress.addressLine1}{' '}
+                {school.schoolAddress.addressLine2}
+              </Text>
+              <Text style={styles.content}>
+                {school.schoolAddress.city} {school.schoolAddress.pincode}
+              </Text>
+              <Text style={styles.subheading}>Details </Text>
+              <Text style={styles.content}>{school.details.board}</Text>
+              <Text style={styles.content}>{school.details.recognition}</Text>
+              <Text style={styles.content}>
+                {school.details.studentsPerClass}
+                {' Students per class'}
+              </Text>
+              <Text style={styles.subheading}>Infrastructure </Text>
+              <Text style={styles.content}>{school.infrastructure}</Text>
+            </View>
 
-        <SafeAreaView style={{width: '100%'}}>
-          <FlatList
-            style={styles.listView}
-            data={ITEMSLIST}
-            renderItem={renderItem}
-            keyExtractor={(item) => item.title}
-          />
-        </SafeAreaView>
+            <SafeAreaView style={{width: '100%'}}>
+              <FlatList
+                style={styles.listView}
+                data={school.items}
+                renderItem={renderItem}
+                keyExtractor={(item) => item.title}
+              />
+            </SafeAreaView>
+          </>
+        )}
         <DonorOthersBox />
 
         <DonateCartList showButton={true} />
@@ -210,33 +216,37 @@ const styles = StyleSheet.create({
   },
 });
 
-const ITEMSLIST = [
-  {
-    id: '1',
-    title: 'Accessories',
-    metric: 'units',
-    totalUnits: '20',
-    imageSrc: require('../styling/images/Accessories.png'),
-  },
-  {
-    id: '2',
-    title: 'Bags',
-    metric: 'pcs',
-    totalUnits: '250',
-    imageSrc: require('../styling/images/Bags.png'),
-  },
-  {
-    id: '3',
-    title: 'Transportations',
-    metric: 'unit',
-    totalUnits: '2000',
-    imageSrc: require('../styling/images/Transportations.png'),
-  },
-  {
-    id: '4',
-    title: 'Copies',
-    metric: 'pcs',
-    totalUnits: '20000',
-    imageSrc: require('../styling/images/Copies.png'),
-  },
-];
+// const ITEMSLIST = [
+//   {
+//     id: '1',
+//     title: 'Accessories',
+//     metric: 'units',
+//     totalUnits: '20',
+//     imageSrc: '../styling/images/Accessories.png',
+//     //imageSrc: require('../styling/images/Accessories.png'),
+//   },
+//   {
+//     id: '2',
+//     title: 'Bags',
+//     metric: 'pcs',
+//     totalUnits: '250',
+//     imageSrc: '../styling/images/Accessories.png',
+//     //imageSrc: require('../styling/images/Bags.png'),
+//   },
+//   {
+//     id: '3',
+//     title: 'Transportations',
+//     metric: 'unit',
+//     totalUnits: '2000',
+//     imageSrc: '../styling/images/Accessories.png',
+//     //imageSrc: require('../styling/images/Transportations.png'),
+//   },
+//   {
+//     id: '4',
+//     title: 'Copies',
+//     metric: 'pcs',
+//     totalUnits: '20000',
+//     imageSrc: '../styling/images/Accessories.png',
+//     //imageSrc: require('../styling/images/Copies.png'),
+//   },
+// ];

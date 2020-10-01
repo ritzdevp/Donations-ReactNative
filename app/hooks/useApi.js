@@ -15,7 +15,7 @@ export default useApi = (apiFunc) => {
     }
     setData(response.data);
     setLoading(false);
-    //console.log(school);
+    //console.log(response.data);
     return response.data;
   };
 
