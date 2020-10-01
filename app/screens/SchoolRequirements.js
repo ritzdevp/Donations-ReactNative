@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, {useState, useEffect} from 'react';
 import {
   StyleSheet,
   View,
@@ -30,13 +30,13 @@ const DeleteIcon = '../styling/images/deleteIcon.png';
 const SchoolRequirements = ({navigation}, props) => {
   console.log('props is ' + props);
 
-  // const {data: itemList, error, loading, request: loadItemDetails} = useApi(
-  //   itemListingApi.getAllItem,
-  // );
+  const {data: itemList, error, loading, request: loadItemDetails} = useApi(
+    itemListingApi.getAllItem,
+  );
 
-  // useEffect(() => {
-  //   loadItemDetails();
-  // }, []);
+  useEffect(() => {
+    loadItemDetails();
+  }, []);
 
   const deleteItem = (title) => {
     props.deleteItem(title);
@@ -46,7 +46,7 @@ const SchoolRequirements = ({navigation}, props) => {
     <Item
       itemName={item.title}
       //itemQty={item.qty}
-      imageSrc={item.imageSrc}></Item>
+      imageSrc={imageSrc[item.imageId]}></Item>
   );
 
   return (
@@ -61,7 +61,7 @@ const SchoolRequirements = ({navigation}, props) => {
           <FlatList
             numColumns={2}
             style={styles.listView}
-            data={ITEMSLIST}
+            data={itemList}
             renderItem={renderItem}
             keyExtractor={(item) => item.title}
           />
@@ -163,26 +163,3 @@ const styles = StyleSheet.create({
     alignSelf: 'center',
   },
 });
-
-const ITEMSLIST = [
-  {
-    id: '1',
-    title: 'Accessories',
-    imageSrc: require('../styling/images/Accessories.png'),
-  },
-  {
-    id: '2',
-    title: 'Bags',
-    imageSrc: require('../styling/images/Bags.png'),
-  },
-  {
-    id: '3',
-    title: 'Transportations',
-    imageSrc: require('../styling/images/Transportations.png'),
-  },
-  {
-    id: '4',
-    title: 'Copies',
-    imageSrc: require('../styling/images/Copies.png'),
-  },
-];
