@@ -11,6 +11,7 @@ import {
 } from 'react-native';
 import DonorItem from '../components/DonorItem';
 import AppButton from '../components/AppButton';
+import TabSwitch from '../components/TabSwitch';
 import colors from '../styling/colorSchemes/colors';
 import EmptyScreen from './EmptyScreen';
 import {connect} from 'react-redux';
@@ -54,6 +55,25 @@ const DonorItemList = ({navigation}, props) => {
         heading="Donations for Educational Institutes"
         navigation={navigation}
       />
+      <View style={styles.switchtabs}>
+        <TabSwitch
+          title="Items List"
+          selectedStatus="true"
+          //onPress={() => navigation.navigate('DonorItemList')}
+        />
+        <TabSwitch
+          title="Schools List"
+          onPress={() => navigation.navigate('DonorSchoolList')}
+        />
+      </View>
+
+      <ScrollView>
+        <SafeAreaView style={{width: '100%'}}>
+          <FlatList
+            style={styles.listView}
+            data={ITEMSLIST}
+            renderItem={renderItem}
+            keyExtractor={(item) => item.title}
       {loading && (
         <ActivityIndicator
           animating={loading}
@@ -140,6 +160,17 @@ const styles = StyleSheet.create({
     marginVertical: 15,
     width: '80%',
     alignSelf: 'center',
+  },
+  switchtabs: {
+    flexDirection: 'row',
+    alignSelf: 'center',
+    backgroundColor: colors.offwhite,
+    borderColor: colors.primary,
+    width: '90%',
+    borderWidth: 2,
+    borderRadius: 50,
+    justifyContent: 'center',
+    marginTop: '2%',
   },
 });
 
