@@ -67,13 +67,6 @@ const DonorItemList = ({navigation}, props) => {
         />
       </View>
 
-      <ScrollView>
-        <SafeAreaView style={{width: '100%'}}>
-          <FlatList
-            style={styles.listView}
-            data={ITEMSLIST}
-            renderItem={renderItem}
-            keyExtractor={(item) => item.title}
       {loading && (
         <ActivityIndicator
           animating={loading}
@@ -171,6 +164,7 @@ const styles = StyleSheet.create({
     borderRadius: 50,
     justifyContent: 'center',
     marginTop: '2%',
+    marginBottom: 20,
   },
 });
 
