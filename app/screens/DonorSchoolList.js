@@ -44,14 +44,15 @@ function DonorSchoolList({navigation}) {
   };
 
   const sortByName = () => {
-    let sortedList = fullList;
+    let sortedList = [...fullList];
     sortedList.sort((a, b) => {
       let fa = a.schoolName.toLowerCase();
       let fb = b.schoolName.toLowerCase();
       return fa < fb ? -1 : 1;
     });
-    updateFullList(sortedList);
     updateList(sortedList);
+    updateFullList(sortedList);
+    //console.log(myList);
   };
   const Item = ({schoolName, city, id}) => (
     <TouchableOpacity
@@ -183,16 +184,18 @@ const styles = StyleSheet.create({
   listContainer: {
     marginVertical: 20,
     width: '80%',
-    paddingVertical: 10,
+    borderTopColor: colors.lightgrey,
+    borderTopWidth: 2,
   },
   sortBox: {
-    width: '80%',
+    width: '75%',
     flexDirection: 'row',
     justifyContent: 'flex-end',
   },
   sortIcon: {
     height: 10,
     width: 10,
+    resizeMode: 'cover',
   },
   switchtabs: {
     flexDirection: 'row',
