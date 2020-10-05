@@ -7,6 +7,7 @@ import {
   Image,
   SafeAreaView,
   TouchableOpacity,
+  ActivityIndicator,
 } from 'react-native';
 import {FlatList} from 'react-native-gesture-handler';
 
@@ -15,6 +16,7 @@ import {addItemToDonateItemsList} from '../actions';
 import {deleteItemFromDonateItemsList} from '../actions';
 import Collapsible from 'react-native-collapsible';
 import itemListingApi from '../api/itemsListing';
+import AppButton from '../components/AppButton';
 
 import colors from '../styling/colorSchemes/colors';
 
@@ -24,6 +26,7 @@ const OnTick = '../styling/images/onTick.png';
 const DonorItem = (props) => {
   const [selected, setSelected] = useState(false);
   const [quantity, setQuantity] = useState(0);
+  const [loadList, setLoadList] = useState(false);
   const {
     data: schoolsPerItem,
     error,
@@ -31,14 +34,19 @@ const DonorItem = (props) => {
     request: loadSchoolsPerItem,
   } = useApi(itemListingApi.getSchoolsPerItem);
 
-  useEffect(() => {
-    if (props.isSchoolList) loadSchoolsPerItem(props.id);
-  }, []);
+  // useEffect(() => {
+  //   if (props.isSchoolList && selected) {
+
+  //     setLoadList(true);
+  //   }
+  // }, []);
 
   const onPress = () => {
     setSelected(!selected);
     props.deleteItem(props.itemName);
     setQuantity(0);
+    if (props.isSchoolList && !loadList) loadSchoolsPerItem(props.id);
+    setLoadList(true);
   };
 
   const renderSchool = ({item}) => (
@@ -100,6 +108,31 @@ const DonorItem = (props) => {
             />
           </SafeAreaView>
         )}
+
+        {loading && (
+          <SafeAreaView style={styles.schoolList}>
+            <ActivityIndicator
+              animating={loading}
+              size="large"
+              color={colors.primary}
+            />
+          </SafeAreaView>
+        )}
+        {error && !loading && (
+          <SafeAreaView style={styles.error}>
+            <Text
+              style={(styles.text, {alignSelf: 'center', marginBottom: 10})}>
+              Couldn't retrieve the listing
+            </Text>
+            <View style={{width: 200}}>
+              <AppButton
+                title="Retry"
+                onPress={() => loadSchoolsPerItem(props.id)}
+              />
+            </View>
+          </SafeAreaView>
+        )}
+
         <TextInput
           style={styles.quantity}
           placeholder="QTY"
@@ -235,6 +268,11 @@ const styles = StyleSheet.create({
   },
   imageBox: {
     width: '30%',
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
+  error: {
+    padding: '10%',
     justifyContent: 'center',
     alignItems: 'center',
   },
