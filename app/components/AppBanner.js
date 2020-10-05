@@ -3,13 +3,13 @@ import {StyleSheet, View, Text, Image} from 'react-native';
 import {TouchableOpacity} from 'react-native';
 import colors from '../styling/colorSchemes/colors';
 
-const DonorHands = '../styling/images/donor-logo-1.png';
+const DonorHands = require('../styling/images/donor-logo-1.png');
 
 const AppBanner = ({navigation}) => {
   return (
     <View style={styles.banner}>
       <TouchableOpacity onPress={() => navigation.navigate('WelcomeScreen')}>
-        <Image style={styles.bannerLogo} source={require(DonorHands)} />
+        <Image style={styles.bannerLogo} source={DonorHands} />
       </TouchableOpacity>
       <Text style={styles.bannerName}>DONORS SUPPORT</Text>
       <TouchableOpacity

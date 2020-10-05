@@ -80,7 +80,7 @@ function DonorSchoolList({navigation}) {
 
   return (
     <View style={styles.container}>
-      <EmptyScreen heading="Institutes Needing Help" navigation={navigation} />
+      <EmptyScreen navigation={navigation} />
       {error && (
         <>
           <Text style={styles.title}> Couldn't retrieve the listing </Text>

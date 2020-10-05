@@ -51,10 +51,7 @@ const DonorItemList = ({navigation}, props) => {
 
   return (
     <View style={styles.container}>
-      <EmptyScreen
-        heading="Donations for Educational Institutes"
-        navigation={navigation}
-      />
+      <EmptyScreen navigation={navigation} />
       <View style={styles.switchtabs}>
         <TabSwitch
           title="Items List"
