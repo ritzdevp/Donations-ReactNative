@@ -1,9 +1,12 @@
 // This screen consist of blue banner with all icons and the heading
 
 import React from 'react';
-import {StyleSheet, View, Text} from 'react-native';
+import {StyleSheet, View, Text, Image} from 'react-native';
 import colors from '../styling/colorSchemes/colors';
 import AppBanner from '../components/AppBanner';
+import {TouchableOpacity} from 'react-native';
+
+const backIcon = require('../styling/Icons/back.png');
 
 export default function EmptyScreen({heading, navigation}) {
   return (
@@ -13,9 +16,14 @@ export default function EmptyScreen({heading, navigation}) {
       </View>
       <View style={styles.headerMini}>
         <View style={styles.headerMiniWhite}>
-          <Text style={styles.titleText}>{heading} </Text>
+          <TouchableOpacity
+            style={styles.backIcon}
+            onPress={() => navigation.goBack()}>
+            <Image source={backIcon} />
+          </TouchableOpacity>
         </View>
       </View>
+      {heading && <Text style={styles.titleText}>{heading} </Text>}
     </>
   );
 }
@@ -30,9 +38,16 @@ const styles = StyleSheet.create({
     backgroundColor: colors.secondary,
     borderBottomEndRadius: 50,
   },
+  backIcon: {
+    height: 20,
+    width: 20,
+    position: 'absolute',
+    left: 25,
+    top: 25,
+  },
   headerMini: {
     width: '100%',
-    height: 89,
+    height: 50,
     backgroundColor: colors.secondary,
   },
   headerMiniWhite: {
@@ -42,10 +57,9 @@ const styles = StyleSheet.create({
     top: 0,
     backgroundColor: colors.offwhite,
     borderTopLeftRadius: 50,
-    height: 89,
+    height: 50,
     alignItems: 'center',
     justifyContent: 'center',
-    paddingVertical: 20,
   },
   titleText: {
     fontFamily: 'Montserrat',
@@ -56,18 +70,8 @@ const styles = StyleSheet.create({
     lineHeight: 27,
     textAlign: 'center',
     flexWrap: 'wrap',
-    color: colors.primary,
-  },
-  heading: {
-    position: 'absolute',
-    width: 184,
     alignSelf: 'center',
-
-    fontFamily: 'Montserrat',
-    fontWeight: 'bold',
-    fontSize: 18,
-    lineHeight: 22,
-
-    color: colors.white,
+    color: colors.primary,
+    marginBottom: 10,
   },
 });
