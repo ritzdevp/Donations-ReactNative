@@ -1,5 +1,4 @@
 import {createStackNavigator} from 'react-navigation-stack';
-import {createAppContainer} from 'react-navigation';
 import WelcomeScreen from '../screens/WelcomeScreen';
 import SchoolRequirements from '../screens/SchoolRequirements';
 import DonorSchoolList from '../screens/DonorSchoolList';
@@ -33,12 +32,12 @@ const screens = {
       headerShown: false,
     },
   },
-  SchoolDetails: {
-    screen: DonorSchoolDetails,
-    navigationOptions: {
-      headerShown: false,
-    },
-  },
+  // SchoolDetails: {
+  //   screen: DonorSchoolDetails,
+  //   navigationOptions: {
+  //     headerShown: false,
+  //   },
+  // },
   DonorForm: {
     screen: DonorDetailsForm,
     navigationOptions: {

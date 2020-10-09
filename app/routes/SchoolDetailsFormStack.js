@@ -10,12 +10,6 @@ const screens = {
       headerShown: false,
     },
   },
-  WelcomeScreen: {
-    screen: WelcomeScreen,
-    navigationOptions: {
-      headerShown: false,
-    },
-  },
 };
 
 const SchoolDetailsFormStack = createStackNavigator(screens);

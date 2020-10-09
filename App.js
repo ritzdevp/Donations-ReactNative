@@ -11,9 +11,5 @@ import SchoolRequirements from './app/screens/SchoolRequirements';
 // import SchoolRequirements from './app/screens/SchoolRequirements';
 
 export default function App() {
-  return (
-    <NavigationContainer>
-      <Navigator />
-    </NavigationContainer>
-  );
+  return <Navigator />;
 }

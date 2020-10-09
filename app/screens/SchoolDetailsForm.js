@@ -47,7 +47,7 @@ function SchoolDetailsForm({navigation}, props) {
 
   const goToWelcomeScreen = () => {
     setModalVisible(!modalVisible);
-    props.navigation.navigate('WelcomeScreen');
+    navigation.navigate('WelcomeScreen');
   };
 
   function onBlurName(inputVal) {

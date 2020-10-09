@@ -26,12 +26,18 @@ const screens = {
       headerShown: false,
     },
   },
-  SchoolDetailsForm: {
-    screen: SchoolDetailsForm,
-    navigationOptions: {
-      headerShown: false,
-    },
-  },
+  // SchoolDetailsForm: {
+  //   screen: SchoolDetailsForm,
+  //   navigationOptions: {
+  //     headerShown: false,
+  //   },
+  // },
+  // WelcomeScreen: {
+  //   screen: WelcomeScreen,
+  //   navigationOptions: {
+  //     headerShown: false,
+  //   },
+  // },
 };
 
 const DonorStack = createStackNavigator(screens);
