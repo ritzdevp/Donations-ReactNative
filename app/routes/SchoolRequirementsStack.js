@@ -18,13 +18,6 @@ const screens = {
       headerShown: false,
     },
   },
-
-  WelcomeScreen: {
-    screen: WelcomeScreen,
-    navigationOptions: {
-      headerShown: false,
-    },
-  },
 };
 
 const SchoolRequirementsStack = createStackNavigator(screens);
