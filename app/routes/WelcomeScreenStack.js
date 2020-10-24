@@ -32,12 +32,12 @@ const screens = {
       headerShown: false,
     },
   },
-  // SchoolDetails: {
-  //   screen: DonorSchoolDetails,
-  //   navigationOptions: {
-  //     headerShown: false,
-  //   },
-  // },
+  SchoolDetails: {
+    screen: DonorSchoolDetails,
+    navigationOptions: {
+      headerShown: false,
+    },
+  },
   DonorForm: {
     screen: DonorDetailsForm,
     navigationOptions: {
