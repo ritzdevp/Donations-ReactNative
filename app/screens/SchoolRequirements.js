@@ -32,7 +32,7 @@ const SchoolRequirements = ({navigation}, props) => {
   console.log('props is ' + props);
 
   const {data: itemList, error, loading, request: loadItemDetails} = useApi(
-    itemListingApi.getAllItem,
+    itemListingApi.getAllListedItems,
   );
 
   useEffect(() => {
