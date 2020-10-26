@@ -46,7 +46,9 @@ const SchoolRequirements = ({navigation}, props) => {
     <Item
       itemName={item.title}
       //itemQty={item.qty}
-      imageSrc={imageSrc[item.imageId]}></Item>
+      imageSrc={imageSrc[item.imageId]}
+      >
+      </Item>
   );
 
   return (

@@ -253,8 +253,8 @@ const styles = StyleSheet.create({
     marginBottom: 10,
   },
   stretch: {
-    maxWidth: 70,
-    maxHeight: 50,
+    width: 70,
+    height: 80,
   },
   tick: {
     alignSelf: 'flex-start',

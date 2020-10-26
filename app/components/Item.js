@@ -130,6 +130,8 @@ const styles = StyleSheet.create({
     position: 'absolute',
     alignSelf: 'center',
     top: 21.96,
+    height: 80,
+    width: 80,
   },
   tick: {
     alignSelf: 'flex-end',

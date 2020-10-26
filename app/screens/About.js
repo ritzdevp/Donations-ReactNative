@@ -19,10 +19,12 @@ const About = ({navigation}) => {
         <ImageBackground
           style={styles.topBackground}
           imageStyle={{borderRadius: 50}}
-          source={require('../styling/images/Vector.png')}
+          source={require('../styling/images/Vector.png')} 
         />
         <AppBanner navigation={navigation} />
         <Text>Hello</Text>
+        {/* <Image style={{top: 400, left:10,width: 100, height: 100, backgroundColor: 'red'}} source={{uri: 'https://raw.githubusercontent.com/ritzacco/donorappimages/main/Accessories.png',}} />
+         */}
       </View>
     </View>
   );
