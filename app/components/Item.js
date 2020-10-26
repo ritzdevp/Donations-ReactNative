@@ -28,7 +28,7 @@ const Item = (props) => {
 
   return (
     <View style={selected ? styles.onTouch : styles.card}>
-      <Image style={styles.stretch} source={props.imageSrc} />
+      <Image style={styles.stretch} source={{uri:props.imageSrc}} />
       <TouchableOpacity onPress={onPress} underlayColor="none">
         <Image
           style={styles.tick}

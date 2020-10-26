@@ -22,6 +22,7 @@ import itemListingApi from '../api/itemsListing';
 // Image components
 import imageSrc from '../constants/itemImageSource';
 
+
 const DonorHands = '../styling/images/donor-logo-1.png';
 const OffTick = '../styling/images/offTick.png';
 const OnTick = '../styling/images/onTick.png';
@@ -44,12 +45,16 @@ const SchoolRequirements = ({navigation}, props) => {
 
   const renderItem = ({item}) => (
     <Item
-      itemName={item.title}
+      itemName={item.itemName}
       //itemQty={item.qty}
-      imageSrc={imageSrc[item.imageId]}
+      imageSrc={item.imageURL}
       >
       </Item>
   );
+
+  console.log('itemList is')
+  console.log(itemList);
+  
 
   return (
     <View style={styles.container}>
@@ -65,7 +70,7 @@ const SchoolRequirements = ({navigation}, props) => {
             style={styles.listView}
             data={itemList}
             renderItem={renderItem}
-            keyExtractor={(item) => item.title}
+            keyExtractor={(item) => item._id}
           />
         </SafeAreaView>
 
