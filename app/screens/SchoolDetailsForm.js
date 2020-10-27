@@ -5,8 +5,13 @@ import AppButton from '../components/AppButton';
 import AppTextInput from '../components/AppTextInput';
 import EmptyScreen from './EmptyScreen';
 import SchoolApi from '../api/schoolListing';
-import {connect, useSelector} from 'react-redux';
+import {connect, useSelector, useDispatch} from 'react-redux';
 import AppMessage from '../components/AppMessage';
+import {addItemToSelectedItemsList} from '../actions';
+import {deleteItemFromSelectedItemsList} from '../actions';
+import {deleteAllFromSelectedItemsList} from '../actions';
+
+
 
 function SchoolDetailsForm({navigation}, props) {
   const [schoolName, onChangeSchoolName] = React.useState('');
@@ -15,6 +20,8 @@ function SchoolDetailsForm({navigation}, props) {
   const [contact, onChangeContact] = React.useState('');
   const [email, onChangeEmail] = React.useState('');
   const [modalVisible, setModalVisible] = React.useState(false);
+
+  const dispatch = useDispatch();
 
   // ERROR MESAGES HOOK
   const [contactErrorMsg, onChangeContactError] = React.useState('');
@@ -46,7 +53,6 @@ function SchoolDetailsForm({navigation}, props) {
   })
 
   const handleSubmit = async () => {
-    
     if (schoolName != '' && contact.length == 10 && email != '' && city != '') {
       const schoolRequest = {
         schoolName,
@@ -61,6 +67,7 @@ function SchoolDetailsForm({navigation}, props) {
       const result = await SchoolApi.submitSchoolRequest(schoolRequest);
       if (!result.ok) return alert('Could not save the details!');
       setModalVisible(true);
+      dispatch({type: 'DELETE_ALL_FROM_SELECTEDITEMSLIST'})
       //alert(`Thank you ${result.data} for using donor support`);
       //props.navigation.navigate('WelcomeScreen');
     } else {
@@ -186,7 +193,15 @@ const mapStateToProps = (state) => {
   };
 };
 
-export default connect(mapStateToProps)(SchoolDetailsForm);
+const mapDispatchToProps = (dispatch) => {
+  return {
+    addItem: (title, qty) => dispatch(addItemToSelectedItemsList(title, qty)),
+    deleteItem: (title) => dispatch(deleteItemFromSelectedItemsList(title)),
+    deleteAll: (title) => dispatch(deleteAllFromSelectedItemsList(title))
+  };
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(SchoolDetailsForm);
 
 const styles = StyleSheet.create({
   container: {
