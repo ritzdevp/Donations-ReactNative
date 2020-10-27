@@ -83,7 +83,7 @@ const DonorItem = (props) => {
             <Image
               style={styles.stretch}
               resizeMode="contain"
-              source={props.imageSrc}
+              source={{uri:props.imageSrc}}
             />
           </View>
           <Text style={styles.itemName}>{props.itemName}</Text>

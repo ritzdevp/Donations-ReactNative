@@ -1,13 +1,13 @@
 import client from './client';
 
-const schoolEndpoint = '/addSchoolRequest';
+// const schoolEndpoint = '/addSchoolRequest';
 
 const getAllSchools = () => client.get(schoolEndpoint);
 const getSchoolDetails = (schoolId) =>
   client.get(schoolEndpoint + '/' + schoolId);
 
 const submitSchoolRequest = (schoolRequest) => {
-  return client.post(schoolEndpoint, schoolRequest);
+  return client.post('/addSchoolRequest', schoolRequest);
 };
 
 export default {
