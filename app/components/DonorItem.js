@@ -31,8 +31,8 @@ const DonorItem = (props) => {
     data: schoolsPerItem,
     error,
     loading,
-    request: loadSchoolsPerItem,
-  } = useApi(itemListingApi.getSchoolsPerItem);
+    request: getSchoolsPerItemByID,
+  } = useApi(itemListingApi.getSchoolsPerItemByID);
 
   // useEffect(() => {
   //   if (props.isSchoolList && selected) {
@@ -45,7 +45,7 @@ const DonorItem = (props) => {
     setSelected(!selected);
     props.deleteItem(props.itemName);
     setQuantity(0);
-    if (props.isSchoolList && !loadList) loadSchoolsPerItem(props.id);
+    if (props.isSchoolList && !loadList) getSchoolsPerItemByID(props.id);
     setLoadList(true);
   };
 
@@ -53,15 +53,16 @@ const DonorItem = (props) => {
     <Item
       schoolName={item.schoolName}
       city={item.city}
-      reqUnits={item.reqUnits}
-      id={item.schoolId}
+      reqUnits={props.isSchoolList? item.requiredQuantity : item.quantity}
+      id={item.schoolID}
+      
     />
   );
   const Item = ({schoolName, city, reqUnits, id}) => (
     <View style={styles.schoolItem}>
       <View style={{flexDirection: 'row'}}>
         <TouchableOpacity
-          onPress={() => props.navigation.navigate('SchoolDetails', {id})}>
+          onPress={() => props.navigation.navigate('SchoolDetails', {id: id})}>
           <Text style={styles.title}>{schoolName}</Text>
         </TouchableOpacity>
         <Text style={styles.text}>
@@ -104,12 +105,12 @@ const DonorItem = (props) => {
               style={styles.listView}
               data={schoolsPerItem}
               renderItem={renderSchool}
-              keyExtractor={(item) => item.schoolName}
+              keyExtractor={(item) => item.schoolID}
             />
           </SafeAreaView>
         )}
 
-        {loading && (
+        {props.isSchoolList && loading && (
           <SafeAreaView style={styles.schoolList}>
             <ActivityIndicator
               animating={loading}
@@ -118,7 +119,7 @@ const DonorItem = (props) => {
             />
           </SafeAreaView>
         )}
-        {error && !loading && (
+        {props.isSchoolList && error && !loading && (
           <SafeAreaView style={styles.error}>
             <Text
               style={(styles.text, {alignSelf: 'center', marginBottom: 10})}>
@@ -127,7 +128,7 @@ const DonorItem = (props) => {
             <View style={{width: 200}}>
               <AppButton
                 title="Retry"
-                onPress={() => loadSchoolsPerItem(props.id)}
+                onPress={() => getSchoolsPerItemByID(props.id)}
               />
             </View>
           </SafeAreaView>
