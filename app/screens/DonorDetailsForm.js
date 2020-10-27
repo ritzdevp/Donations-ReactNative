@@ -5,7 +5,7 @@ import AppButton from '../components/AppButton';
 import AppTextInput from '../components/AppTextInput';
 import EmptyScreen from './EmptyScreen';
 import DonorApi from '../api/donorListing';
-import {connect} from 'react-redux';
+import {connect, useSelector, useDispatch} from 'react-redux';
 import DonateCartList from '../components/DonateCartList';
 import AppMessage from '../components/AppMessage';
 
@@ -18,18 +18,42 @@ function DonorDetailsForm({navigation}, props) {
   const [emailErrorMsg, onChangeEmailError] = React.useState('');
   const [modalVisible, setModalVisible] = React.useState(false);
 
-  //var schoolId = navigation.getParam('schoolId');
-  var schoolId = '1';
-  var itemList = props.donateItemsList;
+
+  const dispatch = useDispatch();
+
+  let schoolID = 'NONE';
+  if (navigation.state.params != undefined){
+    schoolID = navigation.state.params.schoolId;
+  }
+  const itemListTemp = useSelector((state) => state.allReducers.donateItemsListReducer.donateItemsList);
+  const itemList = [];
+  itemListTemp.forEach(item => {
+    let othersFlag = false;
+    let itemID = 'NONE';
+    if (item.itemID === undefined){
+      othersFlag = true;
+    }else{
+      itemID = item.itemID;
+    }
+
+    itemList.push({
+      itemID: itemID,
+      itemName: item.title,
+      quantity: item.qty,
+      others: othersFlag
+    });
+  });
+
   const handleSubmit = async () => {
-    // console.log(donorName, contact, email);
+    console.log(itemList);
     if (donorName != '' && contact.length == 10 && email != '') {
-      const donorRequest = {donorName, contact, email, schoolId, itemList};
+      const donorRequest = {donorName, donorID: 'NONE', phone:contact, email, schoolID:schoolID, items:itemList, status: 'inactive'};
       const result = await DonorApi.submitDonorRequest(donorRequest);
       if (!result.ok) {
         return alert('Could not save the details!');
       }
       setModalVisible(true);
+      dispatch({type: 'DELETE_ALL_FROM_DONATEITEMSLIST'})
       //navigation.navigate('WelcomeScreen');
     } else {
       alert('Please check you details again');

@@ -140,7 +140,7 @@ const DonorItem = (props) => {
           keyboardType="numeric"
           onChangeText={(quantity) => {
             console.log('calling props.addItem...');
-            props.addItem(props.itemName, quantity);
+            props.addItem(props.itemName, quantity, props.itemID);
             setQuantity(quantity);
           }}
           editable={selected}
@@ -159,7 +159,7 @@ const mapStateToProps = (state) => {
 const mapDispatchToProps = (dispatch) => {
   console.log('in mapDispatchToProps');
   return {
-    addItem: (title, qty) => dispatch(addItemToDonateItemsList(title, qty)),
+    addItem: (title, qty, itemID) => dispatch(addItemToDonateItemsList(title, qty, itemID)),
     deleteItem: (title) => dispatch(deleteItemFromDonateItemsList(title)),
   };
 };

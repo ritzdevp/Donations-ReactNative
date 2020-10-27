@@ -68,6 +68,7 @@ const DonorItemList = ({navigation}, props) => {
       metric={item.metric}
       imageSrc={item.imageURL}
       id={item._id}
+      itemID={item._id}
       isSchoolList={true}
       navigation={navigation}></DonorItem>
   );

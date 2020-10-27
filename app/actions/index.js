@@ -18,14 +18,20 @@ export const deleteAllFromSelectedItemsList = (title) => ({
   title: title,
 })
 
-export const addItemToDonateItemsList = (title, qty) => ({
+export const addItemToDonateItemsList = (title, qty, itemID) => ({
   type: 'ADD_ITEM',
   id: nextId++,
   title: title,
   qty: qty,
+  itemID: itemID
 });
 
 export const deleteItemFromDonateItemsList = (title) => ({
   type: 'DELETE_ITEM',
+  title: title,
+});
+
+export const deleteAllFromDonateItemsList = (title) => ({
+  type: 'DELETE_ALL_FROM_DONATEITEMSLIST',
   title: title,
 });

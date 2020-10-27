@@ -129,7 +129,7 @@ const DonorSchoolDetails = ({navigation}, props) => {
         <View style={styles.confirmButton}>
           <AppButton
             title="Donate"
-            onPress={() => navigation.navigate('DonorForm')}
+            onPress={() => navigation.navigate('DonorForm', {schoolId:schoolId})}
           />
         </View>
       </ScrollView>
