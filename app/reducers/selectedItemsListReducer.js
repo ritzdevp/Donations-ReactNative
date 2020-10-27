@@ -13,6 +13,7 @@ const selectedItemsListReducer = (state = initalState, action) => {
             id: action.id,
             title: action.title,
             qty: action.qty,
+            itemID: action.itemID
           }),
       };
 

@@ -1,6 +1,6 @@
 import client from './client';
 
-const schoolEndpoint = '/school';
+const schoolEndpoint = '/addSchoolRequest';
 
 const getAllSchools = () => client.get(schoolEndpoint);
 const getSchoolDetails = (schoolId) =>

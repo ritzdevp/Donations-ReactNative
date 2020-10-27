@@ -46,14 +46,19 @@ const SchoolRequirements = ({navigation}, props) => {
   const renderItem = ({item}) => (
     <Item
       itemName={item.itemName}
-      //itemQty={item.qty}
       imageSrc={item.imageURL}
+      itemID={item._id}
       >
       </Item>
   );
 
   console.log('itemList is')
   console.log(itemList);
+  // console.log('selectedItemsList');
+  // console.log(props.selectedItemsList);
+  // const dummy = useSelector((state) => state.allReducers.selectedItemsListReducer.selectedItemsList);
+  // console.log('dummy is ' + dummy[0].id);
+  
   
 
   return (

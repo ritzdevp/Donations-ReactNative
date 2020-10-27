@@ -42,7 +42,7 @@ const Item = (props) => {
         keyboardType="numeric"
         onChangeText={(quantity) => {
           console.log('calling props.addItem...');
-          props.addItem(props.itemName, quantity);
+          props.addItem(props.itemName, quantity, props.itemID);
           setQuantity(quantity);
         }}
         editable={selected}
@@ -60,7 +60,7 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = (dispatch) => {
   return {
-    addItem: (title, qty) => dispatch(addItemToSelectedItemsList(title, qty)),
+    addItem: (title, qty, itemID) => dispatch(addItemToSelectedItemsList(title, qty, itemID)),
     deleteItem: (title) => dispatch(deleteItemFromSelectedItemsList(title)),
   };
 };

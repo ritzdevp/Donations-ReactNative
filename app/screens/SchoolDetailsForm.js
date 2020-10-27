@@ -5,7 +5,7 @@ import AppButton from '../components/AppButton';
 import AppTextInput from '../components/AppTextInput';
 import EmptyScreen from './EmptyScreen';
 import SchoolApi from '../api/schoolListing';
-import {connect} from 'react-redux';
+import {connect, useSelector} from 'react-redux';
 import AppMessage from '../components/AppMessage';
 
 function SchoolDetailsForm({navigation}, props) {
@@ -22,18 +22,41 @@ function SchoolDetailsForm({navigation}, props) {
   const [emailErrorMsg, onChangeEmailError] = React.useState('');
   const [cityErrorMsg, onChangeCityError] = React.useState('');
 
-  var itemList = props.selectedItemsList;
+  //const itemList = props.selectedItemsList;
+  //console.log('try ' + props.selectedItemsList);
+  // const dummy = useSelector((state) => state.allReducers.selectedItemsListReducer.selectedItemsList);
+  // console.log('dummy is ' + dummy);
+  const selectedItemsListTemp = useSelector((state) => state.allReducers.selectedItemsListReducer.selectedItemsList);
+  const selectedItemsList = [];
+  selectedItemsListTemp.forEach(item => {
+    let othersFlag = false;
+    let itemID = 'NONE';
+    if (item.itemID === undefined){
+      othersFlag = true;
+    }else{
+      itemID = item.itemID;
+    }
+    selectedItemsList.push({
+      itemName: item.title,
+      itemID: itemID,
+      quantity: item.qty,
+      originalQuantity: item.qty,
+      others: othersFlag,
+    })
+  })
 
   const handleSubmit = async () => {
-    // console.log(schoolName, city, contact, email);
+    
     if (schoolName != '' && contact.length == 10 && email != '' && city != '') {
       const schoolRequest = {
         schoolName,
+        schoolID: 'NONE',
         schoolAddress,
         city,
-        contact,
+        phone: contact,
         email,
-        itemList,
+        items: selectedItemsList,
+        status: 'inactive'
       };
       const result = await SchoolApi.submitSchoolRequest(schoolRequest);
       if (!result.ok) return alert('Could not save the details!');
