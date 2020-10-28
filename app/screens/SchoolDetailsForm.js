@@ -15,7 +15,9 @@ import {deleteAllFromSelectedItemsList} from '../actions';
 
 function SchoolDetailsForm({navigation}, props) {
   const [schoolName, onChangeSchoolName] = React.useState('');
-  const [schoolAddress, onChangeSchoolAddress] = React.useState('');
+  const [addressLine1, onChangeAddressLine1] = React.useState('');
+  const [addressLine2, onChangeAddressLine2] = React.useState('');
+  const [pincode, onChangePincode] = React.useState('');
   const [city, onChangeCity] = React.useState('');
   const [contact, onChangeContact] = React.useState('');
   const [email, onChangeEmail] = React.useState('');
@@ -28,11 +30,10 @@ function SchoolDetailsForm({navigation}, props) {
   const [nameErrorMsg, onChangeNameError] = React.useState('');
   const [emailErrorMsg, onChangeEmailError] = React.useState('');
   const [cityErrorMsg, onChangeCityError] = React.useState('');
+  const [addressLine1ErrorMsg, onChangeAddressLine1Error] = React.useState('');
+  const [addressLine2ErrorMsg, onChangeAddressLine2Error] = React.useState('');
+  const [pincodeErrorMsg, onChangePincodeError] = React.useState('');
 
-  //const itemList = props.selectedItemsList;
-  //console.log('try ' + props.selectedItemsList);
-  // const dummy = useSelector((state) => state.allReducers.selectedItemsListReducer.selectedItemsList);
-  // console.log('dummy is ' + dummy);
   const selectedItemsListTemp = useSelector((state) => state.allReducers.selectedItemsListReducer.selectedItemsList);
   const selectedItemsList = [];
   selectedItemsListTemp.forEach(item => {
@@ -57,13 +58,18 @@ function SchoolDetailsForm({navigation}, props) {
       const schoolRequest = {
         schoolName,
         schoolID: 'NONE',
-        schoolAddress,
-        city,
+        schoolAddress: {
+          addressLine1,
+          addressLine2,
+          city,
+          pincode
+        },
         phone: contact,
         email,
         items: selectedItemsList,
         status: 'inactive'
       };
+      console.log(schoolRequest);
       const result = await SchoolApi.submitSchoolRequest(schoolRequest);
       if (!result.ok) return alert('Could not save the details!');
       setModalVisible(true);
@@ -97,6 +103,14 @@ function SchoolDetailsForm({navigation}, props) {
     }
   }
 
+  function onBlurPincode(inputVal) {
+    if (inputVal.length < 1) {
+      onChangePincodeError('* required \n');
+    } else {
+      onChangePincodeError('');
+    }
+  }
+
   function onBlurEmail(inputVal) {
     if (inputVal.length < 1) {
       onChangeEmailError('* required \n');
@@ -122,6 +136,7 @@ function SchoolDetailsForm({navigation}, props) {
       />
       <SafeAreaView style={styles.schoolForm}>
         <ScrollView style={styles.schoolFormScroll}>
+
           <AppTextInput
             mylabel="SCHOOL NAME"
             autoCorrect={false}
@@ -133,16 +148,29 @@ function SchoolDetailsForm({navigation}, props) {
             onEndEditing={(event) => onBlurName(event.nativeEvent.text)}
           />
           <Text style={styles.errorMsg}>{nameErrorMsg}</Text>
+
           <AppTextInput
-            mylabel="SCHOOL ADRESS"
+            mylabel="ADDRESS LINE 1"
             autoCorrect={false}
-            onChangeText={(text) => onChangeSchoolAddress(text)}
-            value={schoolAddress}
-            style={{height: 100}}
+            onChangeText={(text) => onChangeAddressLine1(text)}
+            value={addressLine1}
+            style={{height: 80}}
             textContentType="fullStreetAddress"
             multiline={true}
-            placeholder="Enter Address"
+            placeholder="Enter Address Line 1"
           />
+
+          <AppTextInput
+            mylabel="ADDRESS LINE 2"
+            autoCorrect={false}
+            onChangeText={(text) => onChangeAddressLine2(text)}
+            value={addressLine2}
+            style={{height: 80}}
+            textContentType="fullStreetAddress"
+            multiline={true}
+            placeholder="Enter Address Line 2"
+          />
+
           <AppTextInput
             mylabel="CITY"
             autoCorrect={false}
@@ -154,6 +182,20 @@ function SchoolDetailsForm({navigation}, props) {
             onEndEditing={(event) => onBlurCity(event.nativeEvent.text)}
           />
           <Text style={styles.errorMsg}>{cityErrorMsg}</Text>
+
+          <AppTextInput
+            mylabel="PINCODE"
+            autoCorrect={false}
+            keyboardType="numeric"
+            onChangeText={(text) => onChangePincode(text)}
+            value={pincode}
+            textContentType="telephoneNumber"
+            placeholder="Enter Pincode"
+            onEndEditing={(event) => onBlurPincode(event.nativeEvent.text)}
+          />
+          <Text style={styles.errorMsg}>{pincodeErrorMsg}</Text>
+
+
           <AppTextInput
             mylabel="CONTACT NUMBER"
             autoCorrect={false}
@@ -165,6 +207,7 @@ function SchoolDetailsForm({navigation}, props) {
             onEndEditing={(event) => onBlurContact(event.nativeEvent.text)}
           />
           <Text style={styles.errorMsg}>{contactErrorMsg}</Text>
+
           <AppTextInput
             mylabel="EMAIL"
             autoCorrect={false}
@@ -176,6 +219,7 @@ function SchoolDetailsForm({navigation}, props) {
             onEndEditing={(event) => onBlurEmail(event.nativeEvent.text)}
           />
           <Text style={styles.errorMsg}>{emailErrorMsg}</Text>
+
           <View style={styles.confirmButtonLine} />
           <View style={styles.confirmButton}>
             <AppButton title="Submit" onPress={handleSubmit} />

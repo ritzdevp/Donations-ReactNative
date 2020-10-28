@@ -54,7 +54,6 @@ function DonorDetailsForm({navigation}, props) {
       }
       setModalVisible(true);
       dispatch({type: 'DELETE_ALL_FROM_DONATEITEMSLIST'})
-      //navigation.navigate('WelcomeScreen');
     } else {
       alert('Please check you details again');
     }
