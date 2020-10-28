@@ -109,7 +109,7 @@ const styles = StyleSheet.create({
 
   tableQuantity: {
     height: 35,
-    width: '50%',
+    width: '40%',
     paddingTop: 4,
     fontFamily: 'Montserrat',
     fontWeight: 'bold',
@@ -146,12 +146,11 @@ const styles = StyleSheet.create({
   },
 
   editPenButton: {
-    marginHorizontal: 15,
+    marginRight: '10%',
     backgroundColor: colors.offwhite,
   },
 
   deleteButton: {
-    marginRight: 10,
     paddingRight: 10,
     backgroundColor: colors.offwhite,
   },

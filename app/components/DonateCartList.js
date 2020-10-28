@@ -64,6 +64,7 @@ const styles = StyleSheet.create({
     width: '100%',
     justifyContent: 'space-between',
     paddingBottom: 5,
+    backgroundColor: colors.offwhite
   },
   tableHeaderText: {
     top: 2,
@@ -78,7 +79,7 @@ const styles = StyleSheet.create({
   tableHeaderQty: {
     top: 2,
     paddingTop: 3,
-    marginRight: '10%',
+    marginRight: '20%',
     fontFamily: 'Montserrat',
     fontSize: 14,
     fontWeight: '500',
