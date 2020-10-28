@@ -95,11 +95,11 @@ const DonorSchoolDetails = ({navigation}, props) => {
             <View style={styles.detailContainer}>
               <Text style={styles.subheading}>Address </Text>
               <Text style={styles.content}>
-                {/* {school.schoolAddress.addressLine1}{' '}
-                {school.schoolAddress.addressLine2} */}
+                {school.schoolAddress.addressLine1}{' '}
+                {school.schoolAddress.addressLine2}
               </Text>
               <Text style={styles.content}>
-                {/* {school.schoolAddress.city} {school.schoolAddress.pincode} */}
+                {school.schoolAddress.city} {school.schoolAddress.pincode}
               </Text>
               <Text style={styles.subheading}>Details </Text>
               {/* <Text style={styles.content}>{school.details.board}</Text>
