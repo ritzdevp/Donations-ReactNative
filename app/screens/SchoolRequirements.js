@@ -79,14 +79,6 @@ const SchoolRequirements = ({navigation}, props) => {
           />
         </SafeAreaView>
 
-        {/* <View style={styles.othersBox}>
-          <View>
-            <Image source={require(OffTick)} />
-          </View>
-          <View>
-            <Text style={styles.othersText}>Others</Text>
-          </View>
-        </View> */}
         <OthersBox />
 
         <View style={styles.table}>
