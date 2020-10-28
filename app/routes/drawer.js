@@ -6,7 +6,7 @@ import AboutStack from './AboutStack';
 
 const RootDrawerNavigator = createDrawerNavigator(
   {
-    WelcomeScreen: {
+    Home: {
       screen: WelcomeScreenStack,
     },
     About: {
