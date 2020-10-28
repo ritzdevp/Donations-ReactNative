@@ -16,6 +16,7 @@ const donateItemsListReducer = (state = initalState, action) => {
             id: action.id,
             title: action.title,
             qty: action.qty,
+            itemID: action.itemID
           }),
       };
 
@@ -50,6 +51,15 @@ const donateItemsListReducer = (state = initalState, action) => {
         ...state,
         donateItemsList: state.donateItemsList,
       };
+
+      case 'DELETE_ALL_FROM_DONATEITEMSLIST':
+        console.log('emptying donateitemslist');
+        const emptyArr = [];
+        state.donateItemsList = [...emptyArr];
+        return {
+          ...state,
+          donateItemsList: state.donateItemsList,
+        }
 
     default:
       return state;

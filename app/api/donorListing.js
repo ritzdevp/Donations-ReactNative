@@ -1,6 +1,6 @@
 import client from './client';
 
-const donorEndpoint = '/donor';
+const donorEndpoint = '/addDonorRequest';
 
 //const getAllDonor = () => client.get(donorEndpoint);
 const submitDonorRequest = (donorRequest) => {

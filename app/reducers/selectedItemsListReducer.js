@@ -13,6 +13,7 @@ const selectedItemsListReducer = (state = initalState, action) => {
             id: action.id,
             title: action.title,
             qty: action.qty,
+            itemID: action.itemID
           }),
       };
 
@@ -48,8 +49,17 @@ const selectedItemsListReducer = (state = initalState, action) => {
         selectedItemsList: state.selectedItemsList,
       };
 
+    case 'DELETE_ALL_FROM_SELECTEDITEMSLIST':
+      console.log('emptying selecteditemslist');
+      const emptyArr = [];
+      state.selectedItemsList = [...emptyArr];
+      return {
+        ...state,
+        selectedItemsList: state.selectedItemsList,
+      }
+    
     default:
-      return state;
+    return state;
   }
 };
 

@@ -1,6 +1,6 @@
 export default [
-  require('../styling/images/Accessories.png'),
-  require('../styling/images/Bags.png'),
-  require('../styling/images/Transportations.png'),
-  require('../styling/images/Copies.png'),
+  {uri:'https://raw.githubusercontent.com/ritzacco/donorappimages/main/Accessories.png'},
+  {uri:'https://raw.githubusercontent.com/ritzacco/donorappimages/main/Bags.png'},
+  {uri:'https://raw.githubusercontent.com/ritzacco/donorappimages/main/Transportations.png'},
+  {uri:'https://raw.githubusercontent.com/ritzacco/donorappimages/main/Copies.png'},
 ];

@@ -22,6 +22,7 @@ import itemListingApi from '../api/itemsListing';
 // Image components
 import imageSrc from '../constants/itemImageSource';
 
+
 const DonorHands = '../styling/images/donor-logo-1.png';
 const OffTick = '../styling/images/offTick.png';
 const OnTick = '../styling/images/onTick.png';
@@ -31,7 +32,7 @@ const SchoolRequirements = ({navigation}, props) => {
   console.log('props is ' + props);
 
   const {data: itemList, error, loading, request: loadItemDetails} = useApi(
-    itemListingApi.getAllItem,
+    itemListingApi.getAllListedItems,
   );
 
   useEffect(() => {
@@ -44,10 +45,21 @@ const SchoolRequirements = ({navigation}, props) => {
 
   const renderItem = ({item}) => (
     <Item
-      itemName={item.title}
-      //itemQty={item.qty}
-      imageSrc={imageSrc[item.imageId]}></Item>
+      itemName={item.itemName}
+      imageSrc={item.imageURL}
+      itemID={item._id}
+      >
+      </Item>
   );
+
+  console.log('itemList is')
+  console.log(itemList);
+  // console.log('selectedItemsList');
+  // console.log(props.selectedItemsList);
+  // const dummy = useSelector((state) => state.allReducers.selectedItemsListReducer.selectedItemsList);
+  // console.log('dummy is ' + dummy[0].id);
+  
+  
 
   return (
     <View style={styles.container}>
@@ -63,7 +75,7 @@ const SchoolRequirements = ({navigation}, props) => {
             style={styles.listView}
             data={itemList}
             renderItem={renderItem}
-            keyExtractor={(item) => item.title}
+            keyExtractor={(item) => item._id}
           />
         </SafeAreaView>
 

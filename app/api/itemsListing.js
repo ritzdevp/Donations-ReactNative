@@ -1,11 +1,15 @@
 import client from './client';
 
-const itemEndpoint = '/items';
+const itemEndpoint = '/getAllListedItems';
 
-const getAllItem = () => client.get(itemEndpoint);
-const getSchoolsPerItem = (itemId) => client.get(itemEndpoint + '/' + itemId);
+const getAllListedItems = () => client.get(itemEndpoint);
+const getSchoolsPerItemByID = (id) => client.get('/getSchoolsPerItemByID' + '/' + id);
+const getTotalQuantityPerItem = () => client.get('/getTotalQuantityPerItem');
 
 export default {
-  getAllItem,
-  getSchoolsPerItem,
+  getAllListedItems,
+  getSchoolsPerItemByID,
+  getTotalQuantityPerItem
 };
+
+

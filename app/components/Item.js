@@ -28,7 +28,7 @@ const Item = (props) => {
 
   return (
     <View style={selected ? styles.onTouch : styles.card}>
-      <Image style={styles.stretch} source={props.imageSrc} />
+      <Image style={styles.stretch} source={{uri:props.imageSrc}} />
       <TouchableOpacity onPress={onPress} underlayColor="none">
         <Image
           style={styles.tick}
@@ -42,7 +42,7 @@ const Item = (props) => {
         keyboardType="numeric"
         onChangeText={(quantity) => {
           console.log('calling props.addItem...');
-          props.addItem(props.itemName, quantity);
+          props.addItem(props.itemName, quantity, props.itemID);
           setQuantity(quantity);
         }}
         editable={selected}
@@ -60,7 +60,7 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = (dispatch) => {
   return {
-    addItem: (title, qty) => dispatch(addItemToSelectedItemsList(title, qty)),
+    addItem: (title, qty, itemID) => dispatch(addItemToSelectedItemsList(title, qty, itemID)),
     deleteItem: (title) => dispatch(deleteItemFromSelectedItemsList(title)),
   };
 };
@@ -130,6 +130,8 @@ const styles = StyleSheet.create({
     position: 'absolute',
     alignSelf: 'center',
     top: 21.96,
+    height: 80,
+    width: 80,
   },
   tick: {
     alignSelf: 'flex-end',

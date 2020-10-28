@@ -30,24 +30,49 @@ const DeleteIcon = '../styling/images/deleteIcon.png';
 
 const DonorItemList = ({navigation}, props) => {
   console.log('props is ' + props);
+
   const {data: itemList, error, loading, request: loadItemDetails} = useApi(
-    itemListingApi.getAllItem,
+    itemListingApi.getAllListedItems,
+  );
+
+  const {data: totalUnitsList, error2, loading2, request: getTotalQuantityPerItem} = useApi(
+    itemListingApi.getTotalQuantityPerItem,
   );
 
   useEffect(() => {
     loadItemDetails();
   }, []);
 
+  useEffect(() => {
+    getTotalQuantityPerItem();
+  }, []);
+
+  //console.log(totalUnitsList);
+  const access = new Map();
+  for (let i = 0; i < totalUnitsList.length; i++){
+    access.set(totalUnitsList[i].itemID, totalUnitsList[i].quantity);
+  }
+  //console.log(access);
+  for (let i = 0; i < itemList.length; i++){
+    itemList[i].totalUnits = 0;
+    itemList[i].totalUnits += access.get(itemList[i]._id);
+  }
+
+  //console.log(itemList);
+
+
   const renderItem = ({item}) => (
     <DonorItem
-      itemName={item.title}
+      itemName={item.itemName}
       totalUnits={item.totalUnits}
       metric={item.metric}
-      imageSrc={imageSrc[item.imageId]}
-      id={item.id}
+      imageSrc={item.imageURL}
+      id={item._id}
+      itemID={item._id}
       isSchoolList={true}
       navigation={navigation}></DonorItem>
   );
+
 
   return (
     <View style={styles.container}>
@@ -88,7 +113,7 @@ const DonorItemList = ({navigation}, props) => {
               style={styles.listView}
               data={itemList}
               renderItem={renderItem}
-              keyExtractor={(item) => item.title}
+              keyExtractor={(item) => item._id}
             />
           </SafeAreaView>
         )}

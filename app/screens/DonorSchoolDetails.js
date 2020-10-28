@@ -32,24 +32,41 @@ const DeleteIcon = '../styling/images/deleteIcon.png';
 import imageSrc from '../constants/itemImageSource';
 
 const DonorSchoolDetails = ({navigation}, props) => {
-  var schoolId = '1';
+   //var schoolId = '5f9833289b74b966884f600d';
+  var schoolId = navigation.state.params.id; 
+  console.log(navigation.state.params.id);
   const {data: school, error, loading, request: loadSchoolDetails} = useApi(
-    schoolListingApi.getSchoolDetails,
+    schoolListingApi.getActiveSchoolDetails,
   );
+
+  const {data: itemList, error2, loading2, request: loadItemDetails} = useApi(
+    itemListingApi.getAllListedItems,
+  );
+
+  
+  useEffect(() => {
+    loadItemDetails();
+  }, []);
+
 
   useEffect(() => {
     loadSchoolDetails(schoolId);
   }, []);
 
   //console.log('props is ' + props);
+  const access = new Map();
+  for (let i = 0; i < itemList.length; i++){
+    access.set(itemList[i]._id, itemList[i].imageURL);
+  }
+
 
   const renderItem = ({item}) => (
     <DonorItem
-      itemName={item.title}
-      totalUnits={item.totalUnits}
+      itemName={item.itemName}
+      totalUnits={item.quantity}
       metric={item.metric}
-      imageSrc={imageSrc[item.imageId]}
-      isSchoolList={false}></DonorItem>
+      imageSrc={access.get(item.itemID)}
+      isSchoolList={false}/>
   );
 
   return (
@@ -85,14 +102,14 @@ const DonorSchoolDetails = ({navigation}, props) => {
                 {school.schoolAddress.city} {school.schoolAddress.pincode}
               </Text>
               <Text style={styles.subheading}>Details </Text>
-              <Text style={styles.content}>{school.details.board}</Text>
+              {/* <Text style={styles.content}>{school.details.board}</Text>
               <Text style={styles.content}>{school.details.recognition}</Text>
               <Text style={styles.content}>
                 {school.details.studentsPerClass}
                 {' Students per class'}
               </Text>
               <Text style={styles.subheading}>Infrastructure </Text>
-              <Text style={styles.content}>{school.infrastructure}</Text>
+              <Text style={styles.content}>{school.infrastructure}</Text> */}
             </View>
 
             <SafeAreaView style={{width: '100%'}}>
@@ -100,7 +117,7 @@ const DonorSchoolDetails = ({navigation}, props) => {
                 style={styles.listView}
                 data={school.items}
                 renderItem={renderItem}
-                keyExtractor={(item) => item.title}
+                keyExtractor={(item) => item.itemID}
               />
             </SafeAreaView>
           </>
@@ -112,7 +129,7 @@ const DonorSchoolDetails = ({navigation}, props) => {
         <View style={styles.confirmButton}>
           <AppButton
             title="Donate"
-            onPress={() => navigation.navigate('DonorForm')}
+            onPress={() => navigation.navigate('DonorForm', {schoolId:schoolId})}
           />
         </View>
       </ScrollView>

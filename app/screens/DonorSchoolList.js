@@ -26,7 +26,7 @@ function DonorSchoolList({navigation}) {
   const [fullList, updateFullList] = React.useState([]);
   const [loading, setLoading] = React.useState(false);
   const {data, error, loading: apiLoading, request: loadSchoolListing} = useApi(
-    schoolListingApi.getAllSchools,
+    schoolListingApi.getAllActiveSchools,
   );
 
   // importing data from backend
@@ -56,7 +56,7 @@ function DonorSchoolList({navigation}) {
   };
   const Item = ({schoolName, city, id}) => (
     <TouchableOpacity
-      onPress={() => navigation.navigate('SchoolDetails', {id})}
+      onPress={() => navigation.navigate('SchoolDetails', {id: id})}
       style={styles.item}>
       <View>
         <Text style={styles.title}>{schoolName}</Text>
@@ -74,8 +74,8 @@ function DonorSchoolList({navigation}) {
   const renderItem = ({item}) => (
     <Item
       schoolName={item.schoolName}
-      city={item.schoolAddress.city}
-      id={item.schoolId}
+      //city={item.schoolAddress.city}
+      id={item.schoolID}
     />
   );
 
@@ -130,7 +130,7 @@ function DonorSchoolList({navigation}) {
         <FlatList
           data={myList}
           renderItem={renderItem}
-          keyExtractor={(item) => item.schoolId}
+          keyExtractor={(item) => item.schoolID}
         />
       </SafeAreaView>
     </View>
