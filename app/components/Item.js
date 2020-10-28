@@ -27,27 +27,27 @@ const Item = (props) => {
   };
 
   return (
-    <View style={selected ? styles.onTouch : styles.card}>
-      <Image style={styles.stretch} source={{uri:props.imageSrc}} />
-      <TouchableOpacity onPress={onPress} underlayColor="none">
-        <Image
-          style={styles.tick}
-          source={selected ? require(OnTick) : require(OffTick)}
+    <TouchableOpacity onPress={onPress} underlayColor="none">
+      <View style={selected ? styles.onTouch : styles.card}>
+        <Image style={styles.stretch} source={{uri:props.imageSrc}} />
+          <Image
+            style={styles.tick}
+            source={selected ? require(OnTick) : require(OffTick)}
+          />
+        <Text style={styles.itemName}>{props.itemName}</Text>
+        <TextInput
+          style={styles.quantity}
+          placeholder="QTY"
+          keyboardType="numeric"
+          onChangeText={(quantity) => {
+            console.log('calling props.addItem...');
+            props.addItem(props.itemName, quantity, props.itemID);
+            setQuantity(quantity);
+          }}
+          editable={selected}
         />
-      </TouchableOpacity>
-      <Text style={styles.itemName}>{props.itemName}</Text>
-      <TextInput
-        style={styles.quantity}
-        placeholder="QTY"
-        keyboardType="numeric"
-        onChangeText={(quantity) => {
-          console.log('calling props.addItem...');
-          props.addItem(props.itemName, quantity, props.itemID);
-          setQuantity(quantity);
-        }}
-        editable={selected}
-      />
-    </View>
+      </View>
+    </TouchableOpacity>
   );
 };
 

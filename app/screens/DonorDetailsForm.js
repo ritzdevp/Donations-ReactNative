@@ -92,7 +92,7 @@ function DonorDetailsForm({navigation}, props) {
   return (
     <View style={styles.container}>
       <EmptyScreen
-        heading="Poornapragathi Vidya Mandir Association"
+        heading="Enter Details"
         navigation={navigation}
       />
       <AppMessage

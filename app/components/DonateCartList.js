@@ -30,7 +30,7 @@ const DonateCartList = (props) => {
     <View style={styles.table}>
       <View style={styles.tableHeader}>
         <Text style={styles.tableHeaderText}>Items Selected</Text>
-        <Text style={styles.tableHeaderQty}>Quantity</Text>
+        <Text style={props.showButton? styles.tableHeaderQtyOne: styles.tableHeaderQtyTwo}>Quantity</Text>
       </View>
 
       <FlatList
@@ -76,10 +76,23 @@ const styles = StyleSheet.create({
     backgroundColor: colors.offwhite,
     color: '#343B83',
   },
-  tableHeaderQty: {
+  tableHeaderQtyOne: {
     top: 2,
     paddingTop: 3,
     marginRight: '20%',
+//    marginRight: '10%',
+    fontFamily: 'Montserrat',
+    fontSize: 14,
+    fontWeight: '500',
+    lineHeight: 12,
+    backgroundColor: colors.offwhite,
+    color: '#343B83',
+  },
+  tableHeaderQtyTwo: {
+    top: 2,
+    paddingTop: 3,
+//    marginRight: '20%',
+    marginRight: '10%',
     fontFamily: 'Montserrat',
     fontSize: 14,
     fontWeight: '500',
