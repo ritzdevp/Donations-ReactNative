@@ -103,14 +103,14 @@ const DonorSchoolDetails = ({navigation}, props) => {
                 {school.schoolAddress.city} {school.schoolAddress.pincode}
               </Text>
               <Text style={styles.subheading}>Details </Text>
-              {/* <Text style={styles.content}>{school.details.board}</Text>
+              <Text style={styles.content}>{school.details.board}</Text>
               <Text style={styles.content}>{school.details.recognition}</Text>
               <Text style={styles.content}>
                 {school.details.studentsPerClass}
                 {' Students per class'}
               </Text>
               <Text style={styles.subheading}>Infrastructure </Text>
-              <Text style={styles.content}>{school.infrastructure}</Text> */}
+              <Text style={styles.content}>{school.infrastructure}</Text>
             </View>
 
             <SafeAreaView style={{width: '100%'}}>

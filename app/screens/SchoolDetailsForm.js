@@ -64,6 +64,12 @@ function SchoolDetailsForm({navigation}, props) {
           city,
           pincode
         },
+        details:{
+          board: 'NA',
+          recognition: 'NA',
+          studentsPerClass: 0,
+          infrastructure: 'NA'
+        },
         phone: contact,
         email,
         items: selectedItemsList,
