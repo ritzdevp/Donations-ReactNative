@@ -66,6 +66,7 @@ const DonorSchoolDetails = ({navigation}, props) => {
       totalUnits={item.quantity}
       metric={item.metric}
       imageSrc={access.get(item.itemID)}
+      itemID={item.itemID}
       isSchoolList={false}/>
   );
 
