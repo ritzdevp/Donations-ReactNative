@@ -160,7 +160,7 @@ function SchoolDetailsForm({navigation}, props) {
             autoCorrect={false}
             onChangeText={(text) => onChangeAddressLine1(text)}
             value={addressLine1}
-            style={{height: 80}}
+            style={{height: 50}}
             textContentType="fullStreetAddress"
             multiline={true}
             placeholder="Enter Address Line 1"
@@ -171,7 +171,7 @@ function SchoolDetailsForm({navigation}, props) {
             autoCorrect={false}
             onChangeText={(text) => onChangeAddressLine2(text)}
             value={addressLine2}
-            style={{height: 80}}
+            style={{height: 50}}
             textContentType="fullStreetAddress"
             multiline={true}
             placeholder="Enter Address Line 2"
