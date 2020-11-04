@@ -171,16 +171,4 @@ const styles = StyleSheet.create({
     lineHeight: 15,
     textAlign: 'center',
   },
-
-  //   submitButton: {
-  //     alignSelf: 'flex-end',
-  //     alignItems: 'center',
-  //     justifyContent: 'center',
-  //     backgroundColor: colors.offwhite,
-  //     marginLeft: '40%',
-  //     borderRadius: 7,
-  //     elevation: 1,
-  //     height: 30,
-  //     width: 30,
-  //   },
 });

@@ -62,9 +62,6 @@ const DonorOthersBox = (props) => {
               keyboardType="numeric"
               onChangeText={addOthersItem}
             />
-            {/* <TouchableOpacity style={styles.submitButton}>
-              <Image source={require(SmallConfirm)} />
-            </TouchableOpacity> */}
           </View>
         </View>
       </Collapsible>
@@ -79,7 +76,6 @@ const mapStateToProps = (state) => {
 };
 
 const mapDispatchToProps = (dispatch) => {
-  //  console.log('in mapDispatchToProps');
   return {
     addItem: (title, qty) => dispatch(addItemToDonateItemsList(title, qty)),
   };
@@ -165,16 +161,4 @@ const styles = StyleSheet.create({
     lineHeight: 15,
     textAlign: 'center',
   },
-
-  //   submitButton: {
-  //     alignSelf: 'flex-end',
-  //     alignItems: 'center',
-  //     justifyContent: 'center',
-  //     backgroundColor: colors.offwhite,
-  //     marginLeft: '40%',
-  //     borderRadius: 7,
-  //     elevation: 1,
-  //     height: 30,
-  //     width: 30,
-  //   },
 });
