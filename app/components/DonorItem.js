@@ -34,13 +34,6 @@ const DonorItem = (props) => {
     request: getSchoolsPerItemByID,
   } = useApi(itemListingApi.getSchoolsPerItemByID);
 
-  // useEffect(() => {
-  //   if (props.isSchoolList && selected) {
-
-  //     setLoadList(true);
-  //   }
-  // }, []);
-
   const onPress = () => {
     setSelected(!selected);
     props.deleteItem(props.itemName);

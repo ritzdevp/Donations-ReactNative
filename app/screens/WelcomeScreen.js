@@ -9,7 +9,6 @@ const WelcomeScreen = ({navigation}) => {
     navigation.navigate('SchoolRequirements');
   };
   const goToDonorSchoolList = () => {
-    //navigation.navigate('DonorSchoolList');
     navigation.navigate('DonorItemList');
   };
 
@@ -25,14 +24,10 @@ const WelcomeScreen = ({navigation}) => {
         <View style={styles.introContainer}>
           <View style={styles.schoolContainer}>
             <View>
-              {/* <View style={{flexDirection: 'row'}}> */}
               <Text style={styles.rightText}>
                 Over <Text style={styles.highlightedText}>100 Schools</Text>
               </Text>
-              {/* </View> */}
-              {/* <View style={{flexDirection: 'row'}}> */}
               <Text style={styles.rightText}>got Benefitted</Text>
-              {/* </View> */}
             </View>
             <Image
               style={styles.introLogo}
@@ -68,7 +63,6 @@ const WelcomeScreen = ({navigation}) => {
               style={styles.button}
             />
           </View>
-          {/* <Text> {''}</Text> */}
           <Text style={styles.actionText}>Want to donate ?</Text>
           <View style={styles.appButton}>
             <AppButton

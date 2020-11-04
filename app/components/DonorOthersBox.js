@@ -62,9 +62,6 @@ const DonorOthersBox = (props) => {
               keyboardType="numeric"
               onChangeText={addOthersItem}
             />
-            {/* <TouchableOpacity style={styles.submitButton}>
-              <Image source={require(SmallConfirm)} />
-            </TouchableOpacity> */}
           </View>
         </View>
       </Collapsible>
@@ -79,7 +76,6 @@ const mapStateToProps = (state) => {
 };
 
 const mapDispatchToProps = (dispatch) => {
-  //  console.log('in mapDispatchToProps');
   return {
     addItem: (title, qty) => dispatch(addItemToDonateItemsList(title, qty)),
   };
@@ -119,7 +115,7 @@ const styles = StyleSheet.create({
   },
   nameEntry: {
     backgroundColor: colors.offwhite,
-    height: '50%',
+    height: '45%',
     width: '90%',
     alignSelf: 'center',
     marginTop: 10,
@@ -127,12 +123,12 @@ const styles = StyleSheet.create({
     borderColor: '#D2D7DB',
     borderRadius: 4,
 
-    alignItems: 'center',
     fontFamily: 'Montserrat',
+    textAlignVertical: 'top',
     fontWeight: '500',
-    fontSize: 16,
+    fontSize: 20,
     lineHeight: 15,
-    textAlign: 'center',
+    textAlign: 'left',
     color: '#343B83',
   },
   qtyEntry: {
@@ -165,16 +161,4 @@ const styles = StyleSheet.create({
     lineHeight: 15,
     textAlign: 'center',
   },
-
-  //   submitButton: {
-  //     alignSelf: 'flex-end',
-  //     alignItems: 'center',
-  //     justifyContent: 'center',
-  //     backgroundColor: colors.offwhite,
-  //     marginLeft: '40%',
-  //     borderRadius: 7,
-  //     elevation: 1,
-  //     height: 30,
-  //     width: 30,
-  //   },
 });

@@ -1,6 +1,5 @@
 import React from 'react';
 import 'react-native-gesture-handler';
-//import Navigator from './app/routes/drawer';
 import Navigator from './app/routes/drawer';
 import {NavigationContainer} from '@react-navigation/native';
 import { LogBox } from 'react-native';
