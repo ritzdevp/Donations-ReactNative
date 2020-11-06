@@ -66,7 +66,9 @@ function DonorSchoolList({navigation}) {
   );
 
   function updateInputAndList(text) {
-    var reg = new RegExp(text, 'i');
+    const textClean = text.replace(/[^a-zA-Z ]/g, "");
+    console.log(textClean);
+    var reg = new RegExp(textClean, 'i');
     updateList(fullList.filter((item) => reg.test(item.schoolName)));
     onSearchChange(text);
   }
